@@ -1,0 +1,903 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Copy Vault</title>
+<link rel="icon" type="image/svg+xml" href="./logo.svg">
+<link rel="shortcut icon" href="./logo.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Space+Mono:wght@400;700&family=Bitter:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#EBEBEA;
+    --card:#FFFFFF;
+    --ink:#080808;
+    --ink-soft:#505050;
+    --line:#080808;
+    --line-soft:#CECECE;
+    --accent:#FF4800;
+    --accent-ink:#FFFFFF;
+    --accent-deep:#C23600;
+    --meta:#909090;
+    --header-bg:#0A0A0A;
+    --header-line:#0A0A0A;
+    --on-dark:#F0F0EE;
+    --on-dark-soft:#888888;
+    --sans:'Space Grotesk','Helvetica Neue',sans-serif;
+    --mono:'Space Mono','IBM Plex Mono',monospace;
+    --serif:'Bitter','Georgia',serif;
+    --shadow:none;
+    --shadow-hi:3px 3px 0px #080808;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{background:var(--bg);color:var(--ink);font-family:var(--sans);-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
+  body{padding:0 0 88px}
+
+  header{
+    position:sticky;top:0;z-index:40;background:var(--header-bg);
+    border-bottom:2px solid var(--header-line);
+    padding:20px 40px 0;
+  }
+  .masthead{display:flex;align-items:center;justify-content:space-between;gap:18px;padding-bottom:20px}
+  .brand{display:flex;align-items:center;gap:10px}
+  .brand .dot{
+    width:26px;height:26px;flex:none;border:2px solid var(--ink);border-radius:0;
+    display:flex;align-items:center;justify-content:center;font-size:10px;
+    background:var(--accent);font-family:var(--mono);font-weight:700;color:var(--ink);
+  }
+  .brand .tag{
+    background:transparent;color:var(--on-dark);font-family:var(--mono);
+    font-size:17px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;
+    padding:0 0 3px 0;margin-left:0;white-space:nowrap;
+    border-bottom:2px solid var(--accent);
+  }
+  .brand .tag-sep{color:var(--accent);margin-right:2px;}
+  .count{font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--on-dark-soft);font-variant-numeric:tabular-nums;white-space:nowrap}
+
+  .searchrow{display:flex;align-items:center;gap:0;border:1px solid rgba(255,255,255,.2);background:rgba(255,255,255,.07);border-radius:0;margin-bottom:16px;transition:box-shadow .1s}
+  .searchrow:focus-within{box-shadow:3px 3px 0 var(--accent);border-color:var(--accent)}
+  .searchrow .sicon{color:var(--on-dark-soft);margin-left:16px;flex:none}
+  .searchrow input{
+    flex:1;border:0;background:transparent;color:var(--on-dark);
+    font-family:var(--sans);font-size:17px;font-weight:500;letter-spacing:-.01em;padding:14px 16px;outline:none;
+  }
+  .searchrow input::placeholder{color:var(--on-dark-soft)}
+  .searchrow .clr{border:0;background:transparent;color:var(--on-dark-soft);cursor:pointer;font-size:20px;padding:0 16px;line-height:1}
+  .searchrow .clr:hover{color:var(--on-dark)}
+
+  .lexrow{display:flex;flex-wrap:wrap;gap:7px;padding-bottom:16px;min-height:0;align-items:center}
+  .lexrow.empty{padding-bottom:0}
+  .lexlabel{font-family:var(--mono);font-size:9px;letter-spacing:.18em;text-transform:uppercase;color:var(--on-dark-soft);align-self:center;margin-right:6px}
+  .lex{
+    font-family:var(--mono);font-size:10px;letter-spacing:.06em;text-transform:uppercase;
+    border:1px solid rgba(255,255,255,.2);background:transparent;color:var(--on-dark);
+    padding:4px 10px;border-radius:0;cursor:pointer;transition:.1s;
+  }
+  .lex:hover{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
+
+  .filterbar{display:flex;flex-wrap:wrap;gap:14px 28px;padding:0 0 18px}
+  .fgroup{display:flex;flex-wrap:wrap;align-items:center;gap:6px}
+  .ftitle{font-family:var(--mono);font-size:9px;letter-spacing:.18em;text-transform:uppercase;color:var(--on-dark-soft);margin-right:4px}
+  .f{
+    font-family:var(--mono);font-size:10px;letter-spacing:.06em;text-transform:uppercase;
+    border:1px solid rgba(255,255,255,.2);background:transparent;color:var(--on-dark-soft);
+    padding:5px 12px;cursor:pointer;border-radius:0;transition:.1s;white-space:nowrap;
+  }
+  .f:hover{border-color:var(--on-dark);color:var(--on-dark)}
+  .f.on{background:var(--accent);color:var(--accent-ink);border-color:var(--accent)}
+
+
+  .filtertoggle{display:none}
+
+  main{padding:30px 40px 0}
+  .grid{column-count:3;column-gap:18px}
+  @media(max-width:1000px){.grid{column-count:2}}
+  @media(max-width:640px){
+    .grid{column-count:1}
+    header,main,.activerow{padding-left:22px;padding-right:22px}
+    header{padding-top:16px}
+    .masthead{padding-bottom:14px}
+    .searchrow{margin-bottom:12px}
+    .searchrow input{font-size:17px;padding:13px 14px}
+    /* filtros como desplegable */
+    .filtertoggle{
+      display:flex;align-items:center;justify-content:space-between;gap:10px;width:100%;
+      background:transparent;border:1px solid rgba(255,255,255,.2);color:var(--on-dark);
+      font-family:var(--sans);font-size:13px;font-weight:600;letter-spacing:.04em;text-transform:uppercase;
+      padding:12px 16px;border-radius:10px;cursor:pointer;margin-bottom:16px;
+    }
+    .filtertoggle .lbl{display:flex;align-items:center;gap:8px}
+    .filtertoggle .fcount{background:var(--accent);color:var(--accent-ink);font-size:11px;font-weight:700;border-radius:40px;padding:1px 8px;font-variant-numeric:tabular-nums}
+    .filtertoggle .fcount:empty{display:none}
+    .filtertoggle .chev{transition:transform .2s;flex:none}
+    header.filters-open .filtertoggle{margin-bottom:14px}
+    header.filters-open .filtertoggle .chev{transform:rotate(180deg)}
+    .filterbar{display:none;flex-direction:column;gap:14px;padding-bottom:18px}
+    header.filters-open .filterbar{display:flex}
+    .fgroup{width:100%}
+  }
+
+  .card{
+    break-inside:avoid;margin-bottom:14px;background:var(--card);
+    border:1.5px solid var(--ink);border-radius:0;padding:22px 22px 16px;cursor:pointer;
+    transition:box-shadow .1s;box-shadow:none;position:relative;
+  }
+  .card:hover{box-shadow:3px 3px 0 var(--ink)}
+  .card .q{font-family:var(--serif);line-height:1.18;color:var(--ink);margin-bottom:20px;font-weight:400;letter-spacing:-.01em;text-wrap:pretty}
+  .card .q.xs{font-size:20px}
+  .card .q.sm{font-size:25px}
+  .card .q.md{font-size:30px;line-height:1.1}
+  .card .q.lg{font-size:40px;line-height:1.03;letter-spacing:-.025em}
+  .foot{display:flex;justify-content:space-between;align-items:baseline;border-top:1px solid var(--line-soft);padding-top:11px}
+  .foot .b{font-family:var(--mono);font-size:10px;letter-spacing:.1em;color:var(--ink-soft);text-transform:uppercase}
+  .foot .y{font-family:var(--mono);font-size:10px;color:var(--meta);font-variant-numeric:tabular-nums}
+  mark{background:var(--accent);color:var(--ink);padding:0 2px;border-radius:0}
+  .word{cursor:pointer;border-radius:1px;transition:background .08s}
+  .word:hover{background:rgba(255,72,0,.15)}
+
+  .empty-state{column-span:all;text-align:center;padding:90px 0;color:var(--meta);font-family:var(--mono);font-size:12px;letter-spacing:.1em;text-transform:uppercase}
+
+  /* modal */
+  .scrim{position:fixed;inset:0;background:rgba(8,8,8,.5);z-index:80;display:none;backdrop-filter:blur(2px)}
+  .scrim.show{display:block}
+  .sheet{
+    position:fixed;top:0;right:0;height:100%;width:450px;max-width:92vw;z-index:90;
+    background:var(--card);border-left:2px solid var(--ink);
+    transform:translateX(100%);transition:transform .24s cubic-bezier(.2,.7,.2,1);
+    display:flex;flex-direction:column;
+  }
+  .sheet.show{transform:translateX(0)}
+  .sheet .x{align-self:flex-end;border:0;background:transparent;color:var(--meta);font-size:22px;cursor:pointer;padding:18px 24px;line-height:1;font-family:var(--mono)}
+  .sheet .x:hover{color:var(--ink)}
+  .sheet .body{padding:0 36px 48px;overflow:auto}
+  .sheet .bigq{font-family:var(--serif);font-size:32px;line-height:1.12;font-weight:400;letter-spacing:-.01em;margin:6px 0 30px;color:var(--ink);text-wrap:pretty}
+  .sheet dl{display:grid;grid-template-columns:auto 1fr;gap:0}
+  .sheet dt{font-family:var(--mono);font-size:9px;letter-spacing:.16em;text-transform:uppercase;color:var(--meta);padding:12px 0;border-top:1px solid var(--line-soft);align-self:center}
+  .sheet dd{font-family:var(--sans);font-size:13px;font-weight:500;color:var(--ink);padding:12px 0 12px 20px;border-top:1px solid var(--line-soft);text-align:right}
+  .sheet dd.note{color:var(--ink-soft);font-size:12px;line-height:1.5;font-weight:400}
+  .sheet .dl-btn{
+    display:flex;align-items:center;gap:8px;
+    font-family:var(--mono);font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;
+    background:var(--accent);color:var(--accent-ink);border:0;
+    padding:12px 20px;cursor:pointer;margin-top:28px;width:100%;justify-content:center;
+    transition:opacity .1s;
+  }
+  .sheet .dl-btn:hover{opacity:.85}
+
+</style>
+</head>
+<body>
+<header>
+  <div class="masthead">
+    <div class="brand" style="opacity: 1">
+      <span class="dot"><svg width="13" height="15" viewBox="0 0 13 15" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1 1h7.5L12 4.5V14H1V1Z" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/><path d="M8.5 1v3.5H12" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/><text x="6.5" y="12" text-anchor="middle" font-size="6.5" font-weight="700" fill="currentColor" font-family="monospace">?</text></svg></span>
+      <span class="tag">THE COPY VAULT</span>
+    </div>
+    <div class="count" id="count"></div>
+  </div>
+  <div class="searchrow">
+    <svg class="sicon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><circle cx="10.5" cy="10.5" r="7"></circle><line x1="15.8" y1="15.8" x2="21" y2="21"></line></svg>
+    <input id="q" type="text" placeholder="Search by word, brand or sector…" autocomplete="off" spellcheck="false">
+    <button class="clr" id="qclr" title="borrar búsqueda" style="display:none">×</button>
+  </div>
+  <div class="lexrow empty" id="lex"></div>
+  <button class="filtertoggle" id="filtertoggle" aria-expanded="false">
+    <span class="lbl">Filters <span class="fcount" id="fcount"></span></span>
+    <svg class="chev" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+  </button>
+  <div class="filterbar" id="filterbar"></div>
+</header>
+
+<main>
+  <div class="grid" id="grid"></div>
+</main>
+
+<div class="scrim" id="scrim"></div>
+<aside class="sheet" id="sheet" aria-hidden="true">
+  <button class="x" id="sheetx">×</button>
+  <div class="body" id="sheetbody"></div>
+</aside>
+
+<script>
+const CORPUS = [{"copy":"Think small.","brand":"Volkswagen","sector":"automotive","copy_type":"headline","year":1959,"campaign":"Think Small","agency":"Doyle Dane Bernbach","medium":"print","festival_or_note":"Ad Age — campaign of the century (#1)","lang":"en"},{"copy":"Lemon.","brand":"Volkswagen","sector":"automotive","copy_type":"headline","year":1960,"campaign":"Lemon","agency":"Doyle Dane Bernbach","medium":"print","festival_or_note":"DDB canon — one of the most reproduced print ads ever","lang":"en"},{"copy":"We try harder.","brand":"Avis","sector":"travel & transport","copy_type":"brand tagline","year":1962,"campaign":"We Try Harder","agency":"Doyle Dane Bernbach","medium":"print","festival_or_note":"Ad Age — top 10 campaigns of the century","lang":"en"},{"copy":"When you're only no. 2, you try harder. Or else.","brand":"Avis","sector":"travel & transport","copy_type":"headline","year":1962,"campaign":"We Try Harder","agency":"Doyle Dane Bernbach","medium":"print","festival_or_note":"long-copy version of the DDB headline","lang":"en"},{"copy":"It is and it isn't.","brand":"Stella Artois","sector":"alcohol","copy_type":"headline","year":1991,"campaign":"Reassuringly Expensive","agency":"Lowe Howard-Spink","medium":"print","festival_or_note":"D&AD Pencil","lang":"en"},{"copy":"Reassuringly expensive.","brand":"Stella Artois","sector":"alcohol","copy_type":"brand tagline","year":1981,"campaign":"Reassuringly Expensive","agency":"Lowe Howard-Spink","medium":"print/TV","festival_or_note":"longest-running luxury beer tagline in UK history","lang":"en"},{"copy":"Just do it.","brand":"Nike","sector":"sport","copy_type":"brand tagline","year":1988,"campaign":"Just Do It","agency":"Wieden+Kennedy","medium":"OOH","festival_or_note":"One Show Hall of Fame; inspired by Gary Gilmore's last words","lang":"en"},{"copy":"Believe in something. Even if it means sacrificing everything.","brand":"Nike","sector":"sport","copy_type":"campaign concept","year":2018,"campaign":"Dream Crazy (Kaepernick)","agency":"Wieden+Kennedy","medium":"OOH/print","festival_or_note":"Emmy + Cannes Outdoor Grand Prix","lang":"en"},{"copy":"You don't win silver. You lose gold.","brand":"Nike","sector":"sport","copy_type":"headline","year":1996,"campaign":"Atlanta Olympics","agency":"Wieden+Kennedy","medium":"print/OOH","festival_or_note":"controversial Olympic-year print","lang":"en"},{"copy":"It's gotta be the shoes.","brand":"Nike Air Jordan","sector":"sport","copy_type":"campaign concept","year":1989,"campaign":"Mars Blackmon","agency":"Wieden+Kennedy","medium":"TV/print","festival_or_note":"Spike Lee + Michael Jordan — Ad Age canon","lang":"en"},{"copy":"Bo knows.","brand":"Nike","sector":"sport","copy_type":"campaign concept","year":1989,"campaign":"Bo Knows","agency":"Wieden+Kennedy","medium":"TV/print","festival_or_note":"Ad Age slogan canon — Bo Jackson","lang":"en"},{"copy":"Greatness is not in one special place, and it is not in one special person. Greatness is wherever somebody is trying to find it.","brand":"Nike","sector":"sport","copy_type":"campaign concept","year":2012,"campaign":"Find Your Greatness","agency":"Wieden+Kennedy","medium":"TV/OOH","festival_or_note":"Effie Grand — London Olympics ambush; voiceover canon","lang":"en"},{"copy":"Hello boys.","brand":"Wonderbra","sector":"fashion & style","copy_type":"headline","year":1994,"campaign":"Hello Boys","agency":"TBWA London","medium":"OOH","festival_or_note":"Outdoor Advertising Association — UK Poster of the Century","lang":"en"},{"copy":"Or are you just pleased to see me?","brand":"Wonderbra","sector":"fashion & style","copy_type":"headline","year":1994,"campaign":"Hello Boys (sequel)","agency":"TBWA London","medium":"OOH","festival_or_note":"follow-up panel in the same OOH series","lang":"en"},{"copy":"Smart had one good idea, and that idea was stupid.","brand":"Diesel","sector":"fashion & style","copy_type":"headline","year":2010,"campaign":"Be Stupid","agency":"Anomaly","medium":"OOH","festival_or_note":"Cannes Outdoor Grand Prix","lang":"en"},{"copy":"Smart may have the brains, but stupid has the balls.","brand":"Diesel","sector":"fashion & style","copy_type":"headline","year":2010,"campaign":"Be Stupid","agency":"Anomaly","medium":"OOH","festival_or_note":"Cannes Outdoor Grand Prix","lang":"en"},{"copy":"Smart critiques. Stupid creates.","brand":"Diesel","sector":"fashion & style","copy_type":"headline","year":2010,"campaign":"Be Stupid","agency":"Anomaly","medium":"OOH","festival_or_note":"Cannes Outdoor Grand Prix","lang":"en"},{"copy":"Don't buy this jacket.","brand":"Patagonia","sector":"fashion & style","copy_type":"headline","year":2011,"campaign":"Don't Buy This Jacket","agency":"In-house","medium":"print (NYT Black Friday)","festival_or_note":"Cannes Lions + AdAge most controversial ads canon","lang":"en"},{"copy":"We're in business to save our home planet.","brand":"Patagonia","sector":"fashion & style","copy_type":"brand tagline","year":2018,"campaign":"Mission Statement","agency":"In-house","medium":"brand statement","festival_or_note":"officially-rewritten mission statement","lang":"en"},{"copy":"FCK.","brand":"KFC","sector":"food & drink","copy_type":"headline","year":2018,"campaign":"FCK","agency":"Mother London","medium":"press ad (UK)","festival_or_note":"Cannes Print Grand Prix — chicken-shortage apology","lang":"en"},{"copy":"Wow no cow.","brand":"Oatly","sector":"food & drink","copy_type":"brand tagline","year":2019,"campaign":"Wow No Cow","agency":"Oatly Department of Mind Control","medium":"OOH/packaging","festival_or_note":"D&AD Wood Pencil","lang":"en"},{"copy":"It's like milk but made for humans.","brand":"Oatly","sector":"food & drink","copy_type":"headline","year":2014,"campaign":"Like Milk But For Humans","agency":"In-house","medium":"packaging/OOH","festival_or_note":"subject of a Swedish dairy industry lawsuit","lang":"en"},{"copy":"You shouldn't be reading this. You should be watching the game.","brand":"ESPN","sector":"media & entertainment","copy_type":"headline","year":2003,"campaign":"Without Sports","agency":"Wieden+Kennedy","medium":"print","festival_or_note":"One Show + Communication Arts","lang":"en"},{"copy":"Don't bother to read this. The picture's missing.","brand":"ibidphoto.com","sector":"technology","copy_type":"headline","year":1999,"campaign":"ibid photo library","agency":"Ogilvy (Neil French)","medium":"print","festival_or_note":"D&AD Pencil — long-copy classic","lang":"en"},{"copy":"I never read The Economist. — Management trainee. Aged 42.","brand":"The Economist","sector":"media & entertainment","copy_type":"headline","year":1988,"campaign":"White out of Red","agency":"AMV BBDO (David Abbott)","medium":"OOH","festival_or_note":"doubled subscriber base; D&AD Pencil; Hall of Fame","lang":"en"},{"copy":"Great minds like a think.","brand":"The Economist","sector":"media & entertainment","copy_type":"headline","year":1990,"campaign":"White out of Red","agency":"AMV BBDO","medium":"OOH","festival_or_note":"White-out-of-Red series — D&AD","lang":"en"},{"copy":"Lose the ability to slip out of meetings unnoticed.","brand":"The Economist","sector":"media & entertainment","copy_type":"headline","year":1995,"campaign":"White out of Red","agency":"AMV BBDO","medium":"OOH","festival_or_note":"White-out-of-Red series","lang":"en"},{"copy":"It's lonely at the top, but at least there's something to read.","brand":"The Economist","sector":"media & entertainment","copy_type":"headline","year":1993,"campaign":"White out of Red","agency":"AMV BBDO","medium":"OOH","festival_or_note":"White-out-of-Red series","lang":"en"},{"copy":"I used to think. Now I just read The Economist.","brand":"The Economist","sector":"media & entertainment","copy_type":"headline","year":1990,"campaign":"White out of Red","agency":"AMV BBDO","medium":"OOH","festival_or_note":"White-out-of-Red series — D&AD Pencil","lang":"en"},{"copy":"Think different.","brand":"Apple","sector":"technology","copy_type":"brand tagline","year":1997,"campaign":"Think Different","agency":"TBWA\Chiat\Day","medium":"OOH/print/TV","festival_or_note":"Emmy + Hall of Fame; tagline by Craig Tanimoto","lang":"en"},{"copy":"Here's to the crazy ones.","brand":"Apple","sector":"technology","copy_type":"brand tagline","year":1997,"campaign":"Think Different (Crazy Ones)","agency":"TBWA\Chiat\Day","medium":"TV/print","festival_or_note":"Emmy; copy by Rob Siltanen and Ken Segall","lang":"en"},{"copy":"The misfits. The rebels. The troublemakers. The round pegs in the square holes.","brand":"Apple","sector":"technology","copy_type":"brand tagline","year":1997,"campaign":"Think Different (Crazy Ones)","agency":"TBWA\Chiat\Day","medium":"TV/print","festival_or_note":"Emmy — opening section of the manifesto","lang":"en"},{"copy":"Because the people who are crazy enough to think they can change the world, are the ones who do.","brand":"Apple","sector":"technology","copy_type":"headline","year":1997,"campaign":"Think Different (Crazy Ones)","agency":"TBWA\Chiat\Day","medium":"TV/print","festival_or_note":"Emmy — closing line of the manifesto","lang":"en"},{"copy":"1,000 songs in your pocket.","brand":"Apple","sector":"technology","copy_type":"campaign concept","year":2001,"campaign":"iPod Launch","agency":"TBWA\Media Arts Lab","medium":"OOH/print","festival_or_note":"Steve Jobs keynote line — became OOH headline","lang":"en"},{"copy":"Shot on iPhone.","brand":"Apple","sector":"technology","copy_type":"campaign concept","year":2015,"campaign":"Shot on iPhone","agency":"TBWA\Media Arts Lab","medium":"OOH/billboard","festival_or_note":"Cannes Outdoor Grand Prix","lang":"en"},{"copy":"What's a computer?","brand":"Apple","sector":"technology","copy_type":"headline","year":2017,"campaign":"What's a Computer?","agency":"TBWA\Media Arts Lab","medium":"TV/OOH","festival_or_note":"Cannes Bronze Lion","lang":"en"},{"copy":"Privacy. That's iPhone.","brand":"Apple","sector":"technology","copy_type":"campaign concept","year":2019,"campaign":"Privacy","agency":"TBWA\Media Arts Lab","medium":"OOH/print","festival_or_note":"Cannes Outdoor Lions","lang":"en"},{"copy":"Hello, I'm a Mac.","brand":"Apple","sector":"technology","copy_type":"campaign concept","year":2006,"campaign":"Get a Mac","agency":"TBWA\Media Arts Lab","medium":"TV/print","festival_or_note":"Effie Grand + Cannes Lions","lang":"en"},{"copy":"A diamond is forever.","brand":"De Beers","sector":"fashion & style","copy_type":"brand tagline","year":1947,"campaign":"A Diamond Is Forever","agency":"N.W. Ayer (Frances Gerety)","medium":"print","festival_or_note":"Ad Age — slogan of the 20th century","lang":"en"},{"copy":"Got milk?","brand":"California Milk Processor Board","sector":"food & drink","copy_type":"campaign concept","year":1993,"campaign":"Got Milk?","agency":"Goodby Silverstein & Partners","medium":"OOH/print","festival_or_note":"Hall of Fame; Adweek slogan canon","lang":"en"},{"copy":"Where's the beef?","brand":"Wendy's","sector":"food & drink","copy_type":"campaign concept","year":1984,"campaign":"Where's the Beef?","agency":"Dancer Fitzgerald Sample","medium":"TV/print","festival_or_note":"Clio winner; line escaped into political discourse","lang":"en"},{"copy":"You never actually own a Patek Philippe. You merely look after it for the next generation.","brand":"Patek Philippe","sector":"fashion & style","copy_type":"brand tagline","year":1996,"campaign":"Generations","agency":"Leagas Delaney","medium":"print","festival_or_note":"D&AD Pencil — luxury print canon","lang":"en"},{"copy":"Begin your own tradition.","brand":"Patek Philippe","sector":"fashion & style","copy_type":"headline","year":1996,"campaign":"Generations","agency":"Leagas Delaney","medium":"print","festival_or_note":"ran 25+ years — Cannes Lions","lang":"en"},{"copy":"The ultimate driving machine.","brand":"BMW","sector":"automotive","copy_type":"brand tagline","year":1975,"campaign":"The Ultimate Driving Machine","agency":"Ammirati & Puris","medium":"print","festival_or_note":"Ad Age top tagline; still in use","lang":"en"},{"copy":"There is no substitute.","brand":"Porsche","sector":"automotive","copy_type":"brand tagline","year":1990,"campaign":"There Is No Substitute","agency":"Fallon McElligott","medium":"print","festival_or_note":"Ad Age canon","lang":"en"},{"copy":"Drive it like you stole it.","brand":"Volkswagen GTI","sector":"automotive","copy_type":"campaign concept","year":2007,"campaign":"Drive It Like You Stole It","agency":"Crispin Porter + Bogusky","medium":"OOH/TV","festival_or_note":"controversial; Cannes shortlist","lang":"en"},{"copy":"Probably the best beer in the world.","brand":"Carlsberg","sector":"alcohol","copy_type":"brand tagline","year":1973,"campaign":"Probably the Best","agency":"Saatchi & Saatchi","medium":"OOH/print","festival_or_note":"longest-running UK beer slogan","lang":"en"},{"copy":"We've come to admit Carlsberg probably wasn't the best beer in the world.","brand":"Carlsberg","sector":"alcohol","copy_type":"headline","year":2019,"campaign":"Brewed In, Brewed Out","agency":"Fold7","medium":"OOH/print","festival_or_note":"Cannes Outdoor — radical apology pivot","lang":"en"},{"copy":"Heineken refreshes the parts other beers cannot reach.","brand":"Heineken","sector":"alcohol","copy_type":"brand tagline","year":1974,"campaign":"Refreshes The Parts","agency":"Collett Dickenson Pearce","medium":"print/OOH","festival_or_note":"D&AD Pencils — ran 18 years","lang":"en"},{"copy":"Beanz meanz Heinz.","brand":"Heinz","sector":"food & drink","copy_type":"brand tagline","year":1967,"campaign":"Beanz Meanz Heinz","agency":"Young & Rubicam","medium":"TV/print","festival_or_note":"voted UK's best advertising slogan (Marketing 2000)","lang":"en"},{"copy":"Even when you don't see us, you see us.","brand":"Heinz Ketchup","sector":"food & drink","copy_type":"headline","year":2021,"campaign":"Draw Ketchup","agency":"Rethink Toronto","medium":"OOH/social","festival_or_note":"Cannes Outdoor Gold","lang":"en"},{"copy":"Does exactly what it says on the tin.","brand":"Ronseal","sector":"services","copy_type":"brand tagline","year":1994,"campaign":"Does What It Says","agency":"HHCL","medium":"TV/print","festival_or_note":"entered British dictionary as colloquial phrase","lang":"en"},{"copy":"Should've gone to Specsavers.","brand":"Specsavers","sector":"health & beauty","copy_type":"campaign concept","year":2003,"campaign":"Should've Gone To Specsavers","agency":"Specsavers Creative","medium":"TV/print/OOH","festival_or_note":"entered everyday UK speech","lang":"en"},{"copy":"The misheard version.","brand":"Specsavers","sector":"health & beauty","copy_type":"campaign concept","year":2024,"campaign":"The Misheard Version","agency":"Golin London","medium":"audio/radio","festival_or_note":"Cannes Audio & Radio Grand Prix 2024","lang":"en"},{"copy":"It's not TV. It's HBO.","brand":"HBO","sector":"media & entertainment","copy_type":"brand tagline","year":1996,"campaign":"It's Not TV","agency":"BBDO","medium":"TV/print/OOH","festival_or_note":"Ad Age slogan canon","lang":"en"},{"copy":"There are some things money can't buy. For everything else, there's Mastercard.","brand":"Mastercard","sector":"services","copy_type":"campaign concept","year":1997,"campaign":"Priceless","agency":"McCann Erickson","medium":"TV/print","festival_or_note":"Effie Grand + 25-year continuous run","lang":"en"},{"copy":"Often a bridesmaid, but never a bride.","brand":"Listerine","sector":"health & beauty","copy_type":"headline","year":1924,"campaign":"Often a Bridesmaid","agency":"Lambert & Feasley","medium":"print","festival_or_note":"Ad Age canon — earliest insecurity-marketing print","lang":"en"},{"copy":"Tested on humans.","brand":"The Body Shop","sector":"health & beauty","copy_type":"brand tagline","year":1996,"campaign":"Against Animal Testing","agency":"In-house","medium":"OOH/print","festival_or_note":"long-running ethical-cosmetics line","lang":"en"},{"copy":"This is your brain. This is your brain on drugs.","brand":"Partnership for a Drug-Free America","sector":"public interest & culture","copy_type":"campaign concept","year":1987,"campaign":"This Is Your Brain On Drugs","agency":"Keye/Donna/Pearlstein","medium":"TV/print","festival_or_note":"Clio Hall of Fame","lang":"en"},{"copy":"Friends don't let friends drive drunk.","brand":"U.S. Department of Transportation","sector":"public interest & culture","copy_type":"campaign concept","year":1983,"campaign":"Friends Don't Let Friends","agency":"Ad Council","medium":"TV/print","festival_or_note":"credited with shifting US drink-drive norms","lang":"en"},{"copy":"You're not you when you're hungry.","brand":"Snickers","sector":"food & drink","copy_type":"campaign concept","year":2010,"campaign":"You're Not You When You're Hungry","agency":"BBDO New York","medium":"TV/print/OOH","festival_or_note":"Cannes Lions + Effie Grand","lang":"en"},{"copy":"The beauty of no artificial preservatives.","brand":"Burger King","sector":"food & drink","copy_type":"headline","year":2020,"campaign":"Moldy Whopper","agency":"INGO / DAVID Miami","medium":"print/OOH","festival_or_note":"Cannes Print + Outdoor Grand Prix","lang":"en"},{"copy":"These are confusing times.","brand":"Burger King","sector":"food & drink","copy_type":"campaign concept","year":2021,"campaign":"Confusing Times","agency":"David Madrid","medium":"radio/TV/print","festival_or_note":"One Show Merit — Impossible Whopper plant-based launch","lang":"en"},{"copy":"Whopper detour.","brand":"Burger King","sector":"food & drink","copy_type":"campaign concept","year":2018,"campaign":"Whopper Detour","agency":"FCB New York","medium":"mobile/social","festival_or_note":"Cannes Titanium + Direct Grand Prix","lang":"en"},{"copy":"Subservient chicken.","brand":"Burger King","sector":"food & drink","copy_type":"campaign concept","year":2004,"campaign":"Subservient Chicken","agency":"Crispin Porter + Bogusky","medium":"web","festival_or_note":"Cannes Cyber Lions Grand Prix","lang":"en"},{"copy":"Periods are normal. Showing them should be too.","brand":"Bodyform","sector":"health & beauty","copy_type":"campaign concept","year":2017,"campaign":"Blood Normal","agency":"AMV BBDO","medium":"TV/social","festival_or_note":"Cannes Glass Lion Grand Prix","lang":"en"},{"copy":"Viva la vulva.","brand":"Bodyform","sector":"health & beauty","copy_type":"campaign concept","year":2018,"campaign":"Viva La Vulva","agency":"AMV BBDO","medium":"TV/social","festival_or_note":"Cannes Lions + Effie","lang":"en"},{"copy":"Like a girl.","brand":"Always (P&G)","sector":"health & beauty","copy_type":"campaign concept","year":2014,"campaign":"Like a Girl","agency":"Leo Burnett","medium":"TV/social","festival_or_note":"Cannes Glass Lion + Emmy","lang":"en"},{"copy":"Real beauty.","brand":"Dove","sector":"health & beauty","copy_type":"campaign concept","year":2004,"campaign":"Campaign for Real Beauty","agency":"Ogilvy & Mather","medium":"OOH/print/TV","festival_or_note":"Grand Effie + Cannes Lions Grand Prix (Evolution)","lang":"en"},{"copy":"You are more beautiful than you think.","brand":"Dove","sector":"health & beauty","copy_type":"headline","year":2013,"campaign":"Real Beauty Sketches","agency":"Ogilvy Brazil","medium":"online/print","festival_or_note":"Cannes Titanium Grand Prix","lang":"en"},{"copy":"The truth is hard.","brand":"The New York Times","sector":"media & entertainment","copy_type":"campaign concept","year":2017,"campaign":"The Truth Is Hard","agency":"Droga5","medium":"TV/print/OOH","festival_or_note":"Cannes Lions","lang":"en"},{"copy":"The truth is worth it.","brand":"The New York Times","sector":"media & entertainment","copy_type":"campaign concept","year":2018,"campaign":"The Truth Is Worth It","agency":"Droga5","medium":"TV/print/OOH","festival_or_note":"Cannes Film Grand Prix + Titanium Grand Prix 2019","lang":"en"},{"copy":"Democracy dies in darkness.","brand":"The Washington Post","sector":"media & entertainment","copy_type":"brand tagline","year":2017,"campaign":"Democracy Dies in Darkness","agency":"In-house","medium":"masthead/OOH","festival_or_note":"tagline-as-statement; widely debated","lang":"en"},{"copy":"Hate something. Change something.","brand":"Honda Diesel","sector":"automotive","copy_type":"campaign concept","year":2004,"campaign":"Hate Something","agency":"Wieden+Kennedy London","medium":"TV/print","festival_or_note":"Cannes Film Lion + D&AD Yellow Pencil","lang":"en"},{"copy":"Tick followed tock followed tick.","brand":"Guinness","sector":"alcohol","copy_type":"headline","year":1999,"campaign":"Surfer","agency":"AMV BBDO","medium":"TV","festival_or_note":"Cannes Grand Prix — voiceover canon","lang":"en"},{"copy":"He waits. That's what he does.","brand":"Guinness","sector":"alcohol","copy_type":"headline","year":1999,"campaign":"Surfer","agency":"AMV BBDO","medium":"TV","festival_or_note":"Cannes Grand Prix — opening voiceover","lang":"en"},{"copy":"Good things come to those who wait.","brand":"Guinness","sector":"alcohol","copy_type":"campaign concept","year":1998,"campaign":"Good Things Come To Those Who Wait","agency":"AMV BBDO","medium":"TV/print","festival_or_note":"ran 1998–2007; Cannes Grand Prix","lang":"en"},{"copy":"Did you mean Mailchimp?","brand":"Mailchimp","sector":"technology","copy_type":"campaign concept","year":2017,"campaign":"Did You Mean Mailchimp?","agency":"Droga5","medium":"social/online","festival_or_note":"Cannes Cyber Grand Prix 2017","lang":"en"},{"copy":"Mail Shrimp. Kale Limp. Jail Blimp. MailChimp.","brand":"Mailchimp","sector":"technology","copy_type":"headline","year":2017,"campaign":"Did You Mean Mailchimp?","agency":"Droga5","medium":"online/OOH","festival_or_note":"Cannes Cyber Grand Prix 2017","lang":"en"},{"copy":"Murder your thirst.","brand":"Liquid Death","sector":"food & drink","copy_type":"brand tagline","year":2019,"campaign":"Murder Your Thirst","agency":"In-house","medium":"OOH/packaging","festival_or_note":"Adweek 2022 brand-of-the-year canon","lang":"en"},{"copy":"Some of you may die. But that is a sacrifice I am willing to make.","brand":"Liquid Death","sector":"food & drink","copy_type":"headline","year":2023,"campaign":"Cease & Desist Posters","agency":"In-house","medium":"social","festival_or_note":"Webby — meme-as-ad canon","lang":"en"},{"copy":"3 egg whites. 6 almonds. 2 dates. No B.S.","brand":"RXBAR","sector":"food & drink","copy_type":"brand tagline","year":2015,"campaign":"No B.S.","agency":"In-house","medium":"packaging","festival_or_note":"DTC packaging-as-copy canon","lang":"en"},{"copy":"We see you not opening Duolingo.","brand":"Duolingo","sector":"technology","copy_type":"campaign concept","year":2021,"campaign":"Threatening Owl","agency":"In-house","medium":"social/email","festival_or_note":"Webby + Adweek brand-of-the-year canon","lang":"en"},{"copy":"Dear person who played 'Sorry' 42 times on Valentine's Day. What did you do?","brand":"Spotify","sector":"technology","copy_type":"headline","year":2016,"campaign":"Thanks 2016 It's Been Weird","agency":"In-house","medium":"OOH/print","festival_or_note":"Adweek 2016 brand-of-the-year canon","lang":"en"},{"copy":"Brad is single.","brand":"Norwegian Air","sector":"travel & transport","copy_type":"headline","year":2016,"campaign":"Brad Is Single","agency":"Try Norway","medium":"OOH/print","festival_or_note":"Cannes Direct Lions","lang":"en"},{"copy":"Michael Cerave.","brand":"CeraVe","sector":"health & beauty","copy_type":"campaign concept","year":2024,"campaign":"Michael Cerave","agency":"Ogilvy PR New York","medium":"social/influencer","festival_or_note":"Cannes Social & Influencer Grand Prix 2024","lang":"en"},{"copy":"The everyday tactician.","brand":"Xbox Game Pass","sector":"technology","copy_type":"campaign concept","year":2024,"campaign":"The Everyday Tactician","agency":"McCann London","medium":"social/gaming","festival_or_note":"Cannes Direct + Entertainment for Gaming Grand Prix 2024","lang":"en"},{"copy":"Yes we can.","brand":"Obama 2008","sector":"public interest & culture","copy_type":"campaign concept","year":2008,"campaign":"Yes We Can","agency":"AKPD Message and Media","medium":"OOH/TV","festival_or_note":"Effie political-ad canon","lang":"en"},{"copy":"Hope.","brand":"Obama 2008","sector":"public interest & culture","copy_type":"campaign concept","year":2008,"campaign":"Hope (Shepard Fairey)","agency":"Independent design","medium":"OOH/poster","festival_or_note":"Smithsonian collection — single-word campaign canon","lang":"en"},{"copy":"Bienvenido a la república independiente de tu casa.","brand":"Ikea España","sector":"services","copy_type":"campaign concept","year":2006,"campaign":"República Independiente","agency":"SCPF","medium":"TV/print/OOH","festival_or_note":"Cannes Bronce — slogan icónico publicidad española","lang":"es"},{"copy":"Te gusta conducir.","brand":"BMW","sector":"automotive","copy_type":"campaign concept","year":2001,"campaign":"¿Te Gusta Conducir?","agency":"SCPF","medium":"TV/OOH","festival_or_note":"Sol de Platino — campaña española canon","lang":"es"},{"copy":"Vuelve a casa por Navidad.","brand":"El Almendro","sector":"food & drink","copy_type":"headline","year":1976,"campaign":"Vuelve A Casa Por Navidad","agency":"Various","medium":"TV","festival_or_note":"lema canon publicidad española","lang":"es"},{"copy":"Deficiente sentido del humor.","brand":"Campofrío","sector":"food & drink","copy_type":"campaign concept","year":2011,"campaign":"Cómicos","agency":"McCann","medium":"TV","festival_or_note":"Sol de Plata — campaña canon publicidad española","lang":"es"},{"copy":"Mediterráneamente.","brand":"Estrella Damm","sector":"alcohol","copy_type":"brand tagline","year":2009,"campaign":"Mediterráneamente","agency":"Villarrosàs","medium":"TV/OOH","festival_or_note":"Sol Platino + Effie España — canon publicidad española","lang":"es"},{"copy":"Volveremos a brindar.","brand":"Estrella Damm","sector":"alcohol","copy_type":"campaign concept","year":2020,"campaign":"Volveremos A Brindar","agency":"Oriol Villar / Villarrosàs","medium":"TV/social","festival_or_note":"Sol Oro 2020 — campaña COVID España","lang":"es"},{"copy":"Si te dicen que pronuncies bien, tú no les hagas ni puto caso.","brand":"Cruzcampo","sector":"alcohol","copy_type":"headline","year":2021,"campaign":"Con Mucho Acento","agency":"Ogilvy Spain","medium":"TV","festival_or_note":"Sol de Oro 2021 — voiceover icónico Lola Flores deepfake","lang":"es"},{"copy":"Con mucho acento.","brand":"Cruzcampo","sector":"alcohol","copy_type":"campaign concept","year":2021,"campaign":"Con Mucho Acento","agency":"Ogilvy Spain","medium":"TV/OOH","festival_or_note":"Sol de Oro 2021 + Eficacia España","lang":"es"},{"copy":"Escandalosamente buena.","brand":"Estrella Galicia","sector":"alcohol","copy_type":"brand tagline","year":2013,"campaign":"Escandalosamente Buena","agency":"Estrella Galicia in-house","medium":"TV/OOH","festival_or_note":"Sol de Plata — slogan canon Estrella Galicia","lang":"es"},{"copy":"Sightwalks.","brand":"Cemento Sol / UNAMEC","sector":"public interest & culture","copy_type":"campaign concept","year":2025,"campaign":"Sightwalks","agency":"Circus Grey / Apoyo / LLYC / Dinamo","medium":"OOH","festival_or_note":"Sol de Platino 2025","lang":"es"},{"copy":"Terriblemente delicioso.","brand":"Ministerio de Medio Ambiente Colombia","sector":"public interest & culture","copy_type":"campaign concept","year":2018,"campaign":"La Invasión del Pez León","agency":"Geometry Global Colombia","medium":"OOH/social","festival_or_note":"Sol Gran Premio Campañas Integradas","lang":"es"},{"copy":"Nobody should die at Xmas.","brand":"Open Arms","sector":"public interest & culture","copy_type":"campaign concept","year":2024,"campaign":"Nobody Should Die At Xmas","agency":"Double You","medium":"OOH/social","festival_or_note":"Sol Gran Premio Relaciones Públicas 2024","lang":"en"},{"copy":"Where the bloody hell are you?","brand":"Tourism Australia","sector":"travel & transport","copy_type":"campaign concept","year":2006,"campaign":"Where The Bloody Hell Are You","agency":"M&C Saatchi","medium":"TV/print/OOH","festival_or_note":"Cannes Lions; UK ad-banned","lang":"en"},{"copy":"100% pure New Zealand.","brand":"Tourism New Zealand","sector":"travel & transport","copy_type":"brand tagline","year":1999,"campaign":"100% Pure","agency":"Saatchi & Saatchi","medium":"TV/print/OOH","festival_or_note":"Effie Hall of Fame NZ + Cannes Lions","lang":"en"},{"copy":"I love NY.","brand":"New York State","sector":"travel & transport","copy_type":"brand tagline","year":1977,"campaign":"I Love NY","agency":"Wells Rich Greene","medium":"OOH/print/merch","festival_or_note":"Ad Age slogan canon — designed by Milton Glaser","lang":"en"},{"copy":"Incredible India.","brand":"Ministry of Tourism India","sector":"travel & transport","copy_type":"brand tagline","year":2002,"campaign":"Incredible India","agency":"Ogilvy & Mather India","medium":"OOH/print","festival_or_note":"Cannes Lions India + Effie","lang":"en"},{"copy":"Backup Ukraine.","brand":"Polycam + UNESCO","sector":"public interest & culture","copy_type":"campaign concept","year":2022,"campaign":"Backup Ukraine","agency":"Virtue","medium":"app/PR","festival_or_note":"Cannes Innovation + Direct Grand Prix 2022","lang":"en"},{"copy":"The first digital nation.","brand":"Government of Tuvalu","sector":"public interest & culture","copy_type":"campaign concept","year":2022,"campaign":"The First Digital Nation","agency":"The Monkeys","medium":"PR/film","festival_or_note":"Cannes PR Grand Prix 2023","lang":"en"},{"copy":"If you're into it, it's in the V&A.","brand":"Victoria & Albert Museum","sector":"public interest & culture","copy_type":"campaign concept","year":2024,"campaign":"If You're Into It","agency":"adam&eveDDB","medium":"OOH/print/social","festival_or_note":"D&AD + One Show 2024","lang":"en"},{"copy":"Vive como si nadie te conociera.","brand":"Seagram's Gin","sector":"alcohol","copy_type":"campaign concept","year":2021,"campaign":"Vive Como Si Nadie Te Conociera","agency":"CHINA Madrid","medium":"TV/social","festival_or_note":"Pernod Ricard España — plataforma creativa 2021–2023","lang":"es"},{"copy":"The better you talk, the better you feel.","brand":"ITV","sector":"media & entertainment","copy_type":"campaign concept","year":2021,"campaign":"Britain Get Talking","agency":"Uncommon Creative Studio","medium":"OOH/print/TV","festival_or_note":"One Show — 2.8M people prompted to start a conversation","lang":"en"},{"copy":"Considering what?","brand":"Channel 4","sector":"media & entertainment","copy_type":"campaign concept","year":2024,"campaign":"Considering What?","agency":"4Creative","medium":"TV/OOH","festival_or_note":"Paris 2024 Paralympics — challenged patronising attitudes to disabled athletes","lang":"en"},{"copy":"Stupid is the relentless pursuit of a regret-free life.","brand":"Diesel","sector":"fashion & style","copy_type":"brand tagline","year":2010,"campaign":"Be Stupid","agency":"Anomaly","medium":"OOH/manifesto","festival_or_note":"Cannes Outdoor Grand Prix — opening line of the Be Stupid manifesto","lang":"en"},{"copy":"Smart sees things for how they are. Stupid sees things for how they could be.","brand":"Diesel","sector":"fashion & style","copy_type":"headline","year":2010,"campaign":"Be Stupid","agency":"Anomaly","medium":"OOH","festival_or_note":"Cannes Outdoor Grand Prix","lang":"en"},{"copy":"Smart may have the plans, but stupid has the stories.","brand":"Diesel","sector":"fashion & style","copy_type":"headline","year":2010,"campaign":"Be Stupid","agency":"Anomaly","medium":"OOH","festival_or_note":"Cannes Outdoor Grand Prix","lang":"en"},{"copy":"Smart may have the authority, but stupid has one hell of a hangover.","brand":"Diesel","sector":"fashion & style","copy_type":"headline","year":2010,"campaign":"Be Stupid","agency":"Anomaly","medium":"OOH","festival_or_note":"Cannes Outdoor Grand Prix","lang":"en"},{"copy":"It's not smart to take risks. It's stupid.","brand":"Diesel","sector":"fashion & style","copy_type":"headline","year":2010,"campaign":"Be Stupid","agency":"Anomaly","medium":"OOH","festival_or_note":"Cannes Outdoor Grand Prix","lang":"en"},{"copy":"To be stupid is to be brave.","brand":"Diesel","sector":"fashion & style","copy_type":"headline","year":2010,"campaign":"Be Stupid","agency":"Anomaly","medium":"OOH","festival_or_note":"Cannes Outdoor Grand Prix","lang":"en"},{"copy":"Stupid knows there are worse things than failure. Like not even trying.","brand":"Diesel","sector":"fashion & style","copy_type":"headline","year":2010,"campaign":"Be Stupid","agency":"Anomaly","medium":"OOH/manifesto","festival_or_note":"Cannes Outdoor Grand Prix — closing line of the Be Stupid manifesto","lang":"en"},{"copy":"Stupid is trial and error. Mostly error.","brand":"Diesel","sector":"fashion & style","copy_type":"headline","year":2010,"campaign":"Be Stupid","agency":"Anomaly","medium":"OOH (subway)","festival_or_note":"Cannes Outdoor Grand Prix — NYC subway OOH variant","lang":"en"},{"copy":"Smart listens to the head. Stupid listens to the heart.","brand":"Diesel","sector":"fashion & style","copy_type":"headline","year":2010,"campaign":"Be Stupid","agency":"Anomaly","medium":"OOH","festival_or_note":"Cannes Outdoor Grand Prix","lang":"en"},{"copy":"The Un-Cola.","brand":"7UP","sector":"alcohol","copy_type":"brand tagline","year":null,"campaign":"","agency":"","medium":"","festival_or_note":"","lang":"en"},{"copy":"The Happiest Place on Earth.","brand":"Disneyland","sector":"travel & transport","copy_type":"brand tagline","year":null,"campaign":"","agency":"","medium":"","festival_or_note":"","lang":"en"},{"copy":"Don't Be Evil.","brand":"Google","sector":"technology","copy_type":"brand tagline","year":null,"campaign":"","agency":"","medium":"","festival_or_note":"","lang":"en"},{"copy":"Behold the Power of Cheese.","brand":"American Dairy Association","sector":"food & drink","copy_type":"brand tagline","year":null,"campaign":"","agency":"","medium":"","festival_or_note":"","lang":"en"},{"copy":"Do You Yahoo!?","brand":"Yahoo!","sector":"technology","copy_type":"brand tagline","year":null,"campaign":"","agency":"","medium":"","festival_or_note":"","lang":"en"},{"copy":"Have It Your Way.","brand":"Burger King","sector":"food & drink","copy_type":"brand tagline","year":null,"campaign":"","agency":"","medium":"","festival_or_note":"","lang":"en"},{"copy":"Accelerating the World's Transition to Sustainable Energy.","brand":"Tesla","sector":"automotive","copy_type":"brand tagline","year":null,"campaign":"","agency":"","medium":"","festival_or_note":"","lang":"en"},{"copy":"It's the Real Thing.","brand":"Coca-Cola","sector":"food & drink","copy_type":"brand tagline","year":null,"campaign":"","agency":"","medium":"","festival_or_note":"","lang":"en"},{"copy":"Believe in Better.","brand":"Sky","sector":"media & entertainment","copy_type":"brand tagline","year":null,"campaign":"","agency":"","medium":"","festival_or_note":"","lang":"en"},{"copy":"Does She or Doesn't She?","brand":"Clairol","sector":"health & beauty","copy_type":"brand tagline","year":null,"campaign":"","agency":"","medium":"","festival_or_note":"","lang":"en"},{"copy":"Zoom-Zoom.","brand":"Mazda","sector":"automotive","copy_type":"brand tagline","year":null,"campaign":"","agency":"","medium":"","festival_or_note":"","lang":"en"},{"copy":"All the News That's Fit to Print.","brand":"The New York Times","sector":"media & entertainment","copy_type":"brand tagline","year":null,"campaign":"","agency":"","medium":"","festival_or_note":"","lang":"en"},{"copy":"When You Care Enough to Send the Very Best.","brand":"Hallmark","sector":"services","copy_type":"brand tagline","year":null,"campaign":"","agency":"","medium":"","festival_or_note":"","lang":"en"},{"copy":"Make. Believe.","brand":"Sony","sector":"technology","copy_type":"brand tagline","year":null,"campaign":"","agency":"","medium":"","festival_or_note":"","lang":"en"},{"copy":"The Few. The Proud. The Marines.","brand":"U.S. Marine Corps","sector":"public interest & culture","copy_type":"brand tagline","year":null,"campaign":"","agency":"","medium":"","festival_or_note":"","lang":"en"},{"copy":"Think Green.","brand":"John Deere","sector":"services","copy_type":"brand tagline","year":null,"campaign":"","agency":"","medium":"","festival_or_note":"","lang":"en"},{"copy":"15 minutes can save you 15 percent or more on car insurance.","brand":"Geico","sector":"services","copy_type":"brand tagline","year":null,"campaign":"","agency":"","medium":"","festival_or_note":"","lang":"en"},{"copy":"Because You're Worth It.","brand":"L'Oréal","sector":"health & beauty","copy_type":"brand tagline","year":null,"campaign":"","agency":"","medium":"","festival_or_note":"","lang":"en"},{"copy":"Ideas for Life.","brand":"Panasonic","sector":"technology","copy_type":"brand tagline","year":null,"campaign":"","agency":"","medium":"","festival_or_note":"","lang":"en"},{"copy":"Shave Time. Shave Money.","brand":"Dollar Shave Club","sector":"health & beauty","copy_type":"brand tagline","year":null,"campaign":"","agency":"","medium":"","festival_or_note":"","lang":"en"},{"copy":"The World's Online Marketplace.","brand":"eBay","sector":"technology","copy_type":"brand tagline","year":null,"campaign":"","agency":"","medium":"","festival_or_note":"","lang":"en"},{"copy":"Is It In You?","brand":"Gatorade","sector":"sport","copy_type":"brand tagline","year":null,"campaign":"","agency":"","medium":"","festival_or_note":"","lang":"en"},{"copy":"The Pause That Refreshes.","brand":"Coca-Cola","sector":"food & drink","copy_type":"brand tagline","year":null,"campaign":"","agency":"","medium":"","festival_or_note":"","lang":"en"},{"copy":"The Best or Nothing.","brand":"Mercedes-Benz","sector":"automotive","copy_type":"brand tagline","year":null,"campaign":"","agency":"","medium":"","festival_or_note":"","lang":"en"},{"copy":"Maybe She's Born With It. Maybe It's Maybelline.","brand":"Maybelline","sector":"health & beauty","copy_type":"brand tagline","year":null,"campaign":"","agency":"","medium":"","festival_or_note":"","lang":"en"},{"copy":"Tastes Great, Less Filling.","brand":"Miller Lite","sector":"alcohol","copy_type":"brand tagline","year":null,"campaign":"","agency":"","medium":"","festival_or_note":"","lang":"en"},{"copy":"Hello Tomorrow.","brand":"Emirates","sector":"travel & transport","copy_type":"brand tagline","year":null,"campaign":"","agency":"","medium":"","festival_or_note":"","lang":"en"},{"copy":"You Deserve a Break Today.","brand":"McDonald's","sector":"food & drink","copy_type":"brand tagline","year":null,"campaign":"","agency":"","medium":"","festival_or_note":"","lang":"en"},{"copy":"Taste the Rainbow.","brand":"Skittles","sector":"food & drink","copy_type":"brand tagline","year":null,"campaign":"","agency":"","medium":"","festival_or_note":"","lang":"en"},{"copy":"Just for the Taste of It.","brand":"Diet Coke","sector":"food & drink","copy_type":"brand tagline","year":null,"campaign":"","agency":"","medium":"","festival_or_note":"","lang":"en"},{"copy":"Let Your Fingers Do the Walking.","brand":"Yellow Pages","sector":"services","copy_type":"brand tagline","year":null,"campaign":"","agency":"","medium":"","festival_or_note":"","lang":"en"},{"copy":"Red Bull Gives You Wings.","brand":"Red Bull","sector":"sport","copy_type":"brand tagline","year":null,"campaign":"","agency":"","medium":"","festival_or_note":"","lang":"en"},{"copy":"I Want My MTV.","brand":"MTV","sector":"media & entertainment","copy_type":"brand tagline","year":null,"campaign":"","agency":"","medium":"","festival_or_note":"","lang":"en"},{"copy":"The Quicker Picker Upper.","brand":"Bounty","sector":"food & drink","copy_type":"brand tagline","year":null,"campaign":"","agency":"","medium":"","festival_or_note":"","lang":"en"},{"copy":"Don't Squeeze the Charmin.","brand":"Charmin","sector":"health & beauty","copy_type":"brand tagline","year":null,"campaign":"","agency":"","medium":"","festival_or_note":"","lang":"en"},{"copy":"Strong Enough for a Man, Made for a Woman.","brand":"Secret","sector":"health & beauty","copy_type":"brand tagline","year":null,"campaign":"","agency":"","medium":"","festival_or_note":"","lang":"en"},{"copy":"Keeps Going and Going and Going.","brand":"Energizer","sector":"services","copy_type":"brand tagline","year":null,"campaign":"","agency":"","medium":"","festival_or_note":"","lang":"en"},{"copy":"Betcha Can't Eat Just One.","brand":"Lay's","sector":"food & drink","copy_type":"brand tagline","year":null,"campaign":"","agency":"","medium":"","festival_or_note":"","lang":"en"},{"copy":"Melts in Your Mouth, Not in Your Hands.","brand":"M&M's","sector":"food & drink","copy_type":"brand tagline","year":null,"campaign":"","agency":"","medium":"","festival_or_note":"","lang":"en"},{"copy":"It's Finger Lickin' Good.","brand":"KFC","sector":"food & drink","copy_type":"brand tagline","year":null,"campaign":"","agency":"","medium":"","festival_or_note":"","lang":"en"},{"copy":"Power, Beauty and Soul.","brand":"Aston Martin","sector":"automotive","copy_type":"brand tagline","year":null,"campaign":"","agency":"","medium":"","festival_or_note":"","lang":"en"},{"copy":"Leave the Driving to Us.","brand":"Greyhound","sector":"travel & transport","copy_type":"brand tagline","year":null,"campaign":"","agency":"","medium":"","festival_or_note":"","lang":"en"},{"copy":"Better Ingredients. Better Pizza.","brand":"Papa John's","sector":"food & drink","copy_type":"brand tagline","year":null,"campaign":"","agency":"","medium":"","festival_or_note":"","lang":"en"},{"copy":"When E.F. Hutton Talks, People Listen.","brand":"E.F. Hutton","sector":"services","copy_type":"brand tagline","year":null,"campaign":"","agency":"","medium":"","festival_or_note":"","lang":"en"},{"copy":"It's Time to Fly.","brand":"Southwest Airlines","sector":"travel & transport","copy_type":"brand tagline","year":null,"campaign":"","agency":"","medium":"","festival_or_note":"","lang":"en"},{"copy":"Obey Your Thirst.","brand":"Sprite","sector":"food & drink","copy_type":"brand tagline","year":null,"campaign":"","agency":"","medium":"","festival_or_note":"","lang":"en"},{"copy":"Smell Like a Man, Man.","brand":"Old Spice","sector":"health & beauty","copy_type":"brand tagline","year":null,"campaign":"","agency":"","medium":"","festival_or_note":"","lang":"en"},{"copy":"What's in Your Wallet?","brand":"Capital One","sector":"services","copy_type":"brand tagline","year":null,"campaign":"","agency":"","medium":"","festival_or_note":"","lang":"en"},{"copy":"Imagination at Work.","brand":"General Electric","sector":"technology","copy_type":"brand tagline","year":null,"campaign":"","agency":"","medium":"","festival_or_note":"","lang":"en"},{"copy":"Can You Hear Me Now?","brand":"Verizon","sector":"technology","copy_type":"brand tagline","year":null,"campaign":"","agency":"","medium":"","festival_or_note":"","lang":"en"},{"copy":"Tastes So Good, Cats Ask for It by Name.","brand":"Meow Mix","sector":"food & drink","copy_type":"brand tagline","year":null,"campaign":"","agency":"","medium":"","festival_or_note":"","lang":"en"},{"copy":"Reach Out and Touch Someone.","brand":"AT&T","sector":"technology","copy_type":"brand tagline","year":null,"campaign":"","agency":"","medium":"","festival_or_note":"","lang":"en"},{"copy":"Save Money. Live Better.","brand":"Walmart","sector":"services","copy_type":"brand tagline","year":null,"campaign":"","agency":"","medium":"","festival_or_note":"","lang":"en"},{"copy":"Challenge Everything.","brand":"EA Games","sector":"technology","copy_type":"brand tagline","year":null,"campaign":"","agency":"","medium":"","festival_or_note":"","lang":"en"},{"copy":"We Bring Good Things to Life.","brand":"General Electric","sector":"technology","copy_type":"brand tagline","year":null,"campaign":"","agency":"","medium":"","festival_or_note":"","lang":"en"},{"copy":"Let's Make Things Better.","brand":"Philips","sector":"technology","copy_type":"brand tagline","year":null,"campaign":"","agency":"","medium":"","festival_or_note":"","lang":"en"},{"copy":"The Best a Man Can Get.","brand":"Gillette","sector":"health & beauty","copy_type":"brand tagline","year":null,"campaign":"","agency":"","medium":"","festival_or_note":"","lang":"en"},{"copy":"I'm Lovin' It.","brand":"McDonald's","sector":"food & drink","copy_type":"brand tagline","year":null,"campaign":"","agency":"","medium":"","festival_or_note":"","lang":"en"},{"copy":"Have a Break, Have a KitKat.","brand":"KitKat","sector":"food & drink","copy_type":"brand tagline","year":null,"campaign":"","agency":"","medium":"","festival_or_note":"","lang":"en"},{"copy":"Double Your Pleasure, Double Your Fun.","brand":"Doublemint","sector":"food & drink","copy_type":"brand tagline","year":null,"campaign":"","agency":"","medium":"","festival_or_note":"","lang":"en"},{"copy":"Takes a Licking and Keeps on Ticking.","brand":"Timex","sector":"fashion & style","copy_type":"brand tagline","year":null,"campaign":"","agency":"","medium":"","festival_or_note":"","lang":"en"},{"copy":"Get N or Get Out.","brand":"Nintendo","sector":"technology","copy_type":"brand tagline","year":null,"campaign":"","agency":"","medium":"","festival_or_note":"","lang":"en"},{"copy":"Live in Your World. Play in Ours.","brand":"PlayStation","sector":"technology","copy_type":"brand tagline","year":null,"campaign":"","agency":"","medium":"","festival_or_note":"","lang":"en"},{"copy":"Don't Leave Home Without It.","brand":"American Express","sector":"services","copy_type":"brand tagline","year":null,"campaign":"","agency":"","medium":"","festival_or_note":"","lang":"en"},{"copy":"Put a Tiger in Your Tank.","brand":"Esso","sector":"automotive","copy_type":"brand tagline","year":null,"campaign":"","agency":"","medium":"","festival_or_note":"","lang":"en"},{"copy":"Think Outside the Bun.","brand":"Taco Bell","sector":"food & drink","copy_type":"brand tagline","year":null,"campaign":"","agency":"","medium":"","festival_or_note":"","lang":"en"},{"copy":"Breakfast of Champions.","brand":"Wheaties","sector":"food & drink","copy_type":"brand tagline","year":null,"campaign":"","agency":"","medium":"","festival_or_note":"","lang":"en"},{"copy":"You're in Good Hands.","brand":"Allstate","sector":"services","copy_type":"brand tagline","year":null,"campaign":"","agency":"","medium":"","festival_or_note":"","lang":"en"},{"copy":"Designed for Driving Pleasure.","brand":"BMW","sector":"automotive","copy_type":"brand tagline","year":null,"campaign":"","agency":"","medium":"","festival_or_note":"","lang":"en"},{"copy":"You Got 30 Minutes.","brand":"Domino's Pizza","sector":"food & drink","copy_type":"brand tagline","year":null,"campaign":"","agency":"","medium":"","festival_or_note":"","lang":"en"},{"copy":"Do What You Can't.","brand":"Samsung","sector":"technology","copy_type":"brand tagline","year":null,"campaign":"","agency":"","medium":"","festival_or_note":"","lang":"en"},{"copy":"Let's Go Places.","brand":"Toyota","sector":"automotive","copy_type":"brand tagline","year":null,"campaign":"","agency":"","medium":"","festival_or_note":"","lang":"en"},{"copy":"Good to the Last Drop.","brand":"Maxwell House","sector":"food & drink","copy_type":"brand tagline","year":null,"campaign":"","agency":"","medium":"","festival_or_note":"","lang":"en"},{"copy":"Live Mas.","brand":"Taco Bell","sector":"food & drink","copy_type":"brand tagline","year":null,"campaign":"","agency":"","medium":"","festival_or_note":"","lang":"en"},{"copy":"Born to Perform.","brand":"Jaguar","sector":"automotive","copy_type":"brand tagline","year":null,"campaign":"","agency":"","medium":"","festival_or_note":"","lang":"en"},{"copy":"Expect More. Pay Less.","brand":"Target","sector":"services","copy_type":"brand tagline","year":null,"campaign":"","agency":"","medium":"","festival_or_note":"","lang":"en"},{"copy":"Be All You Can Be.","brand":"U.S. Army","sector":"public interest & culture","copy_type":"brand tagline","year":null,"campaign":"","agency":"","medium":"","festival_or_note":"","lang":"en"},{"copy":"M'm! M'm! Good!","brand":"Campbell's","sector":"food & drink","copy_type":"brand tagline","year":null,"campaign":"","agency":"","medium":"","festival_or_note":"","lang":"en"},{"copy":"Open Happiness.","brand":"Coca-Cola","sector":"food & drink","copy_type":"brand tagline","year":null,"campaign":"","agency":"","medium":"","festival_or_note":"","lang":"en"},{"copy":"Snap! Crackle! Pop!","brand":"Rice Krispies","sector":"food & drink","copy_type":"brand tagline","year":null,"campaign":"","agency":"","medium":"","festival_or_note":"","lang":"en"},{"copy":"A Mind is a Terrible Thing to Waste.","brand":"UNCF","sector":"public interest & culture","copy_type":"brand tagline","year":null,"campaign":"","agency":"","medium":"","festival_or_note":"","lang":"en"},{"copy":"You Can Do It. We Can Help.","brand":"The Home Depot","sector":"services","copy_type":"brand tagline","year":null,"campaign":"","agency":"","medium":"","festival_or_note":"","lang":"en"},{"copy":"Nothing Runs Like a Deere.","brand":"John Deere","sector":"services","copy_type":"brand tagline","year":null,"campaign":"","agency":"","medium":"","festival_or_note":"","lang":"en"},{"copy":"It's Everywhere You Want to Be.","brand":"Visa","sector":"services","copy_type":"brand tagline","year":null,"campaign":"","agency":"","medium":"","festival_or_note":"","lang":"en"},{"copy":"Drivers Wanted.","brand":"Volkswagen","sector":"automotive","copy_type":"brand tagline","year":null,"campaign":"","agency":"","medium":"","festival_or_note":"","lang":"en"},{"copy":"We Know Money.","brand":"Western Union","sector":"services","copy_type":"brand tagline","year":null,"campaign":"","agency":"","medium":"","festival_or_note":"","lang":"en"},{"copy":"Every Kiss Begins with Kay.","brand":"Kay Jewelers","sector":"fashion & style","copy_type":"brand tagline","year":null,"campaign":"","agency":"","medium":"","festival_or_note":"","lang":"en"},{"copy":"Moving Forward.","brand":"Ford","sector":"automotive","copy_type":"brand tagline","year":null,"campaign":"","agency":"","medium":"","festival_or_note":"","lang":"en"},{"copy":"Share Moments. Share Life.","brand":"Kodak","sector":"media & entertainment","copy_type":"brand tagline","year":null,"campaign":"","agency":"","medium":"","festival_or_note":"","lang":"en"},
+{"copy":"Red means go.","brand":"Hugo Boss","sector":"fashion & style","copy_type":"headline","year":null,"campaign":"","agency":"","medium":"OOH/print","festival_or_note":"","lang":"en"},
+{"copy":"Where are you going?","brand":"JD Sports","sector":"sport","copy_type":"campaign concept","year":null,"campaign":"","agency":"","medium":"OOH/TV","festival_or_note":"","lang":"en"},
+{"copy":"The abnormal beauty company.","brand":"The Ordinary","sector":"health & beauty","copy_type":"brand tagline","year":null,"campaign":"","agency":"In-house","medium":"packaging/OOH","festival_or_note":"","lang":"en"},
+{"copy":"Be the problem.","brand":"Under Armour","sector":"sport","copy_type":"campaign concept","year":null,"campaign":"","agency":"","medium":"OOH/digital","festival_or_note":"","lang":"en"},
+{"copy":"Life, delivered.","brand":"Ocado","sector":"services","copy_type":"brand tagline","year":null,"campaign":"","agency":"","medium":"OOH/digital","festival_or_note":"","lang":"en"},
+{"copy":"Found it on Depop.","brand":"Depop","sector":"technology","copy_type":"campaign concept","year":null,"campaign":"","agency":"In-house","medium":"OOH/social","festival_or_note":"","lang":"en"},
+{"copy":"The truth should be ordinary.","brand":"The Ordinary","sector":"health & beauty","copy_type":"headline","year":null,"campaign":"","agency":"In-house","medium":"OOH/print","festival_or_note":"","lang":"en"},
+{"copy":"Ordinary is for everyone else.","brand":"Beats by Dre","sector":"technology","copy_type":"headline","year":null,"campaign":"","agency":"","medium":"OOH/TV","festival_or_note":"","lang":"en"},
+{"copy":"The brilliance of boring.","brand":"PNC Bank","sector":"services","copy_type":"headline","year":null,"campaign":"","agency":"","medium":"print/OOH","festival_or_note":"","lang":"en"},
+{"copy":"You must not remove your trousers at KFC. And that's why there's KFC Delivery.","brand":"KFC","sector":"food & drink","copy_type":"headline","year":2022,"campaign":"KFC Delivery","agency":"Mother London","medium":"OOH/TV","festival_or_note":"FIFA World Cup 2022 UK campaign","lang":"en"},
+{"copy":"Winning isn't for everyone.","brand":"Nike","sector":"sport","copy_type":"headline","year":2024,"campaign":"Winning Isn't for Everyone","agency":"Wieden+Kennedy","medium":"TV/OOH","festival_or_note":"Paris 2024 Olympics campaign","lang":"en"},
+{"copy":"It's raining. Anyone else hears bacon?","brand":"Greenfield Natural Meat Co.","sector":"food & drink","copy_type":"headline","year":null,"campaign":"","agency":"","medium":"print/social","festival_or_note":"","lang":"en"},
+{"copy":"The loss of freedom is never obvious.","brand":"Reporters Without Borders","sector":"public interest & culture","copy_type":"headline","year":null,"campaign":"","agency":"","medium":"OOH/print","festival_or_note":"","lang":"en"},
+{"copy":"The power of a fragrance.","brand":"Axe","sector":"health & beauty","copy_type":"campaign concept","year":null,"campaign":"","agency":"","medium":"TV/OOH","festival_or_note":"","lang":"en"},
+{"copy":"Smell your best when you look your worst.","brand":"Axe","sector":"health & beauty","copy_type":"headline","year":null,"campaign":"","agency":"","medium":"OOH/print","festival_or_note":"","lang":"en"},
+{"copy":"Choose Uber. — Heetch.","brand":"Heetch","sector":"travel & transport","copy_type":"headline","year":2017,"campaign":"Choose Uber","agency":"","medium":"OOH","festival_or_note":"challenger brand hijack of Uber's name","lang":"en"},
+{"copy":"Dumb ways to die.","brand":"Metro Trains Melbourne","sector":"public interest & culture","copy_type":"campaign concept","year":2012,"campaign":"Dumb Ways to Die","agency":"McCann Melbourne","medium":"digital/social/OOH","festival_or_note":"Cannes Grand Prix + most awarded campaign in Cannes history","lang":"en"},
+{"copy":"Thank you for creating Coke.","brand":"Coca-Cola","sector":"food & drink","copy_type":"headline","year":null,"campaign":"","agency":"","medium":"print","festival_or_note":"","lang":"en"},
+{"copy":"u up?","brand":"IKEA","sector":"services","copy_type":"headline","year":2019,"campaign":"u up?","agency":"","medium":"social","festival_or_note":"Black Friday campaign targeting late-night shoppers","lang":"en"},
+{"copy":"Buy with your time.","brand":"IKEA","sector":"services","copy_type":"campaign concept","year":null,"campaign":"","agency":"","medium":"OOH/digital","festival_or_note":"","lang":"en"},
+{"copy":"Courage is beautiful.","brand":"Dove","sector":"health & beauty","copy_type":"campaign concept","year":2020,"campaign":"Courage Is Beautiful","agency":"Ogilvy","medium":"OOH/digital","festival_or_note":"healthcare workers campaign, COVID-19","lang":"en"},
+{"copy":"Let the song play.","brand":"Spotify","sector":"technology","copy_type":"campaign concept","year":null,"campaign":"","agency":"","medium":"OOH/social","festival_or_note":"","lang":"en"},
+{"copy":"You can't stop us.","brand":"Nike","sector":"sport","copy_type":"campaign concept","year":2020,"campaign":"You Can't Stop Us","agency":"Wieden+Kennedy","medium":"TV/social","festival_or_note":"Cannes Film Grand Prix 2021","lang":"en"},
+{"copy":"Are we working from home or living at work? Can we really master a skill after taking an online masterclass? Should we sneeze into our elbows and still bump elbows when we run into people?","brand":"Burger King","sector":"food & drink","copy_type":"headline","year":2021,"campaign":"Confusing Times","agency":"David Madrid","medium":"radio/TV","festival_or_note":"Impossible Whopper — One Show Merit","lang":"en"},
+{"copy":"Colour like no other.","brand":"Sony Bravia","sector":"technology","copy_type":"brand tagline","year":2005,"campaign":"Colour Like No Other","agency":"Fallon London","medium":"TV/OOH","festival_or_note":"D&AD Yellow Pencil","lang":"en"},
+{"copy":"The expandable suitcase. Now you can steal the bathrobe as well as the toiletries.","brand":"Tripp","sector":"fashion & style","copy_type":"headline","year":null,"campaign":"","agency":"","medium":"print/OOH","festival_or_note":"","lang":"en"},
+{"copy":"Welcome, IBM. Seriously.","brand":"Apple","sector":"technology","copy_type":"headline","year":1981,"campaign":"Welcome IBM","agency":"TBWA\\Chiat\\Day","medium":"print (WSJ)","festival_or_note":"full-page WSJ ad welcoming IBM to personal computing","lang":"en"},
+{"copy":"They said it couldn't be done. It couldn't.","brand":"Volkswagen","sector":"automotive","copy_type":"headline","year":null,"campaign":"","agency":"Doyle Dane Bernbach","medium":"print","festival_or_note":"self-deprecating DDB print classic","lang":"en"},
+{"copy":"iMac. Pretty. Freaking. Powerful.","brand":"Apple","sector":"technology","copy_type":"headline","year":1998,"campaign":"iMac Launch","agency":"TBWA\\Media Arts Lab","medium":"OOH/print","festival_or_note":"","lang":"en"},
+{"copy":"No one grows ketchup like Heinz.","brand":"Heinz","sector":"food & drink","copy_type":"headline","year":null,"campaign":"","agency":"","medium":"print/OOH","festival_or_note":"","lang":"en"},
+{"copy":"It's like having Keith Moon in the room. Only safer.","brand":"Sony","sector":"technology","copy_type":"headline","year":null,"campaign":"Sony Hi-Fi","agency":"","medium":"print","festival_or_note":"Sony HiFi components — Keith Moon's notorious destructiveness as contrast","lang":"en"},
+{"copy":"There are less expensive bourbons. There are also thinner steaks and smaller cars.","brand":"Wild Turkey","sector":"alcohol","copy_type":"headline","year":null,"campaign":"","agency":"","medium":"print","festival_or_note":"","lang":"en"},
+{"copy":"Light. Years ahead.","brand":"Apple","sector":"technology","copy_type":"headline","year":null,"campaign":"","agency":"TBWA\\Media Arts Lab","medium":"OOH/print","festival_or_note":"MacBook campaign","lang":"en"},
+{"copy":"Kick glass.","brand":"Apple","sector":"technology","copy_type":"headline","year":null,"campaign":"","agency":"TBWA\\Media Arts Lab","medium":"OOH/print","festival_or_note":"","lang":"en"},
+{"copy":"From 0 to 100 in enough time.","brand":"Volkswagen","sector":"automotive","copy_type":"headline","year":null,"campaign":"","agency":"","medium":"print","festival_or_note":"self-deprecating VW print — slow acceleration","lang":"en"},
+{"copy":"Breath speaks louder than words.","brand":"Tic Tac","sector":"food & drink","copy_type":"headline","year":null,"campaign":"","agency":"","medium":"print/OOH","festival_or_note":"","lang":"en"},
+{"copy":"Not everything great takes a lifetime.","brand":"IKEA","sector":"services","copy_type":"headline","year":null,"campaign":"","agency":"","medium":"OOH/print","festival_or_note":"","lang":"en"},
+{"copy":"Mega power. Mini sized.","brand":"Apple","sector":"technology","copy_type":"headline","year":null,"campaign":"Mac Mini","agency":"TBWA\\Media Arts Lab","medium":"OOH/print","festival_or_note":"","lang":"en"},
+{"copy":"Money talks. We translate.","brand":"The Wall Street Journal","sector":"media & entertainment","copy_type":"headline","year":null,"campaign":"","agency":"","medium":"print/OOH","festival_or_note":"","lang":"en"},
+{"copy":"If the American dream has a diary, this is it.","brand":"The Wall Street Journal","sector":"media & entertainment","copy_type":"headline","year":null,"campaign":"","agency":"","medium":"print","festival_or_note":"","lang":"en"},
+{"copy":"Highlight the remarkable.","brand":"Stabilo","sector":"services","copy_type":"campaign concept","year":2018,"campaign":"Highlight the Remarkable","agency":"DDB Germany","medium":"print/OOH","festival_or_note":"Cannes Print Grand Prix — historical women series","lang":"en"},
+{"copy":"Sorry, no beige.","brand":"Apple","sector":"technology","copy_type":"headline","year":1998,"campaign":"iMac colours","agency":"TBWA\\Media Arts Lab","medium":"OOH/print","festival_or_note":"","lang":"en"},
+{"copy":"The cost of subscribing is nothing compared to the cost of not subscribing.","brand":"The Wall Street Journal","sector":"media & entertainment","copy_type":"headline","year":null,"campaign":"","agency":"","medium":"print/OOH","festival_or_note":"","lang":"en"},
+{"copy":"Absolute power corrupts. Enjoy.","brand":"Absolut Vodka","sector":"alcohol","copy_type":"headline","year":null,"campaign":"","agency":"","medium":"print","festival_or_note":"","lang":"en"},
+{"copy":"Apple does it again.","brand":"Apple","sector":"technology","copy_type":"headline","year":null,"campaign":"","agency":"TBWA\\Media Arts Lab","medium":"OOH/print","festival_or_note":"","lang":"en"},
+{"copy":"Keep it in your pants.","brand":"Game Boy","sector":"technology","copy_type":"headline","year":1989,"campaign":"Game Boy Launch","agency":"","medium":"print/OOH","festival_or_note":"Nintendo — portable gaming campaign","lang":"en"},
+{"copy":"Do I really need a personal computer?","brand":"Apple","sector":"technology","copy_type":"headline","year":null,"campaign":"","agency":"","medium":"print","festival_or_note":"","lang":"en"},
+{"copy":"The new gray.","brand":"Game Boy Color","sector":"technology","copy_type":"headline","year":1998,"campaign":"","agency":"","medium":"print","festival_or_note":"Nintendo Game Boy Color launch","lang":"en"},
+{"copy":"A funny thing happens when you design a computer everyone can use.","brand":"Apple","sector":"technology","copy_type":"headline","year":null,"campaign":"","agency":"TBWA\\Media Arts Lab","medium":"print/OOH","festival_or_note":"","lang":"en"},
+{"copy":"Staring is rude.","brand":"Porsche","sector":"automotive","copy_type":"headline","year":null,"campaign":"","agency":"","medium":"print/OOH","festival_or_note":"","lang":"en"},
+{"copy":"Keep up with reality.","brand":"Reporters Without Borders","sector":"public interest & culture","copy_type":"headline","year":null,"campaign":"","agency":"","medium":"OOH/print","festival_or_note":"","lang":"en"},
+{"copy":"Marathons are our kind of party.","brand":"Michelob Ultra","sector":"alcohol","copy_type":"headline","year":null,"campaign":"","agency":"","medium":"OOH/print","festival_or_note":"","lang":"en"},
+{"copy":"Between you and a better everyday.","brand":"IKEA","sector":"services","copy_type":"brand tagline","year":null,"campaign":"","agency":"","medium":"OOH/print","festival_or_note":"","lang":"en"},
+{"copy":"Find us nearby.","brand":"McDonald's","sector":"food & drink","copy_type":"headline","year":null,"campaign":"","agency":"","medium":"OOH","festival_or_note":"","lang":"en"},
+{"copy":"You don't have to see them growing. But you want to.","brand":"Danone","sector":"food & drink","copy_type":"headline","year":null,"campaign":"","agency":"","medium":"TV/print","festival_or_note":"","lang":"en"},
+{"copy":"Dirt is good.","brand":"OMO","sector":"services","copy_type":"brand tagline","year":null,"campaign":"Dirt Is Good","agency":"Lowe","medium":"TV/OOH","festival_or_note":"Unilever — long-running global platform","lang":"en"},
+{"copy":"Find your summer.","brand":"Magnum","sector":"food & drink","copy_type":"campaign concept","year":null,"campaign":"","agency":"","medium":"OOH/digital","festival_or_note":"","lang":"en"},
+{"copy":"Here's to the rockstar of the year. Your mama.","brand":"Rolling Stone","sector":"media & entertainment","copy_type":"headline","year":null,"campaign":"","agency":"","medium":"print/OOH","festival_or_note":"Mother's Day campaign","lang":"en"},
+{"copy":"Proudly second best.","brand":"IKEA","sector":"services","copy_type":"headline","year":null,"campaign":"","agency":"","medium":"OOH/print","festival_or_note":"","lang":"en"},
+{"copy":"Don't give up the real world.","brand":"Nikon","sector":"technology","copy_type":"headline","year":null,"campaign":"","agency":"","medium":"print/OOH","festival_or_note":"","lang":"en"},
+{"copy":"Nature or nothing.","brand":"Mercedes-Benz","sector":"automotive","copy_type":"campaign concept","year":null,"campaign":"","agency":"","medium":"OOH/print","festival_or_note":"","lang":"en"},
+{"copy":"That thing you have, we put it in our cars.","brand":"Opel","sector":"automotive","copy_type":"headline","year":null,"campaign":"","agency":"","medium":"OOH/TV","festival_or_note":"","lang":"en"},
+{"copy":"For those who hate going twice.","brand":"Fiat","sector":"automotive","copy_type":"headline","year":null,"campaign":"","agency":"","medium":"print/OOH","festival_or_note":"small car / parking campaign","lang":"en"},
+{"copy":"80 million images. Endless possibilities.","brand":"Getty Images","sector":"media & entertainment","copy_type":"headline","year":null,"campaign":"","agency":"","medium":"print/OOH","festival_or_note":"","lang":"en"},
+{"copy":"Belong anywhere.","brand":"Airbnb","sector":"travel & transport","copy_type":"brand tagline","year":2014,"campaign":"Belong Anywhere","agency":"TBWA\\Chiat\\Day","medium":"OOH/digital","festival_or_note":"","lang":"en"},
+{"copy":"Coverage everywhere. Sorry.","brand":"Vodafone","sector":"technology","copy_type":"headline","year":null,"campaign":"","agency":"","medium":"OOH","festival_or_note":"self-aware apology campaign","lang":"en"},
+{"copy":"Time to get out there. Sorry.","brand":"Volkswagen","sector":"automotive","copy_type":"headline","year":null,"campaign":"","agency":"","medium":"OOH","festival_or_note":"","lang":"en"},
+{"copy":"Immaturity at its best.","brand":"Honda","sector":"automotive","copy_type":"headline","year":null,"campaign":"","agency":"","medium":"print/OOH","festival_or_note":"","lang":"en"},
+{"copy":"The world deserves witnesses.","brand":"Leica","sector":"technology","copy_type":"brand tagline","year":null,"campaign":"","agency":"","medium":"print/OOH","festival_or_note":"","lang":"en"},
+{"copy":"Family proof.","brand":"McDonald's","sector":"food & drink","copy_type":"headline","year":null,"campaign":"","agency":"","medium":"OOH/TV","festival_or_note":"","lang":"en"},
+{"copy":"Listen like you used to.","brand":"Spotify","sector":"technology","copy_type":"headline","year":null,"campaign":"","agency":"","medium":"OOH/digital","festival_or_note":"","lang":"en"},
+{"copy":"The dating app designed to be deleted.","brand":"Hinge","sector":"technology","copy_type":"brand tagline","year":null,"campaign":"","agency":"","medium":"OOH/digital","festival_or_note":"","lang":"en"},
+{"copy":"Great beer travels.","brand":"Stella Artois","sector":"alcohol","copy_type":"campaign concept","year":null,"campaign":"","agency":"","medium":"TV/OOH","festival_or_note":"","lang":"en"},
+{"copy":"For real families.","brand":"IKEA","sector":"services","copy_type":"campaign concept","year":null,"campaign":"","agency":"","medium":"OOH/print","festival_or_note":"","lang":"en"},
+{"copy":"Birthdays should be happy.","brand":"Burger King","sector":"food & drink","copy_type":"headline","year":null,"campaign":"","agency":"","medium":"OOH/social","festival_or_note":"","lang":"en"},
+{"copy":"Go furniture crazy.","brand":"IKEA","sector":"services","copy_type":"headline","year":null,"campaign":"","agency":"","medium":"OOH/TV","festival_or_note":"","lang":"en"},
+{"copy":"Building parents' imagination since 1932.","brand":"LEGO","sector":"services","copy_type":"headline","year":null,"campaign":"","agency":"","medium":"print/OOH","festival_or_note":"founded 1932 by Ole Kirk Christiansen","lang":"en"},
+{"copy":"True to pleasure.","brand":"Magnum","sector":"food & drink","copy_type":"brand tagline","year":null,"campaign":"","agency":"","medium":"TV/OOH","festival_or_note":"","lang":"en"},
+{"copy":"Naturalmente diferente.","brand":"Voll-Damm Radler","sector":"alcohol","copy_type":"brand tagline","year":null,"campaign":"","agency":"","medium":"OOH/TV","festival_or_note":"","lang":"es"},
+{"copy":"Go where they won't go.","brand":"Jeep","sector":"automotive","copy_type":"brand tagline","year":null,"campaign":"","agency":"","medium":"OOH/TV","festival_or_note":"","lang":"en"},
+{"copy":"Come as a clown. Eat like a king.","brand":"Burger King","sector":"food & drink","copy_type":"headline","year":null,"campaign":"","agency":"","medium":"OOH","festival_or_note":"","lang":"en"},
+{"copy":"Dating deserves better.","brand":"OkCupid","sector":"technology","copy_type":"brand tagline","year":null,"campaign":"","agency":"","medium":"OOH/digital","festival_or_note":"","lang":"en"},
+{"copy":"Build the future.","brand":"LEGO","sector":"services","copy_type":"campaign concept","year":null,"campaign":"","agency":"","medium":"TV/OOH","festival_or_note":"","lang":"en"},
+{"copy":"The right size for your business.","brand":"Volkswagen","sector":"automotive","copy_type":"headline","year":null,"campaign":"","agency":"","medium":"print/OOH","festival_or_note":"VW Caddy / commercial vehicles","lang":"en"},
+{"copy":"No matter how heavy the load.","brand":"Opel","sector":"automotive","copy_type":"headline","year":null,"campaign":"","agency":"","medium":"print/OOH","festival_or_note":"","lang":"en"},
+{"copy":"When your kids leave home, replace them.","brand":"Pedigree","sector":"food & drink","copy_type":"headline","year":null,"campaign":"","agency":"","medium":"print/OOH","festival_or_note":"","lang":"en"},
+{"copy":"Style addicts only.","brand":"Harvey Nichols","sector":"fashion & style","copy_type":"brand tagline","year":null,"campaign":"","agency":"","medium":"OOH/print","festival_or_note":"","lang":"en"},
+{"copy":"Life needs Ziploc.","brand":"Ziploc","sector":"services","copy_type":"brand tagline","year":null,"campaign":"","agency":"","medium":"TV/print","festival_or_note":"","lang":"en"},
+{"copy":"Only a Smart can take the place of a Smart.","brand":"Smart","sector":"automotive","copy_type":"headline","year":null,"campaign":"","agency":"","medium":"OOH/print","festival_or_note":"Smart car — compact parking campaign","lang":"en"},
+{"copy":"It's just affordable.","brand":"IKEA","sector":"services","copy_type":"headline","year":null,"campaign":"","agency":"","medium":"OOH/print","festival_or_note":"","lang":"en"},
+{"copy":"Non-genuine parts work. Technically.","brand":"Volkswagen","sector":"automotive","copy_type":"headline","year":null,"campaign":"","agency":"","medium":"print/OOH","festival_or_note":"genuine parts campaign","lang":"en"},
+{"copy":"Move before you can't.","brand":"PNet","sector":"services","copy_type":"headline","year":null,"campaign":"","agency":"","medium":"OOH/digital","festival_or_note":"South African job platform","lang":"en"},
+{"copy":"Go further.","brand":"Ford","sector":"automotive","copy_type":"brand tagline","year":null,"campaign":"","agency":"","medium":"OOH/TV","festival_or_note":"","lang":"en"},
+{"copy":"If we don't print it, who will?","brand":"The Guardian","sector":"media & entertainment","copy_type":"headline","year":null,"campaign":"","agency":"","medium":"print/OOH","festival_or_note":"","lang":"en"},
+{"copy":"Have you hugged your feet today?","brand":"Nike","sector":"sport","copy_type":"headline","year":null,"campaign":"","agency":"","medium":"print","festival_or_note":"","lang":"en"},
+{"copy":"There's one thing more painful than carrying on. Giving up.","brand":"Nike","sector":"sport","copy_type":"headline","year":null,"campaign":"","agency":"Wieden+Kennedy","medium":"print/OOH","festival_or_note":"","lang":"en"},
+{"copy":"This is trash.","brand":"Nike","sector":"sport","copy_type":"headline","year":null,"campaign":"","agency":"","medium":"OOH","festival_or_note":"","lang":"en"},
+{"copy":"We are what we believe.","brand":"Nike","sector":"sport","copy_type":"headline","year":null,"campaign":"","agency":"Wieden+Kennedy","medium":"print/OOH","festival_or_note":"","lang":"en"},
+{"copy":"I don't want first. I want first ever.","brand":"Nike","sector":"sport","copy_type":"headline","year":null,"campaign":"","agency":"Wieden+Kennedy","medium":"OOH/TV","festival_or_note":"","lang":"en"},
+{"copy":"There is no finish line.","brand":"Nike","sector":"sport","copy_type":"brand tagline","year":1977,"campaign":"There Is No Finish Line","agency":"Wieden+Kennedy","medium":"print/OOH","festival_or_note":"one of Nike's earliest long-copy masterpieces","lang":"en"},
+{"copy":"So now what's your excuse?","brand":"Nike","sector":"sport","copy_type":"headline","year":null,"campaign":"","agency":"","medium":"OOH/print","festival_or_note":"","lang":"en"},
+{"copy":"Every moonshot needs a rocket.","brand":"Nike","sector":"sport","copy_type":"headline","year":null,"campaign":"","agency":"","medium":"OOH/print","festival_or_note":"","lang":"en"},
+{"copy":"Welcome to the future.","brand":"Nike","sector":"sport","copy_type":"headline","year":null,"campaign":"","agency":"","medium":"OOH/TV","festival_or_note":"","lang":"en"},
+{"copy":"Make it happen.","brand":"Nike","sector":"sport","copy_type":"headline","year":null,"campaign":"","agency":"","medium":"OOH/print","festival_or_note":"","lang":"en"},
+{"copy":"Objectify me.","brand":"Nike","sector":"sport","copy_type":"headline","year":null,"campaign":"","agency":"Wieden+Kennedy","medium":"OOH/print","festival_or_note":"","lang":"en"},
+{"copy":"Pressure is my pleasure.","brand":"Nike","sector":"sport","copy_type":"headline","year":null,"campaign":"","agency":"","medium":"OOH/print","festival_or_note":"","lang":"en"},
+{"copy":"The hardest line to cross is the starting line.","brand":"Nike","sector":"sport","copy_type":"headline","year":null,"campaign":"","agency":"","medium":"OOH/print","festival_or_note":"","lang":"en"},
+{"copy":"Be more online at life.","brand":"Samsung","sector":"technology","copy_type":"headline","year":null,"campaign":"","agency":"","medium":"OOH/digital","festival_or_note":"","lang":"en"},
+{"copy":"It starts on TikTok.","brand":"TikTok","sector":"technology","copy_type":"brand tagline","year":null,"campaign":"","agency":"In-house","medium":"OOH/TV","festival_or_note":"","lang":"en"},
+{"copy":"Your dad called. He wants his shoes back.","brand":"Nike","sector":"sport","copy_type":"headline","year":null,"campaign":"","agency":"","medium":"OOH/print","festival_or_note":"retro sneaker reissue campaign","lang":"en"},
+{"copy":"We still don't think it's a sports car. But if you insist.","brand":"Honda","sector":"automotive","copy_type":"headline","year":null,"campaign":"","agency":"","medium":"print","festival_or_note":"Honda Civic — self-deprecating print","lang":"en"},
+{"copy":"Worn by supermodels in London and dads in Ohio.","brand":"New Balance","sector":"sport","copy_type":"headline","year":null,"campaign":"","agency":"","medium":"OOH/print","festival_or_note":"","lang":"en"},
+{"copy":"No one likes us. We don't care.","brand":"Millwall FC","sector":"sport","copy_type":"brand tagline","year":null,"campaign":"","agency":"","medium":"OOH/merch","festival_or_note":"originated as fan chant in 1970s; became official club positioning","lang":"en"},
+{"copy":"Forget everything you know about insurance.","brand":"Lemonade","sector":"services","copy_type":"headline","year":null,"campaign":"","agency":"In-house","medium":"OOH/digital","festival_or_note":"","lang":"en"},
+{"copy":"How can you make two months' salary last forever?","brand":"De Beers","sector":"fashion & style","copy_type":"headline","year":null,"campaign":"A Diamond Is Forever","agency":"N.W. Ayer","medium":"print","festival_or_note":"variant of the classic diamond engagement ring campaign","lang":"en"},
+{"copy":"I think, therefore IBM.","brand":"IBM","sector":"technology","copy_type":"headline","year":null,"campaign":"","agency":"","medium":"print/OOH","festival_or_note":"","lang":"en"},
+{"copy":"At 60 miles an hour, the loudest noise in this new Rolls-Royce comes from the electric clock.","brand":"Rolls-Royce","sector":"automotive","copy_type":"headline","year":1958,"campaign":"","agency":"Ogilvy & Mather (David Ogilvy)","medium":"print","festival_or_note":"David Ogilvy's most famous headline","lang":"en"},
+{"copy":"9 out of 10,000 Americans prefer Campari.","brand":"Campari","sector":"alcohol","copy_type":"headline","year":null,"campaign":"","agency":"","medium":"print","festival_or_note":"self-aware acquired-taste campaign","lang":"en"},
+{"copy":"We're just a funny water company who hates corporate marketing as much as you. Our evil mission is to make people laugh and get more of them to drink more water, all while helping to kill plastic pollution.","brand":"Liquid Death","sector":"food & drink","copy_type":"brand tagline","year":null,"campaign":"","agency":"In-house","medium":"packaging/digital","festival_or_note":"","lang":"en"},
+{"copy":"They don't write songs about Volvos.","brand":"Cadillac","sector":"automotive","copy_type":"headline","year":null,"campaign":"","agency":"","medium":"print/OOH","festival_or_note":"challenger positioning against Volvo's safety image","lang":"en"},
+{"copy":"Leisure enhancing sunscreen.","brand":"Vacation","sector":"health & beauty","copy_type":"brand tagline","year":null,"campaign":"","agency":"In-house","medium":"packaging/OOH","festival_or_note":"","lang":"en"},
+{"copy":"The new home of football writing.","brand":"The Athletic","sector":"media & entertainment","copy_type":"brand tagline","year":null,"campaign":"","agency":"","medium":"OOH/digital","festival_or_note":"","lang":"en"},
+{"copy":"Every idea needs a medium.","brand":"Medium","sector":"technology","copy_type":"brand tagline","year":null,"campaign":"","agency":"","medium":"OOH/digital","festival_or_note":"","lang":"en"},
+{"copy":"We could make patterns with our milk and charge more. But we don't.","brand":"McDonald's","sector":"food & drink","copy_type":"headline","year":null,"campaign":"","agency":"","medium":"OOH/print","festival_or_note":"coffee campaign","lang":"en"},
+{"copy":"You either love it or hate it.","brand":"Marmite","sector":"food & drink","copy_type":"brand tagline","year":null,"campaign":"Love It or Hate It","agency":"DDB London","medium":"TV/print","festival_or_note":"one of UK's most enduring brand strategies","lang":"en"},
+{"copy":"How does the man who drives the snowplow drive to the snowplow?","brand":"Volkswagen","sector":"automotive","copy_type":"headline","year":1964,"campaign":"Snowplow","agency":"Doyle Dane Bernbach","medium":"print","festival_or_note":"DDB canon — Beetle all-weather reliability","lang":"en"},
+{"copy":"Connecting people.","brand":"Nokia","sector":"technology","copy_type":"brand tagline","year":1992,"campaign":"","agency":"","medium":"TV/OOH","festival_or_note":"","lang":"en"},
+{"copy":"Para todo lo demás, existe Mastercard.","brand":"Mastercard","sector":"services","copy_type":"brand tagline","year":1997,"campaign":"Priceless","agency":"McCann","medium":"TV/print","festival_or_note":"variante española de la campaña Priceless","lang":"es"},
+{"copy":"Keep walking.","brand":"Johnnie Walker","sector":"alcohol","copy_type":"brand tagline","year":1999,"campaign":"Keep Walking","agency":"BBH London","medium":"TV/OOH","festival_or_note":"one of the most enduring spirits campaigns","lang":"en"},
+{"copy":"No te abandona.","brand":"Rexona","sector":"health & beauty","copy_type":"brand tagline","year":null,"campaign":"","agency":"","medium":"TV/OOH","festival_or_note":"","lang":"es"},
+{"copy":"Red Bull te da alas.","brand":"Red Bull","sector":"sport","copy_type":"brand tagline","year":null,"campaign":"","agency":"","medium":"TV/OOH","festival_or_note":"versión española del global 'Red Bull gives you wings'","lang":"es"},
+{"copy":"Impossible is nothing.","brand":"Adidas","sector":"sport","copy_type":"brand tagline","year":2004,"campaign":"Impossible Is Nothing","agency":"180 Amsterdam","medium":"TV/OOH","festival_or_note":"Muhammad Ali campaign","lang":"en"},
+{"copy":"Take a desk break. Move your mind.","brand":"Basics","sector":"services","copy_type":"headline","year":null,"campaign":"","agency":"","medium":"OOH/digital","festival_or_note":"","lang":"en"},
+{"copy":"Breathe through it.","brand":"Mondelez","sector":"food & drink","copy_type":"headline","year":null,"campaign":"","agency":"","medium":"OOH/digital","festival_or_note":"","lang":"en"},
+{"copy":"Show the world that you mean business.","brand":"Vacation","sector":"health & beauty","copy_type":"headline","year":null,"campaign":"","agency":"","medium":"OOH/digital","festival_or_note":"","lang":"en"},
+{"copy":"You might get lost. But not in the crowd.","brand":"Porsche","sector":"automotive","copy_type":"headline","year":null,"campaign":"","agency":"","medium":"OOH","festival_or_note":"","lang":"en"},
+{"copy":"A racing shoe should be easy to forget.","brand":"Nike","sector":"sport","copy_type":"headline","year":null,"campaign":"","agency":"","medium":"print","festival_or_note":"running shoe campaign","lang":"en"},
+{"copy":"Don't tell me what I can't do.","brand":"Nike","sector":"sport","copy_type":"headline","year":null,"campaign":"","agency":"Wieden+Kennedy","medium":"OOH/print","festival_or_note":"","lang":"en"},
+{"copy":"Forget what tennis used to be.","brand":"Nike","sector":"sport","copy_type":"headline","year":null,"campaign":"","agency":"","medium":"OOH/print","festival_or_note":"","lang":"en"},
+{"copy":"The world is waiting for someone who won't.","brand":"Nike","sector":"sport","copy_type":"headline","year":null,"campaign":"","agency":"","medium":"OOH/print","festival_or_note":"","lang":"en"},
+{"copy":"Run away from it all. Run right back.","brand":"Nike","sector":"sport","copy_type":"headline","year":null,"campaign":"","agency":"","medium":"OOH/print","festival_or_note":"","lang":"en"},
+{"copy":"The shoes work if you do.","brand":"Nike","sector":"sport","copy_type":"headline","year":null,"campaign":"","agency":"","medium":"OOH/print","festival_or_note":"","lang":"en"},
+{"copy":"For every size of imagination.","brand":"LEGO","sector":"services","copy_type":"headline","year":null,"campaign":"","agency":"","medium":"OOH/print","festival_or_note":"","lang":"en"},
+{"copy":"Enjoy little things.","brand":"Tesco","sector":"food & drink","copy_type":"headline","year":null,"campaign":"","agency":"","medium":"OOH/TV","festival_or_note":"","lang":"en"},
+{"copy":"If you don't like this ad, we'll find out why.","brand":"Project Research Inc","sector":"services","copy_type":"headline","year":null,"campaign":"","agency":"","medium":"print","festival_or_note":"market research firm self-promo","lang":"en"},
+{"copy":"Isn't it nice when things just work?","brand":"Honda","sector":"automotive","copy_type":"headline","year":null,"campaign":"","agency":"","medium":"print/OOH","festival_or_note":"","lang":"en"},
+{"copy":"Padres en slip.","brand":"BGH","sector":"technology","copy_type":"campaign concept","year":null,"campaign":"","agency":"","medium":"TV","festival_or_note":"icónica campaña argentina de electrónica","lang":"es"},
+{"copy":"Whassup.","brand":"Budweiser","sector":"alcohol","copy_type":"campaign concept","year":1999,"campaign":"Whassup","agency":"DDB Chicago","medium":"TV","festival_or_note":"Cannes Grand Prix — fenómeno cultural global","lang":"en"},
+{"copy":"Yo no soy tonto.","brand":"Media Markt","sector":"services","copy_type":"brand tagline","year":null,"campaign":"","agency":"","medium":"TV/OOH","festival_or_note":"tagline icónico publicidad española","lang":"es"},
+{"copy":"Y duran, y duran, y duran.","brand":"Duracell","sector":"services","copy_type":"brand tagline","year":null,"campaign":"","agency":"","medium":"TV","festival_or_note":"","lang":"es"},
+{"copy":"Velocidad a tope.","brand":"Hot Wheels","sector":"services","copy_type":"brand tagline","year":null,"campaign":"","agency":"","medium":"TV","festival_or_note":"","lang":"es"},
+{"copy":"Busque, compare, y si encuentra algo mejor, cómprelo.","brand":"Colón","sector":"services","copy_type":"headline","year":null,"campaign":"","agency":"","medium":"TV","festival_or_note":"una de las frases más recordadas de la publicidad española","lang":"es"},
+{"copy":"Si no es bueno para ti, no es bueno para nosotros.","brand":"Bancaja","sector":"services","copy_type":"headline","year":null,"campaign":"","agency":"","medium":"TV/OOH","festival_or_note":"","lang":"es"},
+{"copy":"El milagro anti-grasa.","brand":"Fairy","sector":"services","copy_type":"headline","year":null,"campaign":"","agency":"","medium":"TV","festival_or_note":"","lang":"es"},
+{"copy":"Lo nuestro no es normal.","brand":"VIPS","sector":"food & drink","copy_type":"brand tagline","year":null,"campaign":"","agency":"","medium":"TV/OOH","festival_or_note":"","lang":"es"},
+{"copy":"Muy segura. Muy mujer.","brand":"Ausonia","sector":"health & beauty","copy_type":"headline","year":null,"campaign":"","agency":"","medium":"TV","festival_or_note":"","lang":"es"},
+{"copy":"Elige el camino difícil.","brand":"Renault","sector":"automotive","copy_type":"headline","year":null,"campaign":"","agency":"","medium":"TV/OOH","festival_or_note":"","lang":"es"},
+{"copy":"Piensa en verde.","brand":"Heineken","sector":"alcohol","copy_type":"headline","year":null,"campaign":"","agency":"","medium":"TV/OOH","festival_or_note":"","lang":"es"},
+{"copy":"La amistad sale de dentro.","brand":"Amstel","sector":"alcohol","copy_type":"brand tagline","year":null,"campaign":"","agency":"","medium":"TV","festival_or_note":"","lang":"es"},
+{"copy":"La naturalidad se hace querer.","brand":"Trina","sector":"food & drink","copy_type":"brand tagline","year":null,"campaign":"","agency":"","medium":"TV","festival_or_note":"","lang":"es"},
+{"copy":"Si te aburren mándalos a tomar Fanta.","brand":"Fanta","sector":"food & drink","copy_type":"headline","year":null,"campaign":"","agency":"","medium":"TV","festival_or_note":"","lang":"es"},
+{"copy":"Destapa la felicidad.","brand":"Coca-Cola","sector":"food & drink","copy_type":"brand tagline","year":null,"campaign":"","agency":"","medium":"TV/OOH","festival_or_note":"versión española de Open Happiness","lang":"es"},
+{"copy":"¡Un palo! La vuelta a lo sencillo.","brand":"Limón & Nada","sector":"food & drink","copy_type":"brand tagline","year":null,"campaign":"","agency":"","medium":"TV/OOH","festival_or_note":"","lang":"es"},
+{"copy":"Light fever.","brand":"Coca-Cola Light","sector":"food & drink","copy_type":"headline","year":null,"campaign":"","agency":"","medium":"TV/OOH","festival_or_note":"","lang":"en"},
+{"copy":"La vida es móvil, móvil es Vodafone.","brand":"Vodafone","sector":"technology","copy_type":"brand tagline","year":null,"campaign":"","agency":"","medium":"TV/OOH","festival_or_note":"","lang":"es"},
+{"copy":"Adelante.","brand":"BBVA","sector":"services","copy_type":"brand tagline","year":null,"campaign":"","agency":"","medium":"TV/OOH","festival_or_note":"","lang":"es"},
+{"copy":"Con poco me lo monto.","brand":"Fanta","sector":"food & drink","copy_type":"headline","year":null,"campaign":"","agency":"","medium":"TV","festival_or_note":"","lang":"es"},
+{"copy":"Felicikas.","brand":"Kas","sector":"food & drink","copy_type":"brand tagline","year":null,"campaign":"","agency":"","medium":"TV","festival_or_note":"","lang":"es"},
+{"copy":"Busco a un hombre llamado Jaqs.","brand":"Jaqs","sector":"health & beauty","copy_type":"headline","year":null,"campaign":"","agency":"","medium":"TV/OOH","festival_or_note":"perfume — campaña memorable publicidad española","lang":"es"},
+{"copy":"Precio hipermejor.","brand":"Hipercor","sector":"services","copy_type":"brand tagline","year":null,"campaign":"","agency":"","medium":"TV/OOH","festival_or_note":"","lang":"es"},
+{"copy":"Si sueñas, loterías.","brand":"Loterías y Apuestas del Estado","sector":"services","copy_type":"headline","year":null,"campaign":"","agency":"","medium":"TV/OOH","festival_or_note":"","lang":"es"},
+{"copy":"¿Cómo estás?","brand":"Vodafone","sector":"technology","copy_type":"headline","year":null,"campaign":"","agency":"","medium":"TV/OOH","festival_or_note":"","lang":"es"},
+{"copy":"Le va, le va, le va.","brand":"Puleva","sector":"food & drink","copy_type":"brand tagline","year":null,"campaign":"","agency":"","medium":"TV","festival_or_note":"","lang":"es"},
+{"copy":"Tú puedes ser lo que quieras ser.","brand":"Barbie","sector":"services","copy_type":"brand tagline","year":null,"campaign":"","agency":"","medium":"TV","festival_or_note":"","lang":"es"},
+{"copy":"Mañana puede ser otro día lleno de colores.","brand":"Norit","sector":"services","copy_type":"headline","year":null,"campaign":"","agency":"","medium":"TV","festival_or_note":"","lang":"es"},
+{"copy":"El ser humano es imprevisible. Es la Era Aquarius.","brand":"Aquarius","sector":"food & drink","copy_type":"brand tagline","year":null,"campaign":"Era Aquarius","agency":"","medium":"TV/OOH","festival_or_note":"","lang":"es"},
+{"copy":"Si hay Mahou, la vida es Cinco Estrellas.","brand":"Mahou","sector":"alcohol","copy_type":"brand tagline","year":null,"campaign":"","agency":"","medium":"TV/OOH","festival_or_note":"","lang":"es"},
+{"copy":"Spain is different.","brand":"Ministerio de Información y Turismo de España","sector":"travel & transport","copy_type":"campaign concept","year":1964,"campaign":"Spain is Different","agency":"","medium":"print/OOH","festival_or_note":"Manuel Fraga — campaña icónica turismo español","lang":"en"},
+{"copy":"¿Te falta Tefal?","brand":"Tefal","sector":"services","copy_type":"headline","year":null,"campaign":"","agency":"","medium":"TV","festival_or_note":"","lang":"es"},
+{"copy":"Todos tenemos un amigo en Balay.","brand":"Balay","sector":"services","copy_type":"brand tagline","year":null,"campaign":"","agency":"","medium":"TV","festival_or_note":"","lang":"es"},
+{"copy":"Si pagas más, es porque quieres.","brand":"Supermercados Día","sector":"services","copy_type":"headline","year":null,"campaign":"","agency":"","medium":"TV/OOH","festival_or_note":"","lang":"es"},
+{"copy":"En un accidente de tráfico lo peor no es la muerte.","brand":"Dirección General de Tráfico","sector":"public interest & culture","copy_type":"headline","year":null,"campaign":"","agency":"","medium":"TV/OOH","festival_or_note":"campaña seguridad vial española","lang":"es"},
+{"copy":"Rancio serás tú.","brand":"Spagnolo","sector":"fashion & style","copy_type":"headline","year":null,"campaign":"","agency":"","medium":"OOH/print","festival_or_note":"","lang":"es"},
+{"copy":"Hay un hombre que me hace sonreír más que mi marido: mi dentista.","brand":"Oral-B","sector":"health & beauty","copy_type":"headline","year":null,"campaign":"","agency":"","medium":"TV","festival_or_note":"","lang":"es"},
+{"copy":"Agobiarte. Mutuarte.","brand":"Mutua Madrileña","sector":"services","copy_type":"headline","year":null,"campaign":"","agency":"","medium":"TV/OOH","festival_or_note":"","lang":"es"},
+{"copy":"¿Tu vecino no te hace el IRPF? Menos mal que tienes ING.","brand":"ING Direct","sector":"services","copy_type":"headline","year":null,"campaign":"","agency":"","medium":"TV","festival_or_note":"","lang":"es"},
+{"copy":"¿Comer cualquier cosa? ¡Pues va a ser que Knorr!","brand":"Knorr","sector":"food & drink","copy_type":"headline","year":null,"campaign":"","agency":"","medium":"TV","festival_or_note":"","lang":"es"},
+{"copy":"Lo bueno en un ya, dos veces bueno.","brand":"Yatekomo","sector":"food & drink","copy_type":"brand tagline","year":null,"campaign":"","agency":"","medium":"TV","festival_or_note":"","lang":"es"},
+{"copy":"¿Tú cueces o enriqueces?","brand":"Avecrem","sector":"food & drink","copy_type":"headline","year":null,"campaign":"","agency":"","medium":"TV","festival_or_note":"","lang":"es"},
+{"copy":"Que bien, que bien, hoy comemos con Isabel.","brand":"Isabel","sector":"food & drink","copy_type":"brand tagline","year":null,"campaign":"","agency":"","medium":"TV","festival_or_note":"","lang":"es"},
+{"copy":"Placer adulto.","brand":"Chocolates Valor","sector":"food & drink","copy_type":"brand tagline","year":null,"campaign":"","agency":"","medium":"TV/OOH","festival_or_note":"","lang":"es"},
+{"copy":"Parenting is the most extreme sport on earth.","brand":"Liquid Death","sector":"food & drink","copy_type":"headline","year":null,"campaign":"","agency":"In-house","medium":"social/OOH","festival_or_note":"","lang":"en"},
+{"copy":"Houston. Never stronger.","brand":"Nike","sector":"sport","copy_type":"headline","year":null,"campaign":"","agency":"Wieden+Kennedy","medium":"OOH/print","festival_or_note":"","lang":"en"},
+{"copy":"Nuestro futuro siempre ha estado aquí.","brand":"Mercedes-Benz","sector":"automotive","copy_type":"headline","year":null,"campaign":"","agency":"","medium":"TV/OOH","festival_or_note":"","lang":"es"},
+{"copy":"Conectados con el mañana.","brand":"FedEx","sector":"services","copy_type":"headline","year":null,"campaign":"","agency":"","medium":"TV/OOH","festival_or_note":"","lang":"es"},
+{"copy":"Huele como un tío, tío.","brand":"Old Spice","sector":"health & beauty","copy_type":"headline","year":null,"campaign":"","agency":"","medium":"TV/OOH","festival_or_note":"versión española de Smell Like a Man, Man","lang":"es"},
+{"copy":"El poder de elegir.","brand":"Banco Sabadell","sector":"services","copy_type":"brand tagline","year":null,"campaign":"","agency":"","medium":"TV/OOH","festival_or_note":"","lang":"es"},
+{"copy":"Disculpen las mejoras.","brand":"Renfe","sector":"travel & transport","copy_type":"headline","year":null,"campaign":"","agency":"","medium":"OOH","festival_or_note":"campaña de obras — irónica","lang":"es"},
+{"copy":"Modernidad controlada.","brand":"VIPS","sector":"food & drink","copy_type":"headline","year":null,"campaign":"","agency":"","medium":"OOH/print","festival_or_note":"","lang":"es"},
+{"copy":"Lo hecho, hecho está.","brand":"Wallapop","sector":"technology","copy_type":"brand tagline","year":null,"campaign":"","agency":"","medium":"TV/OOH","festival_or_note":"","lang":"es"},
+{"copy":"Déjame el plus, plis.","brand":"Movistar+","sector":"media & entertainment","copy_type":"headline","year":null,"campaign":"","agency":"","medium":"TV/OOH","festival_or_note":"","lang":"es"},
+{"copy":"Move your culo.","brand":"Desigual","sector":"fashion & style","copy_type":"headline","year":null,"campaign":"","agency":"","medium":"OOH/social","festival_or_note":"","lang":"es"},
+{"copy":"Adonde quieras llegar.","brand":"Uber","sector":"travel & transport","copy_type":"brand tagline","year":null,"campaign":"","agency":"","medium":"OOH/TV","festival_or_note":"versión española","lang":"es"},
+{"copy":"Anda, como Amstel.","brand":"Amstel","sector":"alcohol","copy_type":"headline","year":null,"campaign":"","agency":"","medium":"TV/OOH","festival_or_note":"","lang":"es"},
+{"copy":"Saber de sabor.","brand":"Orlando","sector":"food & drink","copy_type":"brand tagline","year":null,"campaign":"","agency":"","medium":"TV","festival_or_note":"","lang":"es"},
+{"copy":"Bienvenido al mundo que viene.","brand":"Orange","sector":"technology","copy_type":"headline","year":null,"campaign":"","agency":"","medium":"TV/OOH","festival_or_note":"","lang":"es"},
+{"copy":"Forever desde 1974.","brand":"Volkswagen","sector":"automotive","copy_type":"headline","year":null,"campaign":"","agency":"","medium":"OOH/print","festival_or_note":"","lang":"es"},
+{"copy":"Del dinero no se habla.","brand":"ING","sector":"services","copy_type":"headline","year":null,"campaign":"","agency":"","medium":"TV/OOH","festival_or_note":"","lang":"es"},
+{"copy":"Saber más es saber mejor.","brand":"Popitas","sector":"food & drink","copy_type":"brand tagline","year":null,"campaign":"","agency":"","medium":"TV","festival_or_note":"","lang":"es"},
+{"copy":"Más crujientes, más molestos.","brand":"Doritos","sector":"food & drink","copy_type":"headline","year":null,"campaign":"","agency":"","medium":"TV/OOH","festival_or_note":"","lang":"es"},
+{"copy":"What a great time to be a computer.","brand":"De'Longhi","sector":"technology","copy_type":"headline","year":2023,"campaign":"","agency":"","medium":"OOH/print","festival_or_note":"coffee machine campaign leveraging AI zeitgeist","lang":"en"},
+{"copy":"Hey Computer, make me a coffee.","brand":"De'Longhi","sector":"technology","copy_type":"headline","year":2023,"campaign":"","agency":"","medium":"OOH/print","festival_or_note":"","lang":"en"},
+{"copy":"Ctrl + Alt + Brew.","brand":"De'Longhi","sector":"technology","copy_type":"headline","year":2023,"campaign":"","agency":"","medium":"OOH/print","festival_or_note":"","lang":"en"},
+{"copy":"Boiled cod. Slightly more protein per calorie than our bars.","brand":"David","sector":"food & drink","copy_type":"headline","year":2024,"campaign":"","agency":"In-house","medium":"OOH/print","festival_or_note":"DTC protein bar — brutally honest comparisons","lang":"en"},
+{"copy":"Protein, for human bodies.","brand":"David","sector":"food & drink","copy_type":"headline","year":2024,"campaign":"","agency":"In-house","medium":"OOH/packaging","festival_or_note":"","lang":"en"},
+{"copy":"Meet David, your protein bar idealized.","brand":"David","sector":"food & drink","copy_type":"headline","year":2024,"campaign":"","agency":"In-house","medium":"OOH/digital","festival_or_note":"","lang":"en"},
+{"copy":"Looks like you need Iceland.","brand":"Visit Iceland","sector":"travel & transport","copy_type":"campaign concept","year":2017,"campaign":"Looks Like You Need Iceland","agency":"","medium":"OOH/digital","festival_or_note":"stress-relief tourism campaign","lang":"en"},
+{"copy":"þþnjifai='.,,lmbmbnbbhgycdrgzw/'pfæ ndaiFVxhðut7r7r7djsmfdsm","brand":"Visit Iceland","sector":"travel & transport","copy_type":"headline","year":2017,"campaign":"Looks Like You Need Iceland","agency":"","medium":"OOH/print","festival_or_note":"keyboard smash — stress-relief Iceland ad","lang":"en"},
+{"copy":"Go with the flaw.","brand":"Diesel","sector":"fashion & style","copy_type":"headline","year":null,"campaign":"","agency":"","medium":"OOH/print","festival_or_note":"","lang":"en"},
+{"copy":"Be a follower.","brand":"Diesel","sector":"fashion & style","copy_type":"headline","year":null,"campaign":"","agency":"","medium":"OOH/print","festival_or_note":"anti-conformity subversion — ironic Diesel tone","lang":"en"},
+{"copy":"Not so fast. Not so furious.","brand":"Häagen-Dazs","sector":"food & drink","copy_type":"headline","year":null,"campaign":"","agency":"","medium":"OOH/print","festival_or_note":"","lang":"en"},
+{"copy":"Is football selling food?","brand":"Uber Eats","sector":"food & drink","copy_type":"headline","year":2024,"campaign":"","agency":"","medium":"OOH/TV","festival_or_note":"UEFA Euro 2024 campaign","lang":"en"},
+{"copy":"Guaranteed not to explode your head.","brand":"Liquid Death","sector":"food & drink","copy_type":"headline","year":null,"campaign":"","agency":"In-house","medium":"OOH/social","festival_or_note":"","lang":"en"},
+{"copy":"Rich people live longer.","brand":"Hims & Hers","sector":"health & beauty","copy_type":"headline","year":null,"campaign":"","agency":"","medium":"OOH/print","festival_or_note":"provocative healthcare access campaign","lang":"en"},
+{"copy":"Deliver the rainbow.","brand":"Skittles","sector":"food & drink","copy_type":"headline","year":null,"campaign":"","agency":"","medium":"OOH/print","festival_or_note":"","lang":"en"},
+{"copy":"The intelligence age.","brand":"OpenAI","sector":"technology","copy_type":"campaign concept","year":2024,"campaign":"The Intelligence Age","agency":"In-house","medium":"OOH/digital","festival_or_note":"","lang":"en"},
+{"copy":"Keep thinking.","brand":"Claude (Anthropic)","sector":"technology","copy_type":"brand tagline","year":2025,"campaign":"","agency":"In-house","medium":"OOH/digital","festival_or_note":"","lang":"en"},
+{"copy":"Running needs nothing.","brand":"Adidas","sector":"sport","copy_type":"headline","year":null,"campaign":"","agency":"","medium":"OOH/print","festival_or_note":"","lang":"en"},
+{"copy":"If I really wanted equality, I could always slow down.","brand":"Adidas","sector":"sport","copy_type":"headline","year":null,"campaign":"","agency":"","medium":"OOH/print","festival_or_note":"running campaign — gender parity in sport","lang":"en"},
+{"copy":"Run like you took something.","brand":"Adidas","sector":"sport","copy_type":"headline","year":null,"campaign":"","agency":"","medium":"OOH/print","festival_or_note":"","lang":"en"},
+{"copy":"Runners, yeah, we're different.","brand":"Adidas","sector":"sport","copy_type":"headline","year":null,"campaign":"","agency":"","medium":"OOH/print","festival_or_note":"","lang":"en"},
+{"copy":"I'm not a sadist. I just like to beat people.","brand":"Adidas","sector":"sport","copy_type":"headline","year":null,"campaign":"","agency":"","medium":"OOH/print","festival_or_note":"running competitive spirit campaign","lang":"en"},
+{"copy":"Greatness doesn't need an audience.","brand":"Nike","sector":"sport","copy_type":"headline","year":null,"campaign":"","agency":"Wieden+Kennedy","medium":"OOH/print","festival_or_note":"","lang":"en"},
+{"copy":"Greatness makes its own way.","brand":"Nike","sector":"sport","copy_type":"headline","year":null,"campaign":"","agency":"Wieden+Kennedy","medium":"OOH/print","festival_or_note":"","lang":"en"},
+{"copy":"Greatness is scary. Until it isn't.","brand":"Nike","sector":"sport","copy_type":"headline","year":null,"campaign":"","agency":"Wieden+Kennedy","medium":"OOH/print","festival_or_note":"","lang":"en"},
+{"copy":"Greatness isn't determined by judges.","brand":"Nike","sector":"sport","copy_type":"headline","year":null,"campaign":"","agency":"Wieden+Kennedy","medium":"OOH/print","festival_or_note":"","lang":"en"},
+{"copy":"Greatness is not born. It's made.","brand":"Nike","sector":"sport","copy_type":"headline","year":null,"campaign":"","agency":"Wieden+Kennedy","medium":"OOH/print","festival_or_note":"","lang":"en"},
+{"copy":"Make yourself ____.","brand":"Nike","sector":"sport","copy_type":"headline","year":null,"campaign":"","agency":"Wieden+Kennedy","medium":"OOH/print","festival_or_note":"","lang":"en"},
+{"copy":"Don't meet your heroes. Win with them.","brand":"Nike","sector":"sport","copy_type":"headline","year":null,"campaign":"","agency":"Wieden+Kennedy","medium":"OOH/print","festival_or_note":"","lang":"en"},
+{"copy":"Don't short yourself.","brand":"MarketWatch","sector":"media & entertainment","copy_type":"headline","year":null,"campaign":"","agency":"","medium":"OOH/print","festival_or_note":"","lang":"en"},
+{"copy":"Become your own useless landlord.","brand":"MarketWatch","sector":"media & entertainment","copy_type":"headline","year":null,"campaign":"","agency":"","medium":"OOH/print","festival_or_note":"","lang":"en"},
+{"copy":"Get almost anything.","brand":"Uber Eats","sector":"food & drink","copy_type":"brand tagline","year":null,"campaign":"","agency":"","medium":"OOH/TV","festival_or_note":"","lang":"en"},
+{"copy":"Make sure your kids are nepo babies.","brand":"MarketWatch","sector":"media & entertainment","copy_type":"headline","year":null,"campaign":"","agency":"","medium":"OOH/print","festival_or_note":"","lang":"en"},
+{"copy":"Money doesn't grow on salaries.","brand":"MarketWatch","sector":"media & entertainment","copy_type":"headline","year":null,"campaign":"","agency":"","medium":"OOH/print","festival_or_note":"","lang":"en"},
+{"copy":"AI can't steal your job if you are already retired.","brand":"MarketWatch","sector":"media & entertainment","copy_type":"headline","year":null,"campaign":"","agency":"","medium":"OOH/print","festival_or_note":"","lang":"en"},
+{"copy":"Be a forever New Yorker.","brand":"StreetEasy","sector":"services","copy_type":"headline","year":null,"campaign":"","agency":"","medium":"OOH/print","festival_or_note":"NYC real estate platform","lang":"en"},
+{"copy":"Make hot dogs economics your business.","brand":"The Wall Street Journal","sector":"media & entertainment","copy_type":"headline","year":2025,"campaign":"","agency":"","medium":"OOH/print","festival_or_note":"","lang":"en"},
+{"copy":"Wrangler on my booty.","brand":"Wrangler","sector":"fashion & style","copy_type":"headline","year":2024,"campaign":"","agency":"","medium":"OOH/social","festival_or_note":"Beyoncé Cowboy Carter partnership","lang":"en"},
+{"copy":"Change up the usual.","brand":"Stella Artois","sector":"alcohol","copy_type":"campaign concept","year":null,"campaign":"Change Up The Usual","agency":"","medium":"TV/OOH","festival_or_note":"","lang":"en"},
+{"copy":"Want pain? You need CLAW.","brand":"CLAW","sector":"food & drink","copy_type":"headline","year":null,"campaign":"","agency":"Uncommon Creative Studio","medium":"OOH/print","festival_or_note":"","lang":"en"},
+{"copy":"I ❤️ Pain.","brand":"CLAW","sector":"food & drink","copy_type":"headline","year":null,"campaign":"","agency":"Uncommon Creative Studio","medium":"OOH/print","festival_or_note":"","lang":"en"},
+{"copy":"¿Te apetece un día redondo?","brand":"Donuts","sector":"food & drink","copy_type":"headline","year":null,"campaign":"","agency":"","medium":"TV/OOH","festival_or_note":"","lang":"es"},
+{"copy":"Una aceituna como ninguna.","brand":"La Española","sector":"food & drink","copy_type":"brand tagline","year":null,"campaign":"","agency":"","medium":"TV/OOH","festival_or_note":"","lang":"es"},
+{"copy":"¿Me haces una rebajita? ¡Claro que sí guapi!","brand":"Chicfy","sector":"technology","copy_type":"headline","year":null,"campaign":"","agency":"","medium":"TV/OOH","festival_or_note":"app moda segunda mano — España","lang":"es"},
+{"copy":"¿Para qué quieres eso si no lo usas?","brand":"Wallapop","sector":"technology","copy_type":"headline","year":null,"campaign":"","agency":"","medium":"TV/OOH","festival_or_note":"","lang":"es"},
+{"copy":"Tomad y comed todos de él. Que no lleva carne.","brand":"Burger King","sector":"food & drink","copy_type":"headline","year":null,"campaign":"Whopper Vegetal","agency":"","medium":"TV/OOH","festival_or_note":"referencia comunión católica para el Whopper Vegetal","lang":"es"},
+{"copy":"Es como el sexo pero cada día.","brand":"Oikos","sector":"food & drink","copy_type":"headline","year":null,"campaign":"","agency":"","medium":"TV","festival_or_note":"yogur griego Danone — España","lang":"es"},
+{"copy":"En Madrid somos de Derecha (y de revés).","brand":"Copa Davis","sector":"sport","copy_type":"headline","year":null,"campaign":"","agency":"","medium":"OOH","festival_or_note":"juego de palabras: derecha política / golpe de tenis","lang":"es"},
+{"copy":"Próximo destino: Pestañas con altura.","brand":"Maybelline","sector":"health & beauty","copy_type":"headline","year":null,"campaign":"","agency":"","medium":"TV/OOH","festival_or_note":"","lang":"es"},
+{"copy":"Tú tienes sed de agua y tu cuerpo de minerales.","brand":"Solán de Cabras","sector":"food & drink","copy_type":"headline","year":null,"campaign":"","agency":"","medium":"TV/OOH","festival_or_note":"","lang":"es"},
+{"copy":"Querrás tragártela entera.","brand":"Netflix","sector":"media & entertainment","copy_type":"headline","year":null,"campaign":"Sex Education","agency":"","medium":"OOH/social","festival_or_note":"doble sentido para la serie Sex Education","lang":"es"},
+{"copy":"Oh, blanca Navidad.","brand":"Netflix","sector":"media & entertainment","copy_type":"headline","year":null,"campaign":"Narcos","agency":"","medium":"OOH/social","festival_or_note":"referencia navideña a la cocaína de Narcos","lang":"es"},
+{"copy":"Andalucía te quiere.","brand":"Consejería Andaluza de Turismo","sector":"travel & transport","copy_type":"headline","year":null,"campaign":"","agency":"","medium":"TV/OOH","festival_or_note":"","lang":"es"},
+{"copy":"Ojo con el rojo.","brand":"Nestea Frutos Rojos","sector":"food & drink","copy_type":"headline","year":null,"campaign":"","agency":"","medium":"TV/OOH","festival_or_note":"","lang":"es"},
+{"copy":"Paz y amor… y el plus para el salón.","brand":"Canal+","sector":"media & entertainment","copy_type":"headline","year":null,"campaign":"","agency":"","medium":"TV/OOH","festival_or_note":"","lang":"es"},
+{"copy":"Because music doesn't judge.","brand":"Spotify","sector":"technology","copy_type":"headline","year":null,"campaign":"","agency":"","medium":"OOH/digital","festival_or_note":"","lang":"en"},
+{"copy":"Beauty is just another duty.","brand":"Diesel","sector":"fashion & style","copy_type":"headline","year":null,"campaign":"","agency":"","medium":"OOH/print","festival_or_note":"","lang":"en"},
+{"copy":"Michael Jordan loves our cereal*.","brand":"Surreal","sector":"food & drink","copy_type":"headline","year":2022,"campaign":"","agency":"In-house","medium":"OOH/print","festival_or_note":"*not that Michael Jordan — DTC cereal brand","lang":"en"},
+{"copy":"A grandes males, pequeños comercios.","brand":"Confecomerç","sector":"services","copy_type":"headline","year":2026,"campaign":"","agency":"","medium":"OOH/print","festival_or_note":"campaña apoyo al pequeño comercio","lang":"es"},
+{"copy":"Lo de VIPS, no es normal.","brand":"VIPS","sector":"food & drink","copy_type":"brand tagline","year":null,"campaign":"","agency":"Mono","medium":"TV/OOH","festival_or_note":"","lang":"es"},
+{"copy":"Cómo sobrevivir a una OPA hostil.","brand":"Banco Sabadell","sector":"services","copy_type":"headline","year":2026,"campaign":"","agency":"Oriol Villar","medium":"OOH/print","festival_or_note":"respuesta a la OPA hostil de BBVA","lang":"es"},
+{"copy":"No compartas más de la cuenta.","brand":"Bizum","sector":"services","copy_type":"headline","year":2026,"campaign":"","agency":"El Ruso de Rocky","medium":"TV/OOH","festival_or_note":"","lang":"es"},
+{"copy":"Sweeter than the sweetest.","brand":"AXE","sector":"health & beauty","copy_type":"headline","year":2026,"campaign":"","agency":"Lola MullenLowe","medium":"TV/OOH","festival_or_note":"","lang":"en"},
+{"copy":"Por huevos.","brand":"Ministerio de Igualdad","sector":"public interest & culture","copy_type":"headline","year":2026,"campaign":"","agency":"Ogilvy","medium":"TV/OOH","festival_or_note":"","lang":"es"},
+{"copy":"En Vicio hemos apostado por poner unas obras delante para llamar tu atención.","brand":"Vicio","sector":"food & drink","copy_type":"headline","year":null,"campaign":"","agency":"","medium":"OOH","festival_or_note":"meta-publicidad — obras frente al local","lang":"es"},
+{"copy":"Ser bueno no significa portarse bien.","brand":"Ritual","sector":"health & beauty","copy_type":"headline","year":null,"campaign":"","agency":"","medium":"OOH/digital","festival_or_note":"","lang":"es"},
+{"copy":"¡Viva la diferencia!","brand":"Yoigo","sector":"technology","copy_type":"brand tagline","year":null,"campaign":"","agency":"","medium":"TV/OOH","festival_or_note":"","lang":"es"},
+{"copy":"Make AI worried you're going to take its job.","brand":"The Economist","sector":"media & entertainment","copy_type":"headline","year":null,"campaign":"","agency":"","medium":"OOH/print","festival_or_note":"","lang":"en"},
+{"copy":"Fake it til you make it to the newsagent.","brand":"The Economist","sector":"media & entertainment","copy_type":"headline","year":null,"campaign":"","agency":"","medium":"OOH/print","festival_or_note":"","lang":"en"},
+{"copy":"Do you have an unprompted opinion?","brand":"The Economist","sector":"media & entertainment","copy_type":"headline","year":null,"campaign":"","agency":"","medium":"OOH/print","festival_or_note":"","lang":"en"},
+{"copy":"Hear yourself think.","brand":"The Economist","sector":"media & entertainment","copy_type":"headline","year":null,"campaign":"","agency":"","medium":"OOH/print","festival_or_note":"","lang":"en"},
+{"copy":"Adults date better.","brand":"Match","sector":"technology","copy_type":"headline","year":null,"campaign":"","agency":"","medium":"OOH/digital","festival_or_note":"","lang":"en"},
+{"copy":"You actually read this? Total success.","brand":"Oatly","sector":"food & drink","copy_type":"headline","year":null,"campaign":"","agency":"Oatly Department of Mind Control","medium":"packaging/OOH","festival_or_note":"","lang":"en"},
+{"copy":"Less URL. More IRL.","brand":"Bolt","sector":"travel & transport","copy_type":"headline","year":null,"campaign":"","agency":"","medium":"OOH/print","festival_or_note":"ride-hailing — anti-digital humour","lang":"en"},
+{"copy":"Don't write that DM. Carpe that diem.","brand":"Bolt","sector":"travel & transport","copy_type":"headline","year":null,"campaign":"","agency":"","medium":"OOH/print","festival_or_note":"","lang":"en"},
+{"copy":"AI can't generate sand between your toes.","brand":"Polaroid","sector":"technology","copy_type":"headline","year":null,"campaign":"","agency":"","medium":"OOH/print","festival_or_note":"analogue camera — anti-AI campaign","lang":"en"},
+{"copy":"The camera for an analogue life.","brand":"Polaroid","sector":"technology","copy_type":"headline","year":null,"campaign":"","agency":"","medium":"OOH/print","festival_or_note":"","lang":"en"},
+{"copy":"The greatest story ever worn.","brand":"Levi's","sector":"fashion & style","copy_type":"headline","year":null,"campaign":"","agency":"","medium":"OOH/print","festival_or_note":"","lang":"en"},
+{"copy":"Tastes totally normal.","brand":"Oatly","sector":"food & drink","copy_type":"headline","year":null,"campaign":"","agency":"Oatly Department of Mind Control","medium":"packaging/OOH","festival_or_note":"","lang":"en"},
+{"copy":"Live Richly.","brand":"Citi","sector":"services","copy_type":"brand tagline","year":null,"campaign":"","agency":"","medium":"OOH/TV","festival_or_note":"","lang":"en"},
+{"copy":"Mucho se está hablando de este nuevo Día.","brand":"Supermercados Día","sector":"services","copy_type":"headline","year":null,"campaign":"","agency":"","medium":"TV/OOH","festival_or_note":"juego de palabras con el nombre de la marca","lang":"es"},
+{"copy":"Este anuncio no es muy bueno pero da sombra.","brand":"Amstel","sector":"alcohol","copy_type":"headline","year":null,"campaign":"","agency":"","medium":"OOH","festival_or_note":"valla publicitaria con sombra literal","lang":"es"},
+{"copy":"Vicio, las hamburguesas favoritas de Goico.","brand":"Vicio","sector":"food & drink","copy_type":"headline","year":null,"campaign":"","agency":"","medium":"OOH/social","festival_or_note":"guiño al competidor Goiko","lang":"es"},
+{"copy":"Why drive when you can ride?","brand":"Bolt","sector":"travel & transport","copy_type":"headline","year":null,"campaign":"","agency":"","medium":"OOH/print","festival_or_note":"","lang":"en"},
+{"copy":"Can't do that if you're driving.","brand":"Uber","sector":"travel & transport","copy_type":"headline","year":null,"campaign":"","agency":"","medium":"OOH/TV","festival_or_note":"","lang":"en"},
+{"copy":"Look good. Lift ugly.","brand":"Gymshark","sector":"sport","copy_type":"headline","year":null,"campaign":"","agency":"","medium":"OOH/social","festival_or_note":"","lang":"en"},
+{"copy":"Run your way.","brand":"New Balance","sector":"sport","copy_type":"headline","year":null,"campaign":"","agency":"","medium":"OOH/print","festival_or_note":"","lang":"en"},
+{"copy":"Ready to play?","brand":"Decathlon","sector":"sport","copy_type":"headline","year":null,"campaign":"","agency":"","medium":"OOH/TV","festival_or_note":"","lang":"en"},
+{"copy":"Y pensar que lo hacías por una selfie.","brand":"Nike","sector":"sport","copy_type":"headline","year":null,"campaign":"","agency":"","medium":"OOH/print","festival_or_note":"","lang":"es"},
+{"copy":"What if.","brand":"Pinterest","sector":"technology","copy_type":"campaign concept","year":null,"campaign":"","agency":"","medium":"OOH/digital","festival_or_note":"","lang":"en"},
+{"copy":"Bring on the sun.","brand":"Ace & Tate","sector":"health & beauty","copy_type":"headline","year":null,"campaign":"","agency":"","medium":"OOH/print","festival_or_note":"eyewear brand","lang":"en"},
+{"copy":"Unhate.","brand":"Benetton","sector":"fashion & style","copy_type":"campaign concept","year":2011,"campaign":"Unhate","agency":"Fabrica","medium":"OOH/print","festival_or_note":"Cannes Grand Prix — world leaders kissing campaign","lang":"en"},
+{"copy":"100 years under the sun.","brand":"Corona","sector":"alcohol","copy_type":"headline","year":2025,"campaign":"","agency":"","medium":"OOH/TV","festival_or_note":"centenary campaign","lang":"en"},
+{"copy":"Own a piece of it.","brand":"TD Bank","sector":"services","copy_type":"headline","year":2026,"campaign":"","agency":"","medium":"OOH/print","festival_or_note":"","lang":"en"},
+{"copy":"Scratch & sniff.","brand":"AXE","sector":"health & beauty","copy_type":"headline","year":null,"campaign":"","agency":"","medium":"print","festival_or_note":"scratch-and-sniff print ad","lang":"en"},
+{"copy":"You don't buy a life. You build one.","brand":"The Home Depot","sector":"services","copy_type":"headline","year":null,"campaign":"","agency":"","medium":"TV/OOH","festival_or_note":"","lang":"en"},
+{"copy":"Tomorrow starts tonight.","brand":"IKEA","sector":"services","copy_type":"headline","year":null,"campaign":"","agency":"","medium":"OOH/print","festival_or_note":"beds/sleep campaign","lang":"en"},
+{"copy":"Lovers don't spread the hate.","brand":"Marmite","sector":"food & drink","copy_type":"headline","year":null,"campaign":"","agency":"","medium":"OOH/print","festival_or_note":"Love/Hate campaign subversion","lang":"en"},
+{"copy":"If these shoes could talk, they'd never stop talking.","brand":"Kiwi","sector":"services","copy_type":"headline","year":null,"campaign":"","agency":"","medium":"print","festival_or_note":"shoe care brand","lang":"en"},
+{"copy":"Search it.","brand":"Budweiser","sector":"alcohol","copy_type":"headline","year":null,"campaign":"","agency":"","medium":"OOH/TV","festival_or_note":"","lang":"en"},
+{"copy":"Buy a newspaper that can't be bought.","brand":"The Guardian","sector":"media & entertainment","copy_type":"headline","year":null,"campaign":"","agency":"","medium":"OOH/print","festival_or_note":"editorial independence campaign","lang":"en"},
+{"copy":"Commit to something.","brand":"Equinox","sector":"sport","copy_type":"brand tagline","year":null,"campaign":"","agency":"","medium":"OOH/print","festival_or_note":"","lang":"en"},
+{"copy":"Have a br.","brand":"KitKat","sector":"food & drink","copy_type":"headline","year":null,"campaign":"","agency":"","medium":"OOH/print","festival_or_note":"truncated Have a Break — you need a break to finish reading this","lang":"en"},
+{"copy":"Live young.","brand":"Evian","sector":"food & drink","copy_type":"brand tagline","year":null,"campaign":"","agency":"","medium":"TV/OOH","festival_or_note":"","lang":"en"},
+{"copy":"Cheaper to print this on money than paper.","brand":"The Zimbabwean","sector":"media & entertainment","copy_type":"headline","year":2009,"campaign":"Trillion Dollar Campaign","agency":"TBWA\\Hunt\\Lascaris","medium":"print","festival_or_note":"D&AD Grand Prix — protest vs Mugabe printed on Zimbabwe's worthless banknotes","lang":"en"},
+{"copy":"Silk dress. Coming soon.","brand":"Shock & Soul Vintage Clothing","sector":"fashion & style","copy_type":"headline","year":null,"campaign":"","agency":"","medium":"OOH","festival_or_note":"teaser OOH for vintage clothing brand","lang":"en"},
+{"copy":"Originals never fit.","brand":"Levi's","sector":"fashion & style","copy_type":"headline","year":null,"campaign":"","agency":"","medium":"OOH/print","festival_or_note":"","lang":"en"},
+{"copy":"Celebrate being human.","brand":"Etsy","sector":"technology","copy_type":"headline","year":null,"campaign":"","agency":"","medium":"OOH/digital","festival_or_note":"","lang":"en"},
+{"copy":"Dream On.","brand":"On","sector":"sport","copy_type":"brand tagline","year":null,"campaign":"","agency":"","medium":"OOH/TV","festival_or_note":"On Running — Swiss performance brand","lang":"en"},
+{"copy":"It feels good to Geico.","brand":"Geico","sector":"services","copy_type":"headline","year":null,"campaign":"","agency":"","medium":"TV","festival_or_note":"","lang":"en"},
+{"copy":"Spray goodbye to boyhood.","brand":"Old Spice","sector":"health & beauty","copy_type":"headline","year":null,"campaign":"","agency":"","medium":"TV/OOH","festival_or_note":"","lang":"en"},
+{"copy":"The horizontal breakfast.","brand":"McDonald's","sector":"food & drink","copy_type":"headline","year":null,"campaign":"","agency":"","medium":"OOH/print","festival_or_note":"breakfast delivery campaign","lang":"en"},
+{"copy":"Make a Smellitment.","brand":"Old Spice","sector":"health & beauty","copy_type":"headline","year":null,"campaign":"","agency":"","medium":"TV/OOH","festival_or_note":"","lang":"en"},
+{"copy":"Haha, you just ate vegetables.","brand":"Wholly Veggie","sector":"food & drink","copy_type":"headline","year":null,"campaign":"","agency":"","medium":"OOH/packaging","festival_or_note":"","lang":"en"},
+{"copy":"Everything to sell anything.","brand":"Squarespace","sector":"technology","copy_type":"headline","year":null,"campaign":"","agency":"","medium":"TV/OOH","festival_or_note":"","lang":"en"},
+{"copy":"A website makes it real.","brand":"Squarespace","sector":"technology","copy_type":"headline","year":null,"campaign":"","agency":"","medium":"TV/OOH","festival_or_note":"","lang":"en"},
+{"copy":"Do whatever tastes good.","brand":"Malibu","sector":"alcohol","copy_type":"headline","year":null,"campaign":"","agency":"","medium":"OOH/TV","festival_or_note":"","lang":"en"},
+{"copy":"It starts with a swipe.","brand":"Tinder","sector":"technology","copy_type":"headline","year":null,"campaign":"","agency":"","medium":"OOH/digital","festival_or_note":"","lang":"en"},
+{"copy":"When all you can think about is burger.","brand":"Postmates","sector":"food & drink","copy_type":"headline","year":null,"campaign":"","agency":"","medium":"OOH/digital","festival_or_note":"food delivery — obsession campaign","lang":"en"},
+{"copy":"Search one and done.","brand":"Kayak","sector":"travel & transport","copy_type":"headline","year":null,"campaign":"","agency":"","medium":"OOH/TV","festival_or_note":"","lang":"en"},
+{"copy":"It's possible.","brand":"Pinterest","sector":"technology","copy_type":"headline","year":null,"campaign":"","agency":"","medium":"OOH/digital","festival_or_note":"","lang":"en"},
+{"copy":"We do we.","brand":"Smirnoff","sector":"alcohol","copy_type":"headline","year":null,"campaign":"","agency":"","medium":"OOH/TV","festival_or_note":"","lang":"en"},
+{"copy":"Get approved.","brand":"AXE","sector":"health & beauty","copy_type":"headline","year":null,"campaign":"","agency":"","medium":"OOH/TV","festival_or_note":"","lang":"en"},
+{"copy":"Dry time is my time.","brand":"Canada Dry","sector":"food & drink","copy_type":"headline","year":null,"campaign":"","agency":"","medium":"OOH/print","festival_or_note":"","lang":"en"},
+{"copy":"Bold choice.","brand":"Jim Beam","sector":"alcohol","copy_type":"headline","year":null,"campaign":"","agency":"","medium":"OOH/print","festival_or_note":"","lang":"en"},
+{"copy":"Rent a car. Not a rental car.","brand":"Turo","sector":"travel & transport","copy_type":"headline","year":null,"campaign":"","agency":"","medium":"OOH/print","festival_or_note":"peer-to-peer car sharing","lang":"en"},
+{"copy":"Every table has a story.","brand":"Starbucks","sector":"food & drink","copy_type":"headline","year":null,"campaign":"","agency":"","medium":"OOH/print","festival_or_note":"","lang":"en"},
+{"copy":"Unjunk your sleep.","brand":"Mattress Firm","sector":"services","copy_type":"headline","year":null,"campaign":"","agency":"","medium":"OOH/TV","festival_or_note":"","lang":"en"},
+{"copy":"Live for the story.","brand":"Canon","sector":"technology","copy_type":"brand tagline","year":null,"campaign":"","agency":"","medium":"OOH/TV","festival_or_note":"","lang":"en"},
+{"copy":"Power through.","brand":"Powerade","sector":"sport","copy_type":"brand tagline","year":null,"campaign":"","agency":"","medium":"TV/OOH","festival_or_note":"","lang":"en"},
+{"copy":"Unleash harmony.","brand":"Hay Day","sector":"technology","copy_type":"headline","year":null,"campaign":"","agency":"","medium":"digital","festival_or_note":"Supercell mobile game","lang":"en"},
+{"copy":"As good as the original. Maybe even better?","brand":"Mountain Dew","sector":"food & drink","copy_type":"headline","year":null,"campaign":"","agency":"","medium":"OOH/print","festival_or_note":"","lang":"en"},
+{"copy":"Stay golden.","brand":"Lay's","sector":"food & drink","copy_type":"headline","year":null,"campaign":"","agency":"","medium":"OOH/TV","festival_or_note":"","lang":"en"},
+{"copy":"Pack the internet.","brand":"Airalo","sector":"technology","copy_type":"headline","year":null,"campaign":"","agency":"","medium":"OOH/digital","festival_or_note":"eSIM provider","lang":"en"},
+{"copy":"Find your rabbit hole.","brand":"Tubi","sector":"media & entertainment","copy_type":"headline","year":null,"campaign":"","agency":"","medium":"OOH/TV","festival_or_note":"free streaming platform","lang":"en"},
+{"copy":"Fortune favours the brave.","brand":"Crypto.com","sector":"technology","copy_type":"brand tagline","year":2021,"campaign":"Fortune Favours the Brave","agency":"","medium":"TV/OOH","festival_or_note":"Matt Damon Super Bowl campaign","lang":"en"},
+{"copy":"All it takes is a yes.","brand":"Lufthansa","sector":"travel & transport","copy_type":"headline","year":null,"campaign":"","agency":"","medium":"OOH/print","festival_or_note":"","lang":"en"},
+{"copy":"Believe in chicken.","brand":"KFC","sector":"food & drink","copy_type":"headline","year":null,"campaign":"","agency":"","medium":"OOH/TV","festival_or_note":"","lang":"en"},
+{"copy":"Vienna. The last place you want to be.","brand":"Vienna Tourist Board","sector":"travel & transport","copy_type":"headline","year":null,"campaign":"","agency":"","medium":"OOH/print","festival_or_note":"anti-tourism self-awareness campaign","lang":"en"},
+{"copy":"Beauty never gets old.","brand":"Dove","sector":"health & beauty","copy_type":"headline","year":null,"campaign":"","agency":"","medium":"OOH/print","festival_or_note":"","lang":"en"},
+{"copy":"Fly human fly.","brand":"Hoka","sector":"sport","copy_type":"brand tagline","year":null,"campaign":"","agency":"","medium":"OOH/TV","festival_or_note":"","lang":"en"},
+{"copy":"Your way out of their system.","brand":"Coinbase","sector":"technology","copy_type":"headline","year":null,"campaign":"","agency":"","medium":"OOH/digital","festival_or_note":"crypto — anti-establishment positioning","lang":"en"},
+{"copy":"The more you Bosch, the more you feel like a Bosch.","brand":"Bosch","sector":"services","copy_type":"headline","year":null,"campaign":"","agency":"","medium":"OOH/TV","festival_or_note":"","lang":"en"},
+{"copy":"Ask your feet.","brand":"Nomis","sector":"sport","copy_type":"headline","year":null,"campaign":"","agency":"","medium":"OOH/print","festival_or_note":"sports footwear brand","lang":"en"},
+{"copy":"Share the joy.","brand":"Apple","sector":"technology","copy_type":"headline","year":null,"campaign":"","agency":"TBWA\\Media Arts Lab","medium":"TV/OOH","festival_or_note":"","lang":"en"},
+{"copy":"Designed for all ears, uniquely tuned to yours.","brand":"Bose","sector":"technology","copy_type":"headline","year":null,"campaign":"","agency":"","medium":"OOH/print","festival_or_note":"","lang":"en"},
+{"copy":"Yes I Do'minos.","brand":"Domino's","sector":"food & drink","copy_type":"headline","year":2026,"campaign":"Yes I Do","agency":"The Newtons Laboratory","medium":"print/OOH","festival_or_note":"Greece — Santorini proposal-themed pizza delivery; the line plays on the brand name","lang":"en"},
+{"copy":"Some disasters can be prevented.","brand":"Universidad Franz Tamayo","sector":"public interest & culture","copy_type":"campaign concept","year":2026,"campaign":"Some Disasters Can Be Prevented","agency":"Malditos Agency","medium":"print/OOH","festival_or_note":"Bolivia — melanoma awareness; moles merged with images of environmental disasters","lang":"en"},
+{"copy":"Ripe is wrong.","brand":"Makro","sector":"services","copy_type":"campaign concept","year":2024,"campaign":"Life Extending Stickers","agency":"VML Colombia & GREY Colombia","medium":"packaging/retail","festival_or_note":"Colombia — 'Life Extending Stickers' food-waste sustainability activation across 22 stores","lang":"en"},
+{"copy":"Made to be enjoyed, not endured.","brand":"Cadbury Bournville","sector":"food & drink","copy_type":"campaign concept","year":2025,"campaign":"Made to Be Enjoyed, Not Endured","agency":"VCCP","medium":"TV/film","festival_or_note":"UK — Bournville's first major brand campaign in ~50 years; parodies dark-chocolate snobbery","lang":"en"},
+{"copy":"Mother Strikes.","brand":"Snack Jack","sector":"food & drink","copy_type":"campaign concept","year":2026,"campaign":"Mother Strikes","agency":"Choojai & Friends","medium":"TV/film","festival_or_note":"Thailand — Thai comedy; a mother enters her son's video-game world","lang":"en"},
+{"copy":"Point of You.","brand":"IKEA","sector":"services","copy_type":"campaign concept","year":2026,"campaign":"Point of You","agency":"NoA Åkestam Holst","medium":"print","festival_or_note":"Sweden — FRAKTA bag shot from its base; print campaign","lang":"en"},
+{"copy":"Whopper of a Finish.","brand":"Burger King","sector":"food & drink","copy_type":"campaign concept","year":2026,"campaign":"Whopper of a Finish","agency":"BBH London","medium":"OOH","festival_or_note":"UK — post-marathon reward; 2nd in the Foodfillment series after 'Bundles of Joy'","lang":"en"},
+{"copy":"Protection is Human.","brand":"NIVEA","sector":"health & beauty","copy_type":"campaign concept","year":2026,"campaign":"Protection is Human","agency":"Jung von Matt","medium":"print","festival_or_note":"Germany — NIVEA Sun Kids; shadows as protective human shields","lang":"en"},
+{"copy":"Scalp Before Skin.","brand":"Clear","sector":"health & beauty","copy_type":"campaign concept","year":2026,"campaign":"Scalp Before Skin","agency":"Ogilvy Singapore","medium":"print/OOH","festival_or_note":"Turkey — World Health Day; scalp care framed as prevention","lang":"en"},
+{"copy":"Dishes of Love and Hate.","brand":"Marmite","sector":"food & drink","copy_type":"campaign concept","year":2026,"campaign":"Dishes of Love and Hate","agency":"adam&eveTBWA","medium":"print","festival_or_note":"UK — hidden delighted/horrified faces within the food","lang":"en"},
+{"copy":"Unpacked Goods.","brand":"IKEA","sector":"services","copy_type":"campaign concept","year":2026,"campaign":"Unpacked Goods","agency":"Rethink","medium":"OOH","festival_or_note":"Canada — pantry-organisation trend met with IKEA storage","lang":"en"},
+{"copy":"Listen to Earth.","brand":"BMW Motorrad","sector":"automotive","copy_type":"campaign concept","year":2026,"campaign":"Listen to Earth","agency":"MullenLowe SSP3 Colombia","medium":"OOH","festival_or_note":"Colombia — Earth Day; silent electric bike lets nature be heard","lang":"en"},
+{"copy":"Peak Exposure.","brand":"Melanoma Fund","sector":"public interest & culture","copy_type":"campaign concept","year":2026,"campaign":"Peak Exposure","agency":"Klick Health","medium":"print","festival_or_note":"UK — UV risk persists in winter and at high altitude","lang":"en"},
+{"copy":"Unseen Acts.","brand":"United Way","sector":"public interest & culture","copy_type":"campaign concept","year":2026,"campaign":"Unseen Acts","agency":"BBDO Puerto Rico","medium":"print","festival_or_note":"Puerto Rico — helpline for unrecognised caregivers","lang":"en"},
+{"copy":"Made to Share.","brand":"Cadbury","sector":"food & drink","copy_type":"campaign concept","year":2026,"campaign":"Made to Share","agency":"VCCP","medium":"OOH/print","festival_or_note":"UK — packaging divides the bar by who deserves what","lang":"en"},
+{"copy":"Sleep Talker Reviews.","brand":"IKEA","sector":"services","copy_type":"campaign concept","year":2025,"campaign":"Sleep Talker Reviews","agency":"Rethink","medium":"print","festival_or_note":"Canada — real sleep-talkers 'review' mattresses in their sleep","lang":"en"},
+{"copy":"Driven by Nature.","brand":"Hyundai","sector":"automotive","copy_type":"campaign concept","year":2026,"campaign":"Driven by Nature","agency":"McCann Athens","medium":"print","festival_or_note":"Greece — Kona Electric; nature reflected across the car body","lang":"en"},
+{"copy":"Smarter Ideas for Smarter Cities.","brand":"IBM","sector":"technology","copy_type":"campaign concept","year":2013,"campaign":"Smarter Ideas for Smarter Cities","agency":"Ogilvy France","medium":"OOH","festival_or_note":"France — billboards that double as benches, ramps and shelters","lang":"en"},
+{"copy":"Fountain of Filth.","brand":"Channel 4","sector":"media & entertainment","copy_type":"campaign concept","year":2026,"campaign":"Fountain of Filth","agency":"4Creative","medium":"OOH/installation","festival_or_note":"UK — sewage-spewing sculpture promoting the drama 'Dirty Business'","lang":"en"},
+{"copy":"Do you want this to be the last character they read?","brand":"Sentinel Insurance","sector":"services","copy_type":"headline","year":2023,"campaign":"","agency":"Publicis Dominicana","medium":"print","festival_or_note":"Dominican Republic — anti-texting-while-driving","lang":"en"},
+{"copy":"Moving Landscapes.","brand":"BMW","sector":"automotive","copy_type":"campaign concept","year":2026,"campaign":"Moving Landscapes","agency":"Serviceplan Group Spain","medium":"print","festival_or_note":"Spain — blurred scenery shot from inside a moving BMW","lang":"en"},
+{"copy":"It has to be Heinz.","brand":"Heinz","sector":"food & drink","copy_type":"brand tagline","year":2026,"campaign":"","agency":"Saatchi & Saatchi ME","medium":"print","festival_or_note":"UAE — empty sachets show one is never enough","lang":"en"},
+{"copy":"The Last Class.","brand":"Freeland Foundation","sector":"public interest & culture","copy_type":"campaign concept","year":2025,"campaign":"The Last Class","agency":"Ogilvy Thailand","medium":"print","festival_or_note":"Thailand — last animals of 43 species posed as a class photo","lang":"en"},
+{"copy":"Can you afford this?","brand":"WWF","sector":"public interest & culture","copy_type":"headline","year":2004,"campaign":"","agency":"Euro RSCG Warsaw","medium":"print","festival_or_note":"Poland — animal-skin souvenirs rendered as barcodes","lang":"en"},
+{"copy":"Reflections of a Better World.","brand":"Hyundai","sector":"automotive","copy_type":"headline","year":2025,"campaign":"","agency":"Groenlandia by Havas","medium":"print","festival_or_note":"Chile — HEV range; families reflected on the car body","lang":"en"},
+{"copy":"Love it, hate it, be careful with it.","brand":"Marmite","sector":"food & drink","copy_type":"headline","year":2021,"campaign":"","agency":"adam&eveDDB","medium":"OOH","festival_or_note":"UK/US — exploding billboards for chilli-flavoured Marmite","lang":"en"},
+{"copy":"Rust isn't an ingredient.","brand":"MAPFRE","sector":"services","copy_type":"campaign concept","year":2025,"campaign":"Rust Isn't an Ingredient","agency":"Havas Perú","medium":"print","festival_or_note":"Peru — rusted utensils that resemble appetising dishes","lang":"en"},
+{"copy":"Stop trying.","brand":"Vapona","sector":"services","copy_type":"campaign concept","year":2012,"campaign":"Stop Trying","agency":"Herezie","medium":"print","festival_or_note":"France — futile DIY pest-swatting vs the easy solution","lang":"en"},
+{"copy":"How toxic is your masculinity?","brand":"Plastic Change","sector":"public interest & culture","copy_type":"headline","year":2025,"campaign":"","agency":"Worth Your While","medium":"OOH","festival_or_note":"Denmark — Calvin Klein parody on microplastics; UN Plastics Treaty","lang":"en"},
+{"copy":"Decide what we give our children to build with.","brand":"Big Trees Project","sector":"public interest & culture","copy_type":"headline","year":null,"campaign":"","agency":"Ogilvy","medium":"print","festival_or_note":"Thailand — Lego studs revealed as tree stumps","lang":"en"},
+{"copy":"Helping reduce food waste since 1869.","brand":"Heinz","sector":"food & drink","copy_type":"headline","year":2024,"campaign":"","agency":"Fitzroy","medium":"OOH","festival_or_note":"Netherlands — Stop Food Waste Day; ketchup through time","lang":"en"},
+{"copy":"Pawsitive Support.","brand":"Dallas Pets Alive!","sector":"public interest & culture","copy_type":"campaign concept","year":2025,"campaign":"Pawsitive Support","agency":"Dieste","medium":"print","festival_or_note":"USA — adopting a pet rescues you too","lang":"en"},
+{"copy":"Periodic Fable.","brand":"The Ordinary","sector":"health & beauty","copy_type":"campaign concept","year":2025,"campaign":"Periodic Fable","agency":"Uncommon Creative Studio","medium":"OOH/digital","festival_or_note":"UK/US/Canada — periodic table of 49 hollow skincare buzzwords","lang":"en"},
+{"copy":"Mayoscapes.","brand":"Hellmann's","sector":"food & drink","copy_type":"campaign concept","year":2023,"campaign":"Mayoscapes","agency":"Ogilvy Canada","medium":"print","festival_or_note":"Canada — winter landscapes with mayo as snow","lang":"en"},
+{"copy":"The Spot.","brand":"La Roche-Posay","sector":"health & beauty","copy_type":"campaign concept","year":2025,"campaign":"The Spot","agency":"Ogilvy PR ANZ","medium":"OOH/installation","festival_or_note":"Australia/NZ — 15m melanoma sculpture at Sculpture by the Sea","lang":"en"},
+{"copy":"Your home, now in formation.","brand":"IKEA","sector":"services","copy_type":"headline","year":2026,"campaign":"","agency":"Sancho BBDO","medium":"print/OOH","festival_or_note":"Colombia — World Cup; home layouts reimagined as football fields","lang":"en"},
+{"copy":"Copenhagen, now flat-packed.","brand":"IKEA","sector":"services","copy_type":"headline","year":2026,"campaign":"","agency":"Marketsquare","medium":"OOH","festival_or_note":"Denmark — large items now available for same-day in-store pick-up","lang":"en"},
+{"copy":"All the fun with none of the mess.","brand":"McDonald's","sector":"food & drink","copy_type":"headline","year":2026,"campaign":"","agency":"Saatchi & Saatchi Qatar","medium":"print","festival_or_note":"Qatar — birthday party clean-up vs celebrating at McDonald's","lang":"en"},
+{"copy":"The only fireworks you can eat.","brand":"Barilla","sector":"food & drink","copy_type":"headline","year":2010,"campaign":"","agency":"Y&R Italy","medium":"print","festival_or_note":"Italy — New Year; spaghetti strands exploding like fireworks","lang":"en"},
+{"copy":"See the unexpected, even if you wish you hadn't.","brand":"Volkswagen","sector":"automotive","copy_type":"headline","year":2026,"campaign":"","agency":"McCarthy & Co.","medium":"print","festival_or_note":"Bolivia — Blind Spot Monitor on the Tera SUV; spotting people you'd rather not see","lang":"en"},
+{"copy":"The first obstacle of every drive.","brand":"Volkswagen","sector":"automotive","copy_type":"headline","year":2016,"campaign":"","agency":"DDB Düsseldorf","medium":"print","festival_or_note":"Germany — Keyless Access; car keys at the end of a bag-maze","lang":"en"},
+{"copy":"So good, even the bread didn't stand a chance.","brand":"Floralp","sector":"food & drink","copy_type":"headline","year":2008,"campaign":"","agency":"Spillmann / Felser / Leo Burnett","medium":"OOH","festival_or_note":"Switzerland — 3D billboard; loaf hollowed out because the butter's irresistible","lang":"en"},
+{"copy":"This cosmetic campaign is for men.","brand":"L'Oréal","sector":"health & beauty","copy_type":"headline","year":2019,"campaign":"","agency":"McCann Düsseldorf","medium":"print","festival_or_note":"Germany — gender-equality stats visualised through L'Oréal products","lang":"en"},
+{"copy":"Every drop counts when you're pushing your limits.","brand":"Gatorade","sector":"sport","copy_type":"headline","year":2011,"campaign":"","agency":"AlmapBBDO","medium":"print","festival_or_note":"Brazil — sweat droplets numbered 1ml to 500ml, a bottle of Gatorade","lang":"en"},
+{"copy":"Bucket For One.","brand":"KFC","sector":"food & drink","copy_type":"campaign concept","year":null,"campaign":"Bucket For One","agency":"Uncommon Creative Studio Stockholm","medium":"print/OOH","festival_or_note":"Sweden — Renaissance painting aesthetic celebrating the urge to keep all the food for yourself","lang":"en"},
+{"copy":"Cuando somos niños, el mundo no tiene límites.","brand":"Ford","sector":"automotive","copy_type":"headline","year":null,"campaign":"","agency":"Herrera | Havas","medium":"print","festival_or_note":"Ecuador — Día del Niño; cotidiano transformado en aventura","lang":"es"},
+{"copy":"Así empezó todo.","brand":"La Ganga","sector":"services","copy_type":"campaign concept","year":null,"campaign":"Así Empezó Todo","agency":"JUK","medium":"print","festival_or_note":"Ecuador — Día del Niño; cajas de electrodomésticos con juguetes en miniatura","lang":"es"},
+{"copy":"As Cold as the Rockies.","brand":"Coors Light","sector":"alcohol","copy_type":"brand tagline","year":null,"campaign":"As Cold as the Rockies","agency":"Rethink","medium":"TV/OOH","festival_or_note":"Canada — thermal camera campaign; beer glows blue against warm summer scenes","lang":"en"},
+{"copy":"Cuando el desorden aumente, guárdalo con nosotros.","brand":"Mamapöol","sector":"services","copy_type":"headline","year":null,"campaign":"","agency":"Mamapool","medium":"TV/OOH","festival_or_note":"Poland — storage brand; everyday chaos visualised as overwhelming clutter","lang":"es"},
+{"copy":"Childhood Redrawn.","brand":"EACA / 5Rights Foundation","sector":"public interest & culture","copy_type":"campaign concept","year":null,"campaign":"Childhood Redrawn","agency":"INNOCEAN Berlin","medium":"print/digital","festival_or_note":"Germany — children's drawings show digital tech's impact on childhood","lang":"en"}
+];
+
+// shuffle on every load
+for(let i=CORPUS.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[CORPUS[i],CORPUS[j]]=[CORPUS[j],CORPUS[i]];}
+
+const SECTORS=[...new Set(CORPUS.map(d=>d.sector))].sort();
+const TYPES=['headline','brand tagline','campaign concept'];
+const LANGS=['en','es'];
+const LANG_LABEL={en:'EN',es:'ES'};
+
+const STOP=new Set(("a an and the to of in on for with you your we our it its is are be it's i'm don't do not no yes if or but as at by from this that these those just so up out off all more most than then them they he she his her him my me us your yours mine ours one two only own can will would could should has have had was were been being into over under again about después " +
+"el la los las un una unos unas y o u de del al a en con por para que se su sus lo le les es son ser estar este esta esto esos esas mas más muy ya no si sí como cuando donde porque pero sin sobre entre hasta desde tu tus mi mis nos te lo da haz hay").split(/\s+/));
+
+let state={q:'',sectors:new Set(),types:new Set(),langs:new Set(),};
+
+const norm=s=>s.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'');
+const tokens=s=>norm(s).replace(/[^a-z0-9'áéíóúñü ]/gi,' ').split(/\s+/).filter(w=>w.length>2&&!STOP.has(w));
+
+function matches(d){
+  if(state.sectors.size && !state.sectors.has(d.sector))return false;
+  if(state.types.size && !state.types.has(d.copy_type))return false;
+  if(state.langs.size && !state.langs.has(d.lang))return false;
+  if(state.q){
+    const nq=norm(state.q);
+    const inCopy=norm(d.copy).includes(nq);
+    const inBrand=norm(d.brand||'').includes(nq);
+    const inSector=norm(d.sector||'').includes(nq);
+    if(!inCopy&&!inBrand&&!inSector)return false;
+  }
+  return true;
+}
+
+function sizeClass(t){const n=t.length;if(n<=14)return'lg';if(n<=40)return'md';if(n<=95)return'sm';return'xs';}
+
+function wrapWords(text,q){
+  const nq=q?norm(q):'';
+  return text.split(/([\w'À-öø-ÿ]+)/g).map(part=>{
+    if(!part)return '';
+    if(!/\w/.test(part))return escapeHtml(part);
+    const escaped=escapeHtml(part);
+    const dataW=escapeHtml(part);
+    const isMatch=nq&&norm(part).includes(nq);
+    const span=`<span class="word" data-w="${dataW}">${escaped}</span>`;
+    return isMatch?`<mark>${span}</mark>`:span;
+  }).join('');
+}
+function escapeHtml(s){return s.replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));}
+
+function renderFilters(){
+  const fb=document.getElementById('filterbar');
+  const g=(title,vals,setName,labels)=>{
+    const set=state[setName];
+    return `<div class="fgroup"><span class="ftitle">${title}</span>`+
+      vals.map(v=>`<button class="f ${set.has(v)?'on':''}" data-set="${setName}" data-v="${escapeHtml(v)}">${escapeHtml(labels?labels[v]||v:v)}</button>`).join('')+
+      `</div>`;
+  };
+  fb.innerHTML =
+    g('Sector',SECTORS,'sectors') +
+    g('Type',TYPES,'types') +
+    g('Language',LANGS,'langs',LANG_LABEL);
+  fb.querySelectorAll('.f').forEach(b=>b.onclick=()=>{
+    const s=state[b.dataset.set];const v=b.dataset.v;
+    s.has(v)?s.delete(v):s.add(v);render();
+  });
+}
+
+
+function renderLex(results){
+  const lex=document.getElementById('lex');
+  if(!state.q){lex.className='lexrow empty';lex.innerHTML='';return;}
+  const qn=norm(state.q);
+  const freq=new Map();
+  results.forEach(d=>{
+    const seen=new Set();
+    tokens(d.copy).forEach(w=>{
+      if(w.includes(qn)||qn.includes(w))return;
+      if(seen.has(w))return;seen.add(w);
+      freq.set(w,(freq.get(w)||0)+1);
+    });
+  });
+  const words=[...freq.entries()].filter(([,n])=>n>=1).sort((a,b)=>b[1]-a[1]).slice(0,14).map(e=>e[0]);
+  if(!words.length){lex.className='lexrow empty';lex.innerHTML='';return;}
+  lex.className='lexrow';
+  lex.innerHTML='<span class="lexlabel">also in</span>'+
+    words.map(w=>`<button class="lex" data-w="${escapeHtml(w)}">${escapeHtml(w)}</button>`).join('');
+  lex.querySelectorAll('.lex').forEach(b=>b.onclick=()=>{
+    state.q=b.dataset.w;document.getElementById('q').value=b.dataset.w;render();
+  });
+}
+
+function renderGrid(results){
+  const grid=document.getElementById('grid');
+  if(!results.length){grid.innerHTML='<div class="empty-state">Nothing found for that combination.</div>';return;}
+  grid.innerHTML=results.map((d,i)=>{
+    const idx=CORPUS.indexOf(d);
+    return `<article class="card" data-i="${idx}">
+      <div class="q ${sizeClass(d.copy)}">${wrapWords(d.copy,state.q)}</div>
+      <div class="foot"><span class="b">${escapeHtml(d.brand)}</span>${d.year!=null&&String(d.year).trim()!==''?`<span class="y">${d.year}</span>`:''}</div>
+    </article>`;
+  }).join('');
+  grid.querySelectorAll('.card').forEach(c=>c.onclick=(e)=>{
+    const w=e.target.closest('.word');
+    if(w){
+      const word=w.dataset.w;
+      const isActive=norm(state.q)===norm(word);
+      state.q=isActive?'':word;
+      document.getElementById('q').value=state.q;
+      document.getElementById('qclr').style.display=state.q?'block':'none';
+      render();
+      return;
+    }
+    openSheet(CORPUS[+c.dataset.i]);
+  });
+}
+
+let _sheetData=null;
+function openSheet(d){
+  _sheetData=d;
+  const body=document.getElementById('sheetbody');
+  const rows=[
+    ['brand',d.brand],['campaign',d.campaign],['agency',d.agency],
+    ['sector',d.sector],['type',d.copy_type],['medium',d.medium],
+    ['year',d.year],['language',LANG_LABEL[d.lang]||d.lang],
+  ];
+  body.innerHTML='<div class="bigq">'+escapeHtml(d.copy)+'</div><dl>'+
+    rows.filter(([,v])=>v!=null && String(v).trim()!=='').map(([k,v])=>`<dt>${k}</dt><dd>${escapeHtml(String(v))}</dd>`).join('')+
+    (d.festival_or_note?`<dt>note</dt><dd class="note">${escapeHtml(d.festival_or_note)}</dd>`:'')+
+    '</dl>'+
+    '<button class="dl-btn" onclick="downloadPost()">↓ Download post</button>';
+  document.getElementById('scrim').classList.add('show');
+  const s=document.getElementById('sheet');s.classList.add('show');s.setAttribute('aria-hidden','false');
+}
+async function downloadPost(){
+  const copy=_sheetData?_sheetData.copy:'';
+  const brand=_sheetData?_sheetData.brand:'';
+  const year=_sheetData?_sheetData.year:'';
+
+  await document.fonts.load('500 74px "Bitter"');
+  await document.fonts.load('700 34px "Space Mono"');
+  await document.fonts.load('400 28px "Space Mono"');
+
+  const W=1080,H=1080;
+  const cv=document.createElement('canvas');
+  cv.width=W;cv.height=H;
+  const c=cv.getContext('2d');
+
+  function wrapText(text,maxW){
+    const words=text.split(' ');let line='',lines=[];
+    for(const w of words){const t=line?line+' '+w:w;if(c.measureText(t).width>maxW&&line){lines.push(line);line=w;}else line=t;}
+    if(line)lines.push(line);return lines;
+  }
+
+  // ── BACKGROUND ── #ebebe9 from SVG
+  c.fillStyle='#EBEBE9';c.fillRect(0,0,W,H);
+
+  // ── BRANDING BOX (black, NOT full-width) ── x=82.13 y=75.68 w=468.44 h=113.48
+  c.fillStyle='#0A0A0A';
+  c.fillRect(82,76,468,113);
+
+  // ── ORANGE BADGE ── x=109.01 y=108.62 w=47.97 h=48.54
+  c.fillStyle='#F04D23';
+  c.fillRect(109,109,48,48);
+
+  // Page icon paths — exact SVG coords
+  c.strokeStyle='#0A0A0A';c.lineWidth=2.8;c.lineJoin='round';c.lineCap='round';
+  // M123.6,120.37 h15 l7,7 v19 h-22 v-26 Z
+  c.beginPath();
+  c.moveTo(123.6,120.37);c.lineTo(138.6,120.37);c.lineTo(145.6,127.37);
+  c.lineTo(145.6,146.37);c.lineTo(123.6,146.37);c.closePath();
+  c.stroke();
+  // M138.6,120.37 v7 h7
+  c.beginPath();
+  c.moveTo(138.6,120.37);c.lineTo(138.6,127.37);c.lineTo(145.6,127.37);
+  c.stroke();
+  // "?" text — Courier New Bold 15.18px at (130.04, 140.82)
+  c.fillStyle='#0A0A0A';
+  c.font='bold 15.18px "Courier New",monospace';
+  c.textAlign='left';c.textBaseline='alphabetic';
+  c.fillText('?',130.04,140.82);
+
+  // ── WORDMARK ── SpaceMono Bold 33.73px at (177.51, 140.9)
+  c.fillStyle='#F0F0EE';
+  c.font='bold 33.73px "Space Mono",monospace';
+  c.letterSpacing=`${33.73*0.1}px`;
+  c.textAlign='left';c.textBaseline='alphabetic';
+  c.fillText('THE COPY VAULT',177.51,140.9);
+  c.letterSpacing='0px';
+
+  // Orange underline — from (179.89,157.16) to (523,157.16) stroke-width 3
+  c.strokeStyle='#F04D23';c.lineWidth=3;
+  c.beginPath();c.moveTo(179.89,157.16);c.lineTo(523,157.16);c.stroke();
+
+  // ── CARD SHADOW ── x=89.37 y=263.11 w=913.04 h=595.03 fill+stroke #231f20 sw=8
+  c.fillStyle='#231F20';c.strokeStyle='#231F20';c.lineWidth=8;
+  c.fillRect(89.37,263.11,913.04,595.03);
+  c.strokeRect(89.37,263.11,913.04,595.03);
+
+  // ── WHITE CARD ── x=81 y=255.74 w=913.04 h=595.03 fill white stroke #231f20 sw=5
+  c.fillStyle='#FFFFFF';c.strokeStyle='#231F20';c.lineWidth=5;
+  c.fillRect(81,255.74,913.04,595.03);
+  c.strokeRect(81+2.5,255.74+2.5,913.04-5,595.03-5);
+
+  // ── COPY TEXT ── Bitter Medium 500, dynamic size, starts from top of card
+  const cardLeft=81,cardRight=994.04,cardTop=255.74,dividerY=717.26;
+  const textX=151.4,textMaxW=cardRight-textX-70;
+  const availH=dividerY-cardTop-59-10; // available height for text
+
+  // pick font size that fits
+  let fs=74.16,lh=88.99;
+  const sizes=[[20,110,132],[40,90,108],[80,74.16,88.99],[140,56,67],[99999,44,53]];
+  for(const[limit,size,lineH] of sizes){
+    if(copy.length<=limit){fs=size;lh=lineH;break;}
+  }
+  // verify it fits, reduce if needed
+  c.font=`500 ${fs}px "Bitter",serif`;
+  let copyLines=wrapText(copy,textMaxW);
+  while(copyLines.length*lh>availH&&fs>28){
+    fs-=4;lh=fs*1.2;
+    c.font=`500 ${fs}px "Bitter",serif`;
+    copyLines=wrapText(copy,textMaxW);
+  }
+
+  // text baseline of first line
+  const firstBaselineY=cardTop+59+fs*0.85;
+  c.fillStyle='#231F20';c.textAlign='left';c.textBaseline='alphabetic';
+  copyLines.forEach((l,i)=>c.fillText(l,textX,firstBaselineY+i*lh));
+
+  // ── DIVIDER ── from (157.04,717.26) to (922.01,717.26) #969696 sw=2
+  c.strokeStyle='#969696';c.lineWidth=2;
+  c.beginPath();c.moveTo(157.04,717.26);c.lineTo(922.01,717.26);c.stroke();
+
+  // ── BRAND + YEAR ── SpaceMono Regular 33.73px at fixed positions
+  c.fillStyle='#969696';
+  c.font='400 33.73px "Space Mono",monospace';
+  c.letterSpacing=`${33.73*0.1}px`;
+  c.textAlign='left';c.textBaseline='alphabetic';
+  c.fillText((brand||'').toUpperCase(),151.4,787.05);
+  c.fillText(String(year||''),843.21,787.05);
+  c.letterSpacing='0px';
+
+  // ── SOCIAL ICONS ── absolute SVG coords from template
+  c.fillStyle='#969696';
+  // Instagram (absolute path from SVG)
+  c.fill(new Path2D('M934.8,920.48c-4.01,0-4.52.02-6.09.09-1.57.07-2.65.32-3.59.69-.97.38-1.8.88-2.62,1.7-.82.82-1.33,1.65-1.71,2.62-.37.94-.62,2.01-.69,3.59-.07,1.58-.09,2.08-.09,6.1s.02,4.52.09,6.09c.07,1.57.32,2.65.69,3.59.38.97.88,1.8,1.7,2.62.82.82,1.65,1.33,2.62,1.71.94.37,2.01.61,3.59.69,1.58.07,2.08.09,6.09.09s4.52-.02,6.09-.09c1.57-.07,2.65-.32,3.59-.69.97-.38,1.8-.88,2.62-1.71.82-.82,1.33-1.65,1.71-2.62.36-.94.61-2.01.69-3.59.07-1.58.09-2.08.09-6.09s-.02-4.52-.09-6.09c-.07-1.57-.32-2.65-.69-3.59-.38-.97-.88-1.8-1.71-2.62-.82-.82-1.64-1.33-2.62-1.7-.94-.37-2.02-.61-3.59-.69-1.58-.07-2.08-.09-6.09-.09h0ZM933.48,923.14c.39,0,.83,0,1.33,0,3.95,0,4.41.01,5.97.08,1.44.07,2.22.31,2.74.51.69.27,1.18.59,1.7,1.11.52.52.84,1.01,1.11,1.7.2.52.44,1.3.51,2.74.07,1.56.09,2.03.09,5.97s-.02,4.41-.09,5.97c-.07,1.44-.31,2.22-.51,2.74-.27.69-.59,1.18-1.11,1.7-.52.52-1.01.84-1.7,1.11-.52.2-1.3.44-2.74.51-1.56.07-2.03.09-5.97.09s-4.41-.02-5.97-.09c-1.44-.07-2.22-.31-2.74-.51-.69-.27-1.18-.59-1.7-1.11-.52-.52-.84-1.01-1.11-1.7-.2-.52-.44-1.3-.51-2.74-.07-1.56-.08-2.03-.08-5.97s.01-4.41.08-5.97c.07-1.44.31-2.22.51-2.74.27-.69.59-1.18,1.11-1.7.52-.52,1.01-.84,1.7-1.11.52-.2,1.3-.44,2.74-.51,1.36-.06,1.89-.08,4.65-.08h0ZM942.69,925.59c-.98,0-1.77.79-1.77,1.77s.79,1.77,1.77,1.77,1.77-.79,1.77-1.77-.79-1.77-1.77-1.77h0ZM934.8,927.67c-4.19,0-7.59,3.4-7.59,7.59s3.4,7.59,7.59,7.59c4.19,0,7.59-3.4,7.59-7.59s-3.4-7.59-7.59-7.59h0ZM934.8,930.33c2.72,0,4.93,2.21,4.93,4.93s-2.21,4.93-4.93,4.93-4.93-2.21-4.93-4.93,2.21-4.93,4.93-4.93Z'));
+  // LinkedIn (absolute path from SVG)
+  c.fill(new Path2D('M994.23,920.35h-22.83c-1.8,0-3.26,1.46-3.26,3.26v22.83c0,1.8,1.46,3.26,3.26,3.26h22.83c1.8,0,3.26-1.46,3.26-3.26v-22.83c0-1.8-1.46-3.26-3.26-3.26ZM977.01,945.63h-4.38v-14.13h4.38v14.13ZM974.8,929.65c-1.43,0-2.59-1.17-2.59-2.61s1.16-2.61,2.59-2.61,2.59,1.17,2.59,2.61-1.16,2.61-2.59,2.61ZM993.42,945.63h-4.36v-7.42c0-2.03-.77-3.17-2.38-3.17-1.75,0-2.67,1.18-2.67,3.17v7.42h-4.2v-14.13h4.2v1.9s1.26-2.34,4.26-2.34,5.14,1.83,5.14,5.62v8.95Z'));
+
+  // ── FOOTER TEXT ── SpaceMono Regular 27.98px at fixed positions
+  c.fillStyle='#969696';
+  c.font='400 27.98px "Space Mono",monospace';
+  c.letterSpacing=`${27.98*0.1}px`;
+  c.textAlign='left';c.textBaseline='alphabetic';
+  c.fillText('FIND THIS AND MORE AT:',90.97,993.79);
+  c.textAlign='right';
+  c.fillText('THE-COPY-VAULT.COM',997.49,993.79);
+  c.letterSpacing='0px';
+
+  // ── DOWNLOAD ────────────────────────────────────
+  const a=document.createElement('a');
+  a.download='copyvault-'+(brand||'post').toLowerCase().replace(/[^a-z0-9]+/g,'-')+'.png';
+  a.href=cv.toDataURL('image/png');
+  a.click();
+}
+function closeSheet(){
+  document.getElementById('scrim').classList.remove('show');
+  const s=document.getElementById('sheet');s.classList.remove('show');s.setAttribute('aria-hidden','true');
+}
+
+function render(){
+  const results=CORPUS.filter(matches);
+  document.getElementById('count').textContent=results.length+' / '+CORPUS.length+' pieces';
+  document.getElementById('qclr').style.display=state.q?'block':'none';
+  const nf=state.sectors.size+state.types.size+state.langs.size;
+  document.getElementById('fcount').textContent=nf?nf:'';
+  renderFilters();renderLex(results);renderGrid(results);
+}
+
+document.getElementById('filtertoggle').onclick=function(){
+  const h=document.querySelector('header');
+  const open=h.classList.toggle('filters-open');
+  this.setAttribute('aria-expanded',open?'true':'false');
+};
+
+document.getElementById('q').addEventListener('input',e=>{state.q=e.target.value.trim();render();});
+document.getElementById('qclr').onclick=()=>{state.q='';document.getElementById('q').value='';render();};
+document.getElementById('scrim').onclick=closeSheet;
+document.getElementById('sheetx').onclick=closeSheet;
+document.addEventListener('keydown',e=>{if(e.key==='Escape')closeSheet();});
+
+render();
+</script>
+</body>
+</html>
