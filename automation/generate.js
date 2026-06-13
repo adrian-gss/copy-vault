@@ -25,8 +25,9 @@ function score(entry) {
     .filter(f => entry[f]).length;
 }
 
-const SPANISH_EVERY = 20;   // every Nth post is in Spanish (Rule 3)
-const RICH_THRESHOLD = 5;   // score >= this counts as a "rich" (high-info) copy
+const SPANISH_EVERY = 20;     // every Nth post is in Spanish (Rule 3)
+const RICH_THRESHOLD = 5;     // score >= this counts as a "rich" (high-info) copy
+const RECENT_BRANDS = 5;      // avoid brands used in the last N posts (soft)
 
 // ── SELECT NEXT COPY ──────────────────────────────────
 // Hard filters (must all pass), then soft ranking, then graceful fallback.
@@ -34,15 +35,16 @@ const RICH_THRESHOLD = 5;   // score >= this counts as a "rich" (high-info) copy
 //          2. brand != previous post's brand
 //          3. language = Spanish on every 20th post, English otherwise
 //          4. if the last two posts had no year, this one must have a year
-//   SOFT (tie-breakers, in order): different sector, alternate info level,
-//          then most complete.
-//   FALLBACK: drop the sector preference (already soft); as a last resort allow
-//          the same brand / a published copy, and log it.
+//   SOFT (tie-breakers, in order): brand not used in last 5 posts, different
+//          sector, alternate info level, then most complete.
+//   FALLBACK: soft prefs relax naturally; as a last resort allow the same brand
+//          / a published copy.
 function selectNext(corpus, state) {
   const all = corpus.map((entry, idx) => ({ entry, idx }));
   const isSpanishSlot = (state.postIndex + 1) % SPANISH_EVERY === 0;
   const wantLang = isSpanishSlot ? 'es' : 'en';
   const needYear = state.lastTwoHadYear[0] === false && state.lastTwoHadYear[1] === false;
+  const recent = new Set(state.recentBrands || []);
 
   // ── HARD FILTERS ──
   const hard = (c, { allowSameBrand = false, anyLang = false, allowPosted = false } = {}) => {
@@ -66,15 +68,17 @@ function selectNext(corpus, state) {
   const prevRich = state.lastScore >= RICH_THRESHOLD;
   const rank = (c) => {
     const s = score(c.entry);
+    const brandFresh = recent.has(c.entry.brand) ? 0 : 1;                         // not used in last 5 posts
     const sectorDiff = c.entry.sector && c.entry.sector !== state.lastSector ? 1 : 0;
     // alternate info level: if previous was rich, prefer a lighter one now, and vice versa
     const altMatch = prevRich ? (s < RICH_THRESHOLD ? 1 : 0) : (s >= RICH_THRESHOLD ? 1 : 0);
-    return { sectorDiff, altMatch, s };
+    return { brandFresh, sectorDiff, altMatch, s };
   };
   pool.sort((a, b) => {
     const ra = rank(a), rb = rank(b);
-    if (rb.sectorDiff !== ra.sectorDiff) return rb.sectorDiff - ra.sectorDiff;   // different sector first
-    if (rb.altMatch !== ra.altMatch) return rb.altMatch - ra.altMatch;           // alternate info level
+    if (rb.brandFresh !== ra.brandFresh) return rb.brandFresh - ra.brandFresh;    // spread brands out first
+    if (rb.sectorDiff !== ra.sectorDiff) return rb.sectorDiff - ra.sectorDiff;    // different sector
+    if (rb.altMatch !== ra.altMatch) return rb.altMatch - ra.altMatch;            // alternate info level
     return rb.s - ra.s;                                                          // then most complete
   });
 
@@ -131,6 +135,9 @@ function loadState(statePath, corpus) {
     while (prev2.length < 2) prev2.unshift(true);             // assume year present before history
     s.lastTwoHadYear = prev2;
   }
+  if (!Array.isArray(s.recentBrands)) {
+    s.recentBrands = s.posted.slice(-RECENT_BRANDS).map(i => corpus[i].brand);
+  }
   return s;
 }
 
@@ -150,6 +157,7 @@ async function main() {
   state.lastSector = entry.sector || null;
   state.lastScore = score(entry);
   state.lastTwoHadYear = [state.lastTwoHadYear[1], !!entry.year];
+  state.recentBrands = [...state.recentBrands, entry.brand].slice(-RECENT_BRANDS);
 
   const caption = buildCaption(entry, state.counter);
   const imageBuf = await renderImage(entry.copy, entry.brand, entry.year);
