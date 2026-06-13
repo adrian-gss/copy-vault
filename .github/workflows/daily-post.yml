@@ -1,0 +1,54 @@
+name: Daily Post
+
+on:
+  schedule:
+    - cron: '0 9 * * *'   # 9:00 UTC (11:00 Madrid) every day
+  workflow_dispatch:        # manual trigger for testing
+
+permissions:
+  contents: write
+
+jobs:
+  post:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install canvas system dependencies
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y build-essential libcairo2-dev libpango1.0-dev libjpeg-dev libgif-dev librsvg2-dev
+
+      - name: Download fonts
+        run: |
+          mkdir -p automation/fonts
+          curl -fsSL "https://github.com/google/fonts/raw/main/ofl/bitter/static/Bitter-Medium.ttf" -o automation/fonts/Bitter-Medium.ttf
+          curl -fsSL "https://github.com/google/fonts/raw/main/ofl/spacemono/SpaceMono-Regular.ttf" -o automation/fonts/SpaceMono-Regular.ttf
+          curl -fsSL "https://github.com/google/fonts/raw/main/ofl/spacemono/SpaceMono-Bold.ttf" -o automation/fonts/SpaceMono-Bold.ttf
+
+      - name: Install npm dependencies
+        run: cd automation && npm install
+
+      - name: Generate image and caption
+        run: cd automation && node generate.js
+
+      - name: Commit output
+        run: |
+          git config user.name "copy-vault-bot"
+          git config user.email "bot@the-copy-vault.com"
+          git add automation/output/post.jpg automation/state.json
+          git commit -m "chore: daily post [skip ci]"
+          git push
+          echo "COMMIT_SHA=$(git rev-parse HEAD)" >> $GITHUB_ENV
+
+      - name: Publish to Instagram and LinkedIn
+        env:
+          MAKE_WEBHOOK_URL: ${{ secrets.MAKE_WEBHOOK_URL }}
+        run: cd automation && node post.js ${{ env.COMMIT_SHA }}

@@ -1,0 +1,12 @@
+{
+  "name": "copy-vault-automation",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "generate": "node generate.js",
+    "post": "node post.js"
+  },
+  "dependencies": {
+    "canvas": "^2.11.2"
+  }
+}
