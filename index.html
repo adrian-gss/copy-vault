@@ -182,7 +182,6 @@
     <input id="q" type="text" placeholder="Search by word, brand or sector…" autocomplete="off" spellcheck="false">
     <button class="clr" id="qclr" title="borrar búsqueda" style="display:none">×</button>
   </div>
-  <div class="lexrow empty" id="lex"></div>
   <button class="filtertoggle" id="filtertoggle" aria-expanded="false">
     <span class="lbl">Filters <span class="fcount" id="fcount"></span></span>
     <svg class="chev" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
@@ -675,28 +674,6 @@ function renderFilters(){
 }
 
 
-function renderLex(results){
-  const lex=document.getElementById('lex');
-  if(!state.q){lex.className='lexrow empty';lex.innerHTML='';return;}
-  const qn=norm(state.q);
-  const freq=new Map();
-  results.forEach(d=>{
-    const seen=new Set();
-    tokens(d.copy).forEach(w=>{
-      if(w.includes(qn)||qn.includes(w))return;
-      if(seen.has(w))return;seen.add(w);
-      freq.set(w,(freq.get(w)||0)+1);
-    });
-  });
-  const words=[...freq.entries()].filter(([,n])=>n>=1).sort((a,b)=>b[1]-a[1]).slice(0,14).map(e=>e[0]);
-  if(!words.length){lex.className='lexrow empty';lex.innerHTML='';return;}
-  lex.className='lexrow';
-  lex.innerHTML='<span class="lexlabel">also in</span>'+
-    words.map(w=>`<button class="lex" data-w="${escapeHtml(w)}">${escapeHtml(w)}</button>`).join('');
-  lex.querySelectorAll('.lex').forEach(b=>b.onclick=()=>{
-    state.q=b.dataset.w;document.getElementById('q').value=b.dataset.w;render();
-  });
-}
 
 function renderGrid(results){
   const grid=document.getElementById('grid');
@@ -889,7 +866,7 @@ function render(){
   document.getElementById('qclr').style.display=state.q?'block':'none';
   const nf=state.sectors.size+state.types.size+state.langs.size;
   document.getElementById('fcount').textContent=nf?nf:'';
-  renderFilters();renderLex(results);renderGrid(results);
+  renderFilters();renderGrid(results);
 }
 
 document.getElementById('filtertoggle').onclick=function(){
