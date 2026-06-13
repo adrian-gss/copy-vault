@@ -29,9 +29,9 @@ jobs:
       - name: Download fonts
         run: |
           mkdir -p automation/fonts
-          curl -fsSL "https://github.com/google/fonts/raw/main/ofl/bitter/static/Bitter-Medium.ttf" -o automation/fonts/Bitter-Medium.ttf
-          curl -fsSL "https://github.com/google/fonts/raw/main/ofl/spacemono/SpaceMono-Regular.ttf" -o automation/fonts/SpaceMono-Regular.ttf
-          curl -fsSL "https://github.com/google/fonts/raw/main/ofl/spacemono/SpaceMono-Bold.ttf" -o automation/fonts/SpaceMono-Bold.ttf
+          curl -fsSL "https://cdn.jsdelivr.net/npm/@expo-google-fonts/bitter/Bitter_500Medium.ttf" -o automation/fonts/Bitter-Medium.ttf
+          curl -fsSL "https://cdn.jsdelivr.net/npm/@expo-google-fonts/space-mono/SpaceMono_400Regular.ttf" -o automation/fonts/SpaceMono-Regular.ttf
+          curl -fsSL "https://cdn.jsdelivr.net/npm/@expo-google-fonts/space-mono/SpaceMono_700Bold.ttf" -o automation/fonts/SpaceMono-Bold.ttf
 
       - name: Install npm dependencies
         run: cd automation && npm install
