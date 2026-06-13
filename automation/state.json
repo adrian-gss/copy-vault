@@ -1,25 +1,26 @@
 {
-  "counter": 5,
+  "counter": 6,
   "posted": [
     0,
     1,
     2,
     3,
-    120
+    120,
+    6
   ],
-  "postIndex": 5,
-  "lastBrand": "7UP",
-  "lastSector": "alcohol",
-  "lastScore": 4,
+  "postIndex": 6,
+  "lastBrand": "Nike",
+  "lastSector": "sport",
+  "lastScore": 9,
   "lastTwoHadYear": [
-    true,
-    false
+    false,
+    true
   ],
   "recentBrands": [
     "Volkswagen",
-    "Volkswagen",
     "Avis",
     "Avis",
-    "7UP"
+    "7UP",
+    "Nike"
   ]
 }
