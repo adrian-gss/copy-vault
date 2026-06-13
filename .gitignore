@@ -1,0 +1,6 @@
+.vercel
+node_modules/
+post/
+.claude/
+*.ai
+.DS_Store

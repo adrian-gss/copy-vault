@@ -740,11 +740,7 @@ function openSheet(d){
   document.getElementById('scrim').classList.add('show');
   const s=document.getElementById('sheet');s.classList.add('show');s.setAttribute('aria-hidden','false');
 }
-async function downloadPost(){
-  const copy=_sheetData?_sheetData.copy:'';
-  const brand=_sheetData?_sheetData.brand:'';
-  const year=_sheetData?_sheetData.year:'';
-
+async function buildPostCanvas(copy,brand,year){
   await document.fonts.load('500 74px "Bitter"');
   await document.fonts.load('700 34px "Space Mono"');
   await document.fonts.load('400 28px "Space Mono"');
@@ -865,12 +861,23 @@ async function downloadPost(){
   c.fillText('THE-COPY-VAULT.COM',997.49,993.79);
   c.letterSpacing='0px';
 
-  // ── DOWNLOAD ────────────────────────────────────
+  return cv;
+}
+async function downloadPost(){
+  const copy=_sheetData?_sheetData.copy:'';
+  const brand=_sheetData?_sheetData.brand:'';
+  const year=_sheetData?_sheetData.year:'';
+  const cv=await buildPostCanvas(copy,brand,year);
   const a=document.createElement('a');
   a.download='copyvault-'+(brand||'post').toLowerCase().replace(/[^a-z0-9]+/g,'-')+'.png';
   a.href=cv.toDataURL('image/png');
   a.click();
 }
+// Used by the automation (headless browser) — returns a JPEG data URL for Instagram/LinkedIn
+window.renderPostImage=async function(copy,brand,year){
+  const cv=await buildPostCanvas(copy,brand,year);
+  return cv.toDataURL('image/jpeg',0.95);
+};
 function closeSheet(){
   document.getElementById('scrim').classList.remove('show');
   const s=document.getElementById('sheet');s.classList.remove('show');s.setAttribute('aria-hidden','true');

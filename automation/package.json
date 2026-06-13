@@ -7,6 +7,6 @@
     "post": "node post.js"
   },
   "dependencies": {
-    "canvas": "^2.11.2"
+    "playwright": "^1.48.0"
   }
 }
