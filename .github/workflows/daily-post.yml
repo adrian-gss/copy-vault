@@ -2,14 +2,38 @@ name: Daily Post
 
 on:
   schedule:
-    - cron: '0 9 * * *'   # 9:00 UTC (11:00 Madrid) every day
-  workflow_dispatch:        # manual trigger for testing
+    # GitHub cron is always UTC and ignores DST. To always hit 09:00 Madrid,
+    # we fire at both 07:00 and 08:00 UTC and let the gate job keep only the
+    # run that lands on 09:00 local time (07:00 UTC in summer, 08:00 in winter).
+    - cron: '0 7 * * *'
+    - cron: '0 8 * * *'
+  workflow_dispatch:        # manual trigger for testing (always proceeds)
 
 permissions:
   contents: write
 
 jobs:
+  gate:
+    runs-on: ubuntu-latest
+    outputs:
+      proceed: ${{ steps.check.outputs.proceed }}
+    steps:
+      - id: check
+        run: |
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
+            echo "Manual run — proceeding."
+            echo "proceed=true" >> "$GITHUB_OUTPUT"
+          elif [ "$(TZ='Europe/Madrid' date +%H)" = "09" ]; then
+            echo "It is 09:00 in Madrid — proceeding."
+            echo "proceed=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "Not 09:00 in Madrid (currently $(TZ='Europe/Madrid' date +%H):00) — skipping."
+            echo "proceed=false" >> "$GITHUB_OUTPUT"
+          fi
+
   post:
+    needs: gate
+    if: needs.gate.outputs.proceed == 'true'
     runs-on: ubuntu-latest
 
     steps:
