@@ -905,7 +905,7 @@ document.getElementById('sheetx').onclick=closeSheet;
 document.addEventListener('keydown',e=>{if(e.key==='Escape')closeSheet();});
 
 // suggest-a-copy form (delegated — the card is re-rendered with the grid)
-const SUGGEST_WEBHOOK_URL='';  // ← Make webhook URL goes here
+const SUGGEST_WEBHOOK_URL='https://hook.eu1.make.com/crrdni62ko4sijay3aukbe8lbiayw288';
 document.addEventListener('submit',async function(e){
   if(!e.target||e.target.id!=='suggestForm')return;
   e.preventDefault();
