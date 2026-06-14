@@ -16,6 +16,27 @@ module.exports = async (req, res) => {
     return;
   }
 
+  // Dry run: verify the function + token reach GitHub WITHOUT triggering a post.
+  if (req.query && req.query.dryRun) {
+    try {
+      const r = await fetch(
+        'https://api.github.com/repos/adrian-gss/copy-vault/actions/workflows/daily-post.yml',
+        {
+          headers: {
+            Accept: 'application/vnd.github+json',
+            Authorization: `Bearer ${token}`,
+            'X-GitHub-Api-Version': '2022-11-28',
+            'User-Agent': 'copy-vault-cron',
+          },
+        }
+      );
+      res.status(200).json({ dryRun: true, tokenWorks: r.status === 200, githubStatus: r.status });
+    } catch (e) {
+      res.status(500).json({ dryRun: true, error: String(e) });
+    }
+    return;
+  }
+
   try {
     const r = await fetch(
       'https://api.github.com/repos/adrian-gss/copy-vault/actions/workflows/daily-post.yml/dispatches',
