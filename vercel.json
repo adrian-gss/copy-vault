@@ -1,0 +1,5 @@
+{
+  "crons": [
+    { "path": "/api/trigger-post", "schedule": "40 9 * * *" }
+  ]
+}
