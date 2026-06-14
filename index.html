@@ -691,12 +691,15 @@ function renderFilters(){
 
 
 
-const SUGGEST_CARD_HTML=`<form class="suggest-card" id="suggestForm" novalidate>
+const SUGGEST_FORM_INNER=`
   <div class="suggest-h"><span class="o">Missing Any?</span><span class="w">Add it below:</span></div>
   <textarea class="suggest-in" id="sgCopy" placeholder="Copy Suggested *" rows="3"></textarea>
   <input class="suggest-in" id="sgBrand" type="text" placeholder="Brand *">
-  <button class="suggest-btn" type="submit">Submit</button>
-</form>`;
+  <button class="suggest-btn" type="submit">Submit</button>`;
+const SUGGEST_THANKS_HTML=`
+  <div class="suggest-h"><span class="o">Thank you!</span><span class="w">Suggestion sent.</span></div>
+  <button class="suggest-btn" type="button" id="sgAnother">Add another</button>`;
+const SUGGEST_CARD_HTML=`<form class="suggest-card" id="suggestForm" novalidate>${SUGGEST_FORM_INNER}</form>`;
 
 function renderGrid(results){
   const grid=document.getElementById('grid');
@@ -906,6 +909,12 @@ document.addEventListener('keydown',e=>{if(e.key==='Escape')closeSheet();});
 
 // suggest-a-copy form (delegated — the card is re-rendered with the grid)
 const SUGGEST_WEBHOOK_URL='https://hook.eu1.make.com/crrdni62ko4sijay3aukbe8lbiayw288';
+document.addEventListener('click',function(e){
+  if(e.target&&e.target.id==='sgAnother'){
+    const form=document.getElementById('suggestForm');
+    if(form){form.innerHTML=SUGGEST_FORM_INNER;form.querySelector('#sgCopy').focus();}
+  }
+});
 document.addEventListener('submit',async function(e){
   if(!e.target||e.target.id!=='suggestForm')return;
   e.preventDefault();
@@ -923,7 +932,7 @@ document.addEventListener('submit',async function(e){
     if(SUGGEST_WEBHOOK_URL){
       await fetch(SUGGEST_WEBHOOK_URL,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({copy,brand,page:location.href})});
     }
-    form.innerHTML='<div class="suggest-h"><span class="o">Thank you!</span><span class="w">Suggestion sent.</span></div>';
+    form.innerHTML=SUGGEST_THANKS_HTML;
   }catch(err){
     btn.disabled=false;btn.textContent='Submit';
     btn.textContent='Try again';
