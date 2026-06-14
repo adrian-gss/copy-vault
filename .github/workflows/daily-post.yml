@@ -1,11 +1,10 @@
 name: Daily Post
 
 on:
-  # Triggered daily by a Make.com scenario (reliable cloud scheduler) that calls the
-  # GitHub API: POST /actions/workflows/daily-post.yml/dispatches at 11:40 Europe/Madrid.
+  # Triggered daily by a Vercel Cron job that calls the GitHub API:
+  # POST /actions/workflows/daily-post.yml/dispatches at 07:30 UTC (~09:30 Madrid).
   # GitHub's own `schedule:` cron is intentionally NOT used here — it never fired
-  # reliably for this repo, and keeping it would double-post alongside the Make trigger.
-  # workflow_dispatch also allows manual runs from the Actions tab.
+  # reliably for this repo. workflow_dispatch also allows manual runs from the Actions tab.
   workflow_dispatch:
 
 permissions:

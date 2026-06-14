@@ -1,5 +1,6 @@
 // Vercel Cron endpoint — triggers the GitHub Actions "Daily Post" workflow.
-// Scheduled in vercel.json. Vercel invokes this once a day (GET request) and,
+// Scheduled in vercel.json at 07:30 UTC (= 09:30 Madrid in summer / 08:30 in
+// winter; Vercel cron is fixed UTC). Vercel invokes this once a day (GET) and,
 // when CRON_SECRET is set, includes "Authorization: Bearer <CRON_SECRET>" so
 // random visitors can't trigger posts. We then call the GitHub API to dispatch
 // the workflow, which renders the image and publishes to Instagram + LinkedIn.
