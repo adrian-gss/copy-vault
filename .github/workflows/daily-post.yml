@@ -1,13 +1,12 @@
 name: Daily Post
 
 on:
-  schedule:
-    # 09:40 UTC, off-peak minute. GitHub cron is UTC and best-effort (can be delayed
-    # 5-30 min), so we avoid the congested top of the hour. 09:40 UTC = 11:40 Madrid
-    # in summer (CEST) / 10:40 in winter (CET) — comfortably mid-morning year-round.
-    # No gate, so a delayed run still posts instead of being skipped.
-    - cron: '40 9 * * *'
-  workflow_dispatch:        # manual trigger
+  # Triggered daily by a Make.com scenario (reliable cloud scheduler) that calls the
+  # GitHub API: POST /actions/workflows/daily-post.yml/dispatches at 11:40 Europe/Madrid.
+  # GitHub's own `schedule:` cron is intentionally NOT used here — it never fired
+  # reliably for this repo, and keeping it would double-post alongside the Make trigger.
+  # workflow_dispatch also allows manual runs from the Actions tab.
+  workflow_dispatch:
 
 permissions:
   contents: write
