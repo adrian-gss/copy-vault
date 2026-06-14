@@ -167,9 +167,7 @@
   .sheet .dl-btn:hover{opacity:.85}
 
   /* suggest-a-copy card (always below all cards, one column wide) */
-  .suggest-card{column-span:all;width:calc((100% - 36px)/3);margin:0 0 14px;background:#000;border-radius:0;padding:28px 26px 26px}
-  @media(max-width:1000px){.suggest-card{width:calc((100% - 18px)/2)}}
-  @media(max-width:640px){.suggest-card{width:100%}}
+  .suggest-card{break-inside:avoid;margin-bottom:14px;background:#000;border-radius:0;padding:28px 26px 26px}
   .suggest-h{font-family:var(--serif);font-weight:500;font-size:38px;line-height:1.1;letter-spacing:-.02em;margin-bottom:22px}
   .suggest-h .o{color:var(--accent);display:block}
   .suggest-h .w{color:#fff;display:block}
