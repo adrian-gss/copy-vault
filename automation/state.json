@@ -1,5 +1,5 @@
 {
-  "counter": 7,
+  "counter": 8,
   "posted": [
     0,
     1,
@@ -7,21 +7,22 @@
     3,
     120,
     6,
-    121
+    121,
+    4
   ],
-  "postIndex": 7,
-  "lastBrand": "Disneyland",
-  "lastSector": "travel & transport",
-  "lastScore": 4,
+  "postIndex": 8,
+  "lastBrand": "Stella Artois",
+  "lastSector": "alcohol",
+  "lastScore": 9,
   "lastTwoHadYear": [
-    true,
-    false
+    false,
+    true
   ],
   "recentBrands": [
     "Avis",
-    "Avis",
     "7UP",
     "Nike",
-    "Disneyland"
+    "Disneyland",
+    "Stella Artois"
   ]
 }
