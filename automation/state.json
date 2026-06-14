@@ -1,26 +1,27 @@
 {
-  "counter": 6,
+  "counter": 7,
   "posted": [
     0,
     1,
     2,
     3,
     120,
-    6
+    6,
+    121
   ],
-  "postIndex": 6,
-  "lastBrand": "Nike",
-  "lastSector": "sport",
-  "lastScore": 9,
+  "postIndex": 7,
+  "lastBrand": "Disneyland",
+  "lastSector": "travel & transport",
+  "lastScore": 4,
   "lastTwoHadYear": [
-    false,
-    true
+    true,
+    false
   ],
   "recentBrands": [
-    "Volkswagen",
     "Avis",
     "Avis",
     "7UP",
-    "Nike"
+    "Nike",
+    "Disneyland"
   ]
 }
