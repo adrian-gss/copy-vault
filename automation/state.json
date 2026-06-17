@@ -1,5 +1,5 @@
 {
-  "counter": 11,
+  "counter": 12,
   "posted": [
     0,
     1,
@@ -11,21 +11,22 @@
     4,
     122,
     9,
-    123
+    123,
+    7
   ],
-  "postIndex": 11,
-  "lastBrand": "American Dairy Association",
-  "lastSector": "food & drink",
-  "lastScore": 4,
+  "postIndex": 12,
+  "lastBrand": "Nike",
+  "lastSector": "sport",
+  "lastScore": 9,
   "lastTwoHadYear": [
-    true,
-    false
+    false,
+    true
   ],
   "recentBrands": [
-    "Disneyland",
     "Stella Artois",
     "Google",
     "Nike Air Jordan",
-    "American Dairy Association"
+    "American Dairy Association",
+    "Nike"
   ]
 }
