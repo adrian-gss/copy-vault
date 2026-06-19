@@ -1,5 +1,5 @@
 {
-  "counter": 13,
+  "counter": 14,
   "posted": [
     0,
     1,
@@ -13,21 +13,22 @@
     9,
     123,
     7,
-    124
+    124,
+    5
   ],
-  "postIndex": 13,
-  "lastBrand": "Yahoo!",
-  "lastSector": "technology",
-  "lastScore": 4,
+  "postIndex": 14,
+  "lastBrand": "Stella Artois",
+  "lastSector": "alcohol",
+  "lastScore": 9,
   "lastTwoHadYear": [
-    true,
-    false
+    false,
+    true
   ],
   "recentBrands": [
-    "Google",
     "Nike Air Jordan",
     "American Dairy Association",
     "Nike",
-    "Yahoo!"
+    "Yahoo!",
+    "Stella Artois"
   ]
 }
