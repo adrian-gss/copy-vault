@@ -1,5 +1,5 @@
 {
-  "counter": 14,
+  "counter": 15,
   "posted": [
     0,
     1,
@@ -14,21 +14,22 @@
     123,
     7,
     124,
-    5
+    5,
+    125
   ],
-  "postIndex": 14,
-  "lastBrand": "Stella Artois",
-  "lastSector": "alcohol",
-  "lastScore": 9,
+  "postIndex": 15,
+  "lastBrand": "Burger King",
+  "lastSector": "food & drink",
+  "lastScore": 4,
   "lastTwoHadYear": [
-    false,
-    true
+    true,
+    false
   ],
   "recentBrands": [
-    "Nike Air Jordan",
     "American Dairy Association",
     "Nike",
     "Yahoo!",
-    "Stella Artois"
+    "Stella Artois",
+    "Burger King"
   ]
 }
