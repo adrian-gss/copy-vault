@@ -1,5 +1,5 @@
 {
-  "counter": 15,
+  "counter": 16,
   "posted": [
     0,
     1,
@@ -15,21 +15,22 @@
     7,
     124,
     5,
-    125
+    125,
+    12
   ],
-  "postIndex": 15,
-  "lastBrand": "Burger King",
-  "lastSector": "food & drink",
-  "lastScore": 4,
+  "postIndex": 16,
+  "lastBrand": "Wonderbra",
+  "lastSector": "fashion & style",
+  "lastScore": 9,
   "lastTwoHadYear": [
-    true,
-    false
+    false,
+    true
   ],
   "recentBrands": [
-    "American Dairy Association",
     "Nike",
     "Yahoo!",
     "Stella Artois",
-    "Burger King"
+    "Burger King",
+    "Wonderbra"
   ]
 }
