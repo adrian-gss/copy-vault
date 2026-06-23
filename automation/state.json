@@ -1,5 +1,5 @@
 {
-  "counter": 17,
+  "counter": 18,
   "posted": [
     0,
     1,
@@ -17,21 +17,22 @@
     5,
     125,
     12,
-    126
+    126,
+    8
   ],
-  "postIndex": 17,
-  "lastBrand": "Tesla",
-  "lastSector": "automotive",
-  "lastScore": 4,
+  "postIndex": 18,
+  "lastBrand": "Nike",
+  "lastSector": "sport",
+  "lastScore": 9,
   "lastTwoHadYear": [
-    true,
-    false
+    false,
+    true
   ],
   "recentBrands": [
-    "Yahoo!",
     "Stella Artois",
     "Burger King",
     "Wonderbra",
-    "Tesla"
+    "Tesla",
+    "Nike"
   ]
 }
