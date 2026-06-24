@@ -1,5 +1,5 @@
 {
-  "counter": 18,
+  "counter": 19,
   "posted": [
     0,
     1,
@@ -18,21 +18,22 @@
     125,
     12,
     126,
-    8
+    8,
+    127
   ],
-  "postIndex": 18,
-  "lastBrand": "Nike",
-  "lastSector": "sport",
-  "lastScore": 9,
+  "postIndex": 19,
+  "lastBrand": "Coca-Cola",
+  "lastSector": "food & drink",
+  "lastScore": 4,
   "lastTwoHadYear": [
-    false,
-    true
+    true,
+    false
   ],
   "recentBrands": [
-    "Stella Artois",
     "Burger King",
     "Wonderbra",
     "Tesla",
-    "Nike"
+    "Nike",
+    "Coca-Cola"
   ]
 }
