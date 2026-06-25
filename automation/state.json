@@ -1,5 +1,5 @@
 {
-  "counter": 19,
+  "counter": 20,
   "posted": [
     0,
     1,
@@ -19,21 +19,22 @@
     12,
     126,
     8,
-    127
+    127,
+    89
   ],
-  "postIndex": 19,
-  "lastBrand": "Coca-Cola",
-  "lastSector": "food & drink",
-  "lastScore": 4,
+  "postIndex": 20,
+  "lastBrand": "Ikea España",
+  "lastSector": "services",
+  "lastScore": 9,
   "lastTwoHadYear": [
-    true,
-    false
+    false,
+    true
   ],
   "recentBrands": [
-    "Burger King",
     "Wonderbra",
     "Tesla",
     "Nike",
-    "Coca-Cola"
+    "Coca-Cola",
+    "Ikea España"
   ]
 }
