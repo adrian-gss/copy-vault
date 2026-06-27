@@ -1,5 +1,5 @@
 {
-  "counter": 21,
+  "counter": 22,
   "posted": [
     0,
     1,
@@ -21,21 +21,22 @@
     8,
     127,
     89,
-    128
+    128,
+    13
   ],
-  "postIndex": 21,
-  "lastBrand": "Sky",
-  "lastSector": "media & entertainment",
-  "lastScore": 4,
+  "postIndex": 22,
+  "lastBrand": "Wonderbra",
+  "lastSector": "fashion & style",
+  "lastScore": 9,
   "lastTwoHadYear": [
-    true,
-    false
+    false,
+    true
   ],
   "recentBrands": [
-    "Tesla",
     "Nike",
     "Coca-Cola",
     "Ikea España",
-    "Sky"
+    "Sky",
+    "Wonderbra"
   ]
 }
