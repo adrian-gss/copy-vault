@@ -1,5 +1,5 @@
 {
-  "counter": 22,
+  "counter": 23,
   "posted": [
     0,
     1,
@@ -22,21 +22,22 @@
     127,
     89,
     128,
-    13
+    13,
+    129
   ],
-  "postIndex": 22,
-  "lastBrand": "Wonderbra",
-  "lastSector": "fashion & style",
-  "lastScore": 9,
+  "postIndex": 23,
+  "lastBrand": "Clairol",
+  "lastSector": "health & beauty",
+  "lastScore": 4,
   "lastTwoHadYear": [
-    false,
-    true
+    true,
+    false
   ],
   "recentBrands": [
-    "Nike",
     "Coca-Cola",
     "Ikea España",
     "Sky",
-    "Wonderbra"
+    "Wonderbra",
+    "Clairol"
   ]
 }
