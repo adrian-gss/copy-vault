@@ -1,5 +1,5 @@
 {
-  "counter": 25,
+  "counter": 26,
   "posted": [
     0,
     1,
@@ -25,21 +25,22 @@
     13,
     129,
     10,
-    130
+    130,
+    14
   ],
-  "postIndex": 25,
-  "lastBrand": "Mazda",
-  "lastSector": "automotive",
-  "lastScore": 4,
+  "postIndex": 26,
+  "lastBrand": "Diesel",
+  "lastSector": "fashion & style",
+  "lastScore": 9,
   "lastTwoHadYear": [
-    true,
-    false
+    false,
+    true
   ],
   "recentBrands": [
-    "Sky",
     "Wonderbra",
     "Clairol",
     "Nike",
-    "Mazda"
+    "Mazda",
+    "Diesel"
   ]
 }
