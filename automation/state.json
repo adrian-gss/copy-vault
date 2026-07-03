@@ -1,5 +1,5 @@
 {
-  "counter": 27,
+  "counter": 28,
   "posted": [
     0,
     1,
@@ -27,21 +27,22 @@
     10,
     130,
     14,
-    131
+    131,
+    17
   ],
-  "postIndex": 27,
-  "lastBrand": "The New York Times",
-  "lastSector": "media & entertainment",
-  "lastScore": 4,
+  "postIndex": 28,
+  "lastBrand": "Patagonia",
+  "lastSector": "fashion & style",
+  "lastScore": 9,
   "lastTwoHadYear": [
-    true,
-    false
+    false,
+    true
   ],
   "recentBrands": [
-    "Clairol",
     "Nike",
     "Mazda",
     "Diesel",
-    "The New York Times"
+    "The New York Times",
+    "Patagonia"
   ]
 }
