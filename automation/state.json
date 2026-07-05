@@ -1,5 +1,5 @@
 {
-  "counter": 29,
+  "counter": 30,
   "posted": [
     0,
     1,
@@ -29,21 +29,22 @@
     14,
     131,
     17,
-    132
+    132,
+    11
   ],
-  "postIndex": 29,
-  "lastBrand": "Hallmark",
-  "lastSector": "services",
-  "lastScore": 4,
+  "postIndex": 30,
+  "lastBrand": "Nike",
+  "lastSector": "sport",
+  "lastScore": 9,
   "lastTwoHadYear": [
-    true,
-    false
+    false,
+    true
   ],
   "recentBrands": [
-    "Mazda",
     "Diesel",
     "The New York Times",
     "Patagonia",
-    "Hallmark"
+    "Hallmark",
+    "Nike"
   ]
 }
