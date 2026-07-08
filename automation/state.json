@@ -1,5 +1,5 @@
 {
-  "counter": 32,
+  "counter": 33,
   "posted": [
     0,
     1,
@@ -32,21 +32,22 @@
     132,
     11,
     133,
-    15
+    15,
+    134
   ],
-  "postIndex": 32,
-  "lastBrand": "Diesel",
-  "lastSector": "fashion & style",
-  "lastScore": 9,
+  "postIndex": 33,
+  "lastBrand": "U.S. Marine Corps",
+  "lastSector": "public interest & culture",
+  "lastScore": 4,
   "lastTwoHadYear": [
-    false,
-    true
+    true,
+    false
   ],
   "recentBrands": [
-    "Patagonia",
     "Hallmark",
     "Nike",
     "Sony",
-    "Diesel"
+    "Diesel",
+    "U.S. Marine Corps"
   ]
 }
