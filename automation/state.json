@@ -1,5 +1,5 @@
 {
-  "counter": 34,
+  "counter": 35,
   "posted": [
     0,
     1,
@@ -34,21 +34,22 @@
     133,
     15,
     134,
-    18
+    18,
+    135
   ],
-  "postIndex": 34,
-  "lastBrand": "Patagonia",
-  "lastSector": "fashion & style",
-  "lastScore": 9,
+  "postIndex": 35,
+  "lastBrand": "John Deere",
+  "lastSector": "services",
+  "lastScore": 4,
   "lastTwoHadYear": [
-    false,
-    true
+    true,
+    false
   ],
   "recentBrands": [
-    "Nike",
     "Sony",
     "Diesel",
     "U.S. Marine Corps",
-    "Patagonia"
+    "Patagonia",
+    "John Deere"
   ]
 }
