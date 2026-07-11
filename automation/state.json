@@ -1,5 +1,5 @@
 {
-  "counter": 35,
+  "counter": 36,
   "posted": [
     0,
     1,
@@ -35,21 +35,22 @@
     15,
     134,
     18,
-    135
+    135,
+    19
   ],
-  "postIndex": 35,
-  "lastBrand": "John Deere",
-  "lastSector": "services",
-  "lastScore": 4,
+  "postIndex": 36,
+  "lastBrand": "KFC",
+  "lastSector": "food & drink",
+  "lastScore": 9,
   "lastTwoHadYear": [
-    true,
-    false
+    false,
+    true
   ],
   "recentBrands": [
-    "Sony",
     "Diesel",
     "U.S. Marine Corps",
     "Patagonia",
-    "John Deere"
+    "John Deere",
+    "KFC"
   ]
 }
