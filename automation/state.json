@@ -1,5 +1,5 @@
 {
-  "counter": 37,
+  "counter": 38,
   "posted": [
     0,
     1,
@@ -37,21 +37,22 @@
     18,
     135,
     19,
-    136
+    136,
+    16
   ],
-  "postIndex": 37,
-  "lastBrand": "Geico",
-  "lastSector": "services",
-  "lastScore": 4,
+  "postIndex": 38,
+  "lastBrand": "Diesel",
+  "lastSector": "fashion & style",
+  "lastScore": 9,
   "lastTwoHadYear": [
-    true,
-    false
+    false,
+    true
   ],
   "recentBrands": [
-    "U.S. Marine Corps",
     "Patagonia",
     "John Deere",
     "KFC",
-    "Geico"
+    "Geico",
+    "Diesel"
   ]
 }
