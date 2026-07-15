@@ -1,5 +1,5 @@
 {
-  "counter": 39,
+  "counter": 40,
   "posted": [
     0,
     1,
@@ -39,21 +39,22 @@
     19,
     136,
     16,
-    137
+    137,
+    90
   ],
-  "postIndex": 39,
-  "lastBrand": "L'Oréal",
-  "lastSector": "health & beauty",
-  "lastScore": 4,
+  "postIndex": 40,
+  "lastBrand": "BMW",
+  "lastSector": "automotive",
+  "lastScore": 9,
   "lastTwoHadYear": [
-    true,
-    false
+    false,
+    true
   ],
   "recentBrands": [
-    "John Deere",
     "KFC",
     "Geico",
     "Diesel",
-    "L'Oréal"
+    "L'Oréal",
+    "BMW"
   ]
 }
