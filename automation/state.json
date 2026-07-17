@@ -1,5 +1,5 @@
 {
-  "counter": 41,
+  "counter": 42,
   "posted": [
     0,
     1,
@@ -41,21 +41,22 @@
     16,
     137,
     90,
-    138
+    138,
+    20
   ],
-  "postIndex": 41,
-  "lastBrand": "Panasonic",
-  "lastSector": "technology",
-  "lastScore": 4,
+  "postIndex": 42,
+  "lastBrand": "Oatly",
+  "lastSector": "food & drink",
+  "lastScore": 9,
   "lastTwoHadYear": [
-    true,
-    false
+    false,
+    true
   ],
   "recentBrands": [
-    "Geico",
     "Diesel",
     "L'Oréal",
     "BMW",
-    "Panasonic"
+    "Panasonic",
+    "Oatly"
   ]
 }
