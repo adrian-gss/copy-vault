@@ -1,5 +1,5 @@
 {
-  "counter": 42,
+  "counter": 43,
   "posted": [
     0,
     1,
@@ -42,21 +42,22 @@
     137,
     90,
     138,
-    20
+    20,
+    139
   ],
-  "postIndex": 42,
-  "lastBrand": "Oatly",
-  "lastSector": "food & drink",
-  "lastScore": 9,
+  "postIndex": 43,
+  "lastBrand": "Dollar Shave Club",
+  "lastSector": "health & beauty",
+  "lastScore": 4,
   "lastTwoHadYear": [
-    false,
-    true
+    true,
+    false
   ],
   "recentBrands": [
-    "Diesel",
     "L'Oréal",
     "BMW",
     "Panasonic",
-    "Oatly"
+    "Oatly",
+    "Dollar Shave Club"
   ]
 }
