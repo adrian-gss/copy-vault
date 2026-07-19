@@ -1,5 +1,5 @@
 {
-  "counter": 43,
+  "counter": 44,
   "posted": [
     0,
     1,
@@ -43,21 +43,22 @@
     90,
     138,
     20,
-    139
+    139,
+    22
   ],
-  "postIndex": 43,
-  "lastBrand": "Dollar Shave Club",
-  "lastSector": "health & beauty",
-  "lastScore": 4,
+  "postIndex": 44,
+  "lastBrand": "ESPN",
+  "lastSector": "media & entertainment",
+  "lastScore": 9,
   "lastTwoHadYear": [
-    true,
-    false
+    false,
+    true
   ],
   "recentBrands": [
-    "L'Oréal",
     "BMW",
     "Panasonic",
     "Oatly",
-    "Dollar Shave Club"
+    "Dollar Shave Club",
+    "ESPN"
   ]
 }
