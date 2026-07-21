@@ -1,5 +1,5 @@
 {
-  "counter": 45,
+  "counter": 46,
   "posted": [
     0,
     1,
@@ -45,21 +45,22 @@
     20,
     139,
     22,
-    140
+    140,
+    24
   ],
-  "postIndex": 45,
-  "lastBrand": "eBay",
-  "lastSector": "technology",
-  "lastScore": 4,
+  "postIndex": 46,
+  "lastBrand": "The Economist",
+  "lastSector": "media & entertainment",
+  "lastScore": 9,
   "lastTwoHadYear": [
-    true,
-    false
+    false,
+    true
   ],
   "recentBrands": [
-    "Panasonic",
     "Oatly",
     "Dollar Shave Club",
     "ESPN",
-    "eBay"
+    "eBay",
+    "The Economist"
   ]
 }
