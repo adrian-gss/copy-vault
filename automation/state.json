@@ -1,5 +1,5 @@
 {
-  "counter": 46,
+  "counter": 47,
   "posted": [
     0,
     1,
@@ -46,21 +46,22 @@
     139,
     22,
     140,
-    24
+    24,
+    141
   ],
-  "postIndex": 46,
-  "lastBrand": "The Economist",
-  "lastSector": "media & entertainment",
-  "lastScore": 9,
+  "postIndex": 47,
+  "lastBrand": "Gatorade",
+  "lastSector": "sport",
+  "lastScore": 4,
   "lastTwoHadYear": [
-    false,
-    true
+    true,
+    false
   ],
   "recentBrands": [
-    "Oatly",
     "Dollar Shave Club",
     "ESPN",
     "eBay",
-    "The Economist"
+    "The Economist",
+    "Gatorade"
   ]
 }
