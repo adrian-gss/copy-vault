@@ -1,5 +1,5 @@
 {
-  "counter": 49,
+  "counter": 50,
   "posted": [
     0,
     1,
@@ -49,21 +49,22 @@
     24,
     141,
     21,
-    143
+    143,
+    23
   ],
-  "postIndex": 49,
-  "lastBrand": "Mercedes-Benz",
-  "lastSector": "automotive",
-  "lastScore": 4,
+  "postIndex": 50,
+  "lastBrand": "ibidphoto.com",
+  "lastSector": "technology",
+  "lastScore": 9,
   "lastTwoHadYear": [
-    true,
-    false
+    false,
+    true
   ],
   "recentBrands": [
-    "eBay",
     "The Economist",
     "Gatorade",
     "Oatly",
-    "Mercedes-Benz"
+    "Mercedes-Benz",
+    "ibidphoto.com"
   ]
 }
