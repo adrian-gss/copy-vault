@@ -41,7 +41,18 @@ jobs:
           git push
           echo "COMMIT_SHA=$(git rev-parse HEAD)" >> $GITHUB_ENV
 
-      - name: Publish to Instagram and LinkedIn
+      - name: Publish to Instagram (via Make)
         env:
           MAKE_WEBHOOK_URL: ${{ secrets.MAKE_WEBHOOK_URL }}
         run: cd automation && node post.js ${{ env.COMMIT_SHA }}
+
+      - name: Publish to LinkedIn (via LinkedIn API)
+        # Runs even if the Instagram step failed, so one channel breaking
+        # doesn't take down the other.
+        if: always()
+        env:
+          LINKEDIN_ACCESS_TOKEN: ${{ secrets.LINKEDIN_ACCESS_TOKEN }}
+          LINKEDIN_ORG_URN: ${{ secrets.LINKEDIN_ORG_URN }}
+          LINKEDIN_REFRESH_TOKEN: ${{ secrets.LINKEDIN_REFRESH_TOKEN }}
+          LINKEDIN_CLIENT_SECRET: ${{ secrets.LINKEDIN_CLIENT_SECRET }}
+        run: cd automation && node post-linkedin.js
