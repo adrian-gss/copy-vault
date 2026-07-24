@@ -1,5 +1,5 @@
 {
-  "counter": 48,
+  "counter": 49,
   "posted": [
     0,
     1,
@@ -48,21 +48,22 @@
     140,
     24,
     141,
-    21
+    21,
+    143
   ],
-  "postIndex": 48,
-  "lastBrand": "Oatly",
-  "lastSector": "food & drink",
-  "lastScore": 9,
+  "postIndex": 49,
+  "lastBrand": "Mercedes-Benz",
+  "lastSector": "automotive",
+  "lastScore": 4,
   "lastTwoHadYear": [
-    false,
-    true
+    true,
+    false
   ],
   "recentBrands": [
-    "ESPN",
     "eBay",
     "The Economist",
     "Gatorade",
-    "Oatly"
+    "Oatly",
+    "Mercedes-Benz"
   ]
 }
