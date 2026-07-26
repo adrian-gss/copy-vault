@@ -1,5 +1,5 @@
 {
-  "counter": 51,
+  "counter": 52,
   "posted": [
     0,
     1,
@@ -51,21 +51,22 @@
     21,
     143,
     23,
-    142
+    142,
+    25
   ],
-  "postIndex": 51,
-  "lastBrand": "Coca-Cola",
-  "lastSector": "food & drink",
-  "lastScore": 4,
+  "postIndex": 52,
+  "lastBrand": "The Economist",
+  "lastSector": "media & entertainment",
+  "lastScore": 9,
   "lastTwoHadYear": [
-    true,
-    false
+    false,
+    true
   ],
   "recentBrands": [
-    "Gatorade",
     "Oatly",
     "Mercedes-Benz",
     "ibidphoto.com",
-    "Coca-Cola"
+    "Coca-Cola",
+    "The Economist"
   ]
 }
