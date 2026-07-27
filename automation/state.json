@@ -1,5 +1,5 @@
 {
-  "counter": 52,
+  "counter": 53,
   "posted": [
     0,
     1,
@@ -52,21 +52,22 @@
     143,
     23,
     142,
-    25
+    25,
+    144
   ],
-  "postIndex": 52,
-  "lastBrand": "The Economist",
-  "lastSector": "media & entertainment",
-  "lastScore": 9,
+  "postIndex": 53,
+  "lastBrand": "Maybelline",
+  "lastSector": "health & beauty",
+  "lastScore": 4,
   "lastTwoHadYear": [
-    false,
-    true
+    true,
+    false
   ],
   "recentBrands": [
-    "Oatly",
     "Mercedes-Benz",
     "ibidphoto.com",
     "Coca-Cola",
-    "The Economist"
+    "The Economist",
+    "Maybelline"
   ]
 }
