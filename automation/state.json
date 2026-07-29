@@ -1,5 +1,5 @@
 {
-  "counter": 54,
+  "counter": 55,
   "posted": [
     0,
     1,
@@ -54,21 +54,22 @@
     142,
     25,
     144,
-    29
+    29,
+    145
   ],
-  "postIndex": 54,
-  "lastBrand": "Apple",
-  "lastSector": "technology",
-  "lastScore": 9,
+  "postIndex": 55,
+  "lastBrand": "Miller Lite",
+  "lastSector": "alcohol",
+  "lastScore": 4,
   "lastTwoHadYear": [
-    false,
-    true
+    true,
+    false
   ],
   "recentBrands": [
-    "ibidphoto.com",
     "Coca-Cola",
     "The Economist",
     "Maybelline",
-    "Apple"
+    "Apple",
+    "Miller Lite"
   ]
 }
