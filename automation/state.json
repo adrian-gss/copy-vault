@@ -1,5 +1,5 @@
 {
-  "counter": 56,
+  "counter": 57,
   "posted": [
     0,
     1,
@@ -56,21 +56,22 @@
     144,
     29,
     145,
-    38
+    38,
+    146
   ],
-  "postIndex": 56,
-  "lastBrand": "De Beers",
-  "lastSector": "fashion & style",
-  "lastScore": 9,
+  "postIndex": 57,
+  "lastBrand": "Emirates",
+  "lastSector": "travel & transport",
+  "lastScore": 4,
   "lastTwoHadYear": [
-    false,
-    true
+    true,
+    false
   ],
   "recentBrands": [
-    "The Economist",
     "Maybelline",
     "Apple",
     "Miller Lite",
-    "De Beers"
+    "De Beers",
+    "Emirates"
   ]
 }
