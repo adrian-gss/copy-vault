@@ -1,5 +1,5 @@
 {
-  "counter": 58,
+  "counter": 59,
   "posted": [
     0,
     1,
@@ -58,21 +58,22 @@
     145,
     38,
     146,
-    26
+    26,
+    147
   ],
-  "postIndex": 58,
-  "lastBrand": "The Economist",
-  "lastSector": "media & entertainment",
-  "lastScore": 9,
+  "postIndex": 59,
+  "lastBrand": "McDonald's",
+  "lastSector": "food & drink",
+  "lastScore": 4,
   "lastTwoHadYear": [
-    false,
-    true
+    true,
+    false
   ],
   "recentBrands": [
-    "Apple",
     "Miller Lite",
     "De Beers",
     "Emirates",
-    "The Economist"
+    "The Economist",
+    "McDonald's"
   ]
 }
