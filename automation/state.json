@@ -1,5 +1,5 @@
 {
-  "counter": 59,
+  "counter": 60,
   "posted": [
     0,
     1,
@@ -59,21 +59,22 @@
     38,
     146,
     26,
-    147
+    147,
+    93
   ],
-  "postIndex": 59,
-  "lastBrand": "McDonald's",
-  "lastSector": "food & drink",
-  "lastScore": 4,
+  "postIndex": 60,
+  "lastBrand": "Estrella Damm",
+  "lastSector": "alcohol",
+  "lastScore": 9,
   "lastTwoHadYear": [
-    true,
-    false
+    false,
+    true
   ],
   "recentBrands": [
-    "Miller Lite",
     "De Beers",
     "Emirates",
     "The Economist",
-    "McDonald's"
+    "McDonald's",
+    "Estrella Damm"
   ]
 }
