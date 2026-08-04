@@ -1,5 +1,5 @@
 {
-  "counter": 60,
+  "counter": 61,
   "posted": [
     0,
     1,
@@ -60,21 +60,22 @@
     146,
     26,
     147,
-    93
+    93,
+    148
   ],
-  "postIndex": 60,
-  "lastBrand": "Estrella Damm",
-  "lastSector": "alcohol",
-  "lastScore": 9,
+  "postIndex": 61,
+  "lastBrand": "Skittles",
+  "lastSector": "food & drink",
+  "lastScore": 4,
   "lastTwoHadYear": [
-    false,
-    true
+    true,
+    false
   ],
   "recentBrands": [
-    "De Beers",
     "Emirates",
     "The Economist",
     "McDonald's",
-    "Estrella Damm"
+    "Estrella Damm",
+    "Skittles"
   ]
 }
