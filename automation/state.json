@@ -1,5 +1,5 @@
 {
-  "counter": 61,
+  "counter": 62,
   "posted": [
     0,
     1,
@@ -61,21 +61,22 @@
     26,
     147,
     93,
-    148
+    148,
+    30
   ],
-  "postIndex": 61,
-  "lastBrand": "Skittles",
-  "lastSector": "food & drink",
-  "lastScore": 4,
+  "postIndex": 62,
+  "lastBrand": "Apple",
+  "lastSector": "technology",
+  "lastScore": 9,
   "lastTwoHadYear": [
-    true,
-    false
+    false,
+    true
   ],
   "recentBrands": [
-    "Emirates",
     "The Economist",
     "McDonald's",
     "Estrella Damm",
-    "Skittles"
+    "Skittles",
+    "Apple"
   ]
 }
