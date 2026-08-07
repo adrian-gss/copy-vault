@@ -1,5 +1,5 @@
 {
-  "counter": 63,
+  "counter": 64,
   "posted": [
     0,
     1,
@@ -63,21 +63,22 @@
     93,
     148,
     30,
-    149
+    149,
+    27
   ],
-  "postIndex": 63,
-  "lastBrand": "Diet Coke",
-  "lastSector": "food & drink",
-  "lastScore": 4,
+  "postIndex": 64,
+  "lastBrand": "The Economist",
+  "lastSector": "media & entertainment",
+  "lastScore": 9,
   "lastTwoHadYear": [
-    true,
-    false
+    false,
+    true
   ],
   "recentBrands": [
-    "McDonald's",
     "Estrella Damm",
     "Skittles",
     "Apple",
-    "Diet Coke"
+    "Diet Coke",
+    "The Economist"
   ]
 }
