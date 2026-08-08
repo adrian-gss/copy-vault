@@ -1,5 +1,5 @@
 {
-  "counter": 64,
+  "counter": 65,
   "posted": [
     0,
     1,
@@ -64,21 +64,22 @@
     148,
     30,
     149,
-    27
+    27,
+    150
   ],
-  "postIndex": 64,
-  "lastBrand": "The Economist",
-  "lastSector": "media & entertainment",
-  "lastScore": 9,
+  "postIndex": 65,
+  "lastBrand": "Yellow Pages",
+  "lastSector": "services",
+  "lastScore": 4,
   "lastTwoHadYear": [
-    false,
-    true
+    true,
+    false
   ],
   "recentBrands": [
-    "Estrella Damm",
     "Skittles",
     "Apple",
     "Diet Coke",
-    "The Economist"
+    "The Economist",
+    "Yellow Pages"
   ]
 }
