@@ -1,5 +1,5 @@
 {
-  "counter": 65,
+  "counter": 66,
   "posted": [
     0,
     1,
@@ -65,21 +65,22 @@
     30,
     149,
     27,
-    150
+    150,
+    39
   ],
-  "postIndex": 65,
-  "lastBrand": "Yellow Pages",
-  "lastSector": "services",
-  "lastScore": 4,
+  "postIndex": 66,
+  "lastBrand": "California Milk Processor Board",
+  "lastSector": "food & drink",
+  "lastScore": 9,
   "lastTwoHadYear": [
-    true,
-    false
+    false,
+    true
   ],
   "recentBrands": [
-    "Skittles",
     "Apple",
     "Diet Coke",
     "The Economist",
-    "Yellow Pages"
+    "Yellow Pages",
+    "California Milk Processor Board"
   ]
 }
