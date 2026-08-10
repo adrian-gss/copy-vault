@@ -1,5 +1,5 @@
 {
-  "counter": 66,
+  "counter": 67,
   "posted": [
     0,
     1,
@@ -66,21 +66,22 @@
     149,
     27,
     150,
-    39
+    39,
+    151
   ],
-  "postIndex": 66,
-  "lastBrand": "California Milk Processor Board",
-  "lastSector": "food & drink",
-  "lastScore": 9,
+  "postIndex": 67,
+  "lastBrand": "Red Bull",
+  "lastSector": "sport",
+  "lastScore": 4,
   "lastTwoHadYear": [
-    false,
-    true
+    true,
+    false
   ],
   "recentBrands": [
-    "Apple",
     "Diet Coke",
     "The Economist",
     "Yellow Pages",
-    "California Milk Processor Board"
+    "California Milk Processor Board",
+    "Red Bull"
   ]
 }
