@@ -1,5 +1,5 @@
 {
-  "counter": 67,
+  "counter": 68,
   "posted": [
     0,
     1,
@@ -67,21 +67,22 @@
     27,
     150,
     39,
-    151
+    151,
+    31
   ],
-  "postIndex": 67,
-  "lastBrand": "Red Bull",
-  "lastSector": "sport",
-  "lastScore": 4,
+  "postIndex": 68,
+  "lastBrand": "Apple",
+  "lastSector": "technology",
+  "lastScore": 9,
   "lastTwoHadYear": [
-    true,
-    false
+    false,
+    true
   ],
   "recentBrands": [
-    "Diet Coke",
     "The Economist",
     "Yellow Pages",
     "California Milk Processor Board",
-    "Red Bull"
+    "Red Bull",
+    "Apple"
   ]
 }
