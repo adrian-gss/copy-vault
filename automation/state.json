@@ -1,5 +1,5 @@
 {
-  "counter": 68,
+  "counter": 69,
   "posted": [
     0,
     1,
@@ -68,21 +68,22 @@
     150,
     39,
     151,
-    31
+    31,
+    152
   ],
-  "postIndex": 68,
-  "lastBrand": "Apple",
-  "lastSector": "technology",
-  "lastScore": 9,
+  "postIndex": 69,
+  "lastBrand": "MTV",
+  "lastSector": "media & entertainment",
+  "lastScore": 4,
   "lastTwoHadYear": [
-    false,
-    true
+    true,
+    false
   ],
   "recentBrands": [
-    "The Economist",
     "Yellow Pages",
     "California Milk Processor Board",
     "Red Bull",
-    "Apple"
+    "Apple",
+    "MTV"
   ]
 }
