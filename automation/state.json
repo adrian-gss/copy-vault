@@ -1,5 +1,5 @@
 {
-  "counter": 69,
+  "counter": 70,
   "posted": [
     0,
     1,
@@ -69,21 +69,22 @@
     39,
     151,
     31,
-    152
+    152,
+    40
   ],
-  "postIndex": 69,
-  "lastBrand": "MTV",
-  "lastSector": "media & entertainment",
-  "lastScore": 4,
+  "postIndex": 70,
+  "lastBrand": "Wendy's",
+  "lastSector": "food & drink",
+  "lastScore": 9,
   "lastTwoHadYear": [
-    true,
-    false
+    false,
+    true
   ],
   "recentBrands": [
-    "Yellow Pages",
     "California Milk Processor Board",
     "Red Bull",
     "Apple",
-    "MTV"
+    "MTV",
+    "Wendy's"
   ]
 }
