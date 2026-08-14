@@ -1,5 +1,5 @@
 {
-  "counter": 70,
+  "counter": 71,
   "posted": [
     0,
     1,
@@ -70,21 +70,22 @@
     151,
     31,
     152,
-    40
+    40,
+    154
   ],
-  "postIndex": 70,
-  "lastBrand": "Wendy's",
-  "lastSector": "food & drink",
-  "lastScore": 9,
+  "postIndex": 71,
+  "lastBrand": "Charmin",
+  "lastSector": "health & beauty",
+  "lastScore": 4,
   "lastTwoHadYear": [
-    false,
-    true
+    true,
+    false
   ],
   "recentBrands": [
-    "California Milk Processor Board",
     "Red Bull",
     "Apple",
     "MTV",
-    "Wendy's"
+    "Wendy's",
+    "Charmin"
   ]
 }
