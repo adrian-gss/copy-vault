@@ -1,5 +1,5 @@
 {
-  "counter": 71,
+  "counter": 72,
   "posted": [
     0,
     1,
@@ -71,21 +71,22 @@
     31,
     152,
     40,
-    154
+    154,
+    28
   ],
-  "postIndex": 71,
-  "lastBrand": "Charmin",
-  "lastSector": "health & beauty",
-  "lastScore": 4,
+  "postIndex": 72,
+  "lastBrand": "The Economist",
+  "lastSector": "media & entertainment",
+  "lastScore": 9,
   "lastTwoHadYear": [
-    true,
-    false
+    false,
+    true
   ],
   "recentBrands": [
-    "Red Bull",
     "Apple",
     "MTV",
     "Wendy's",
-    "Charmin"
+    "Charmin",
+    "The Economist"
   ]
 }
