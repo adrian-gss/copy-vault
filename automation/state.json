@@ -1,5 +1,5 @@
 {
-  "counter": 72,
+  "counter": 73,
   "posted": [
     0,
     1,
@@ -72,21 +72,22 @@
     152,
     40,
     154,
-    28
+    28,
+    153
   ],
-  "postIndex": 72,
-  "lastBrand": "The Economist",
-  "lastSector": "media & entertainment",
-  "lastScore": 9,
+  "postIndex": 73,
+  "lastBrand": "Bounty",
+  "lastSector": "food & drink",
+  "lastScore": 4,
   "lastTwoHadYear": [
-    false,
-    true
+    true,
+    false
   ],
   "recentBrands": [
-    "Apple",
     "MTV",
     "Wendy's",
     "Charmin",
-    "The Economist"
+    "The Economist",
+    "Bounty"
   ]
 }
