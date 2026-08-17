@@ -1,5 +1,5 @@
 {
-  "counter": 73,
+  "counter": 74,
   "posted": [
     0,
     1,
@@ -73,21 +73,22 @@
     40,
     154,
     28,
-    153
+    153,
+    32
   ],
-  "postIndex": 73,
-  "lastBrand": "Bounty",
-  "lastSector": "food & drink",
-  "lastScore": 4,
+  "postIndex": 74,
+  "lastBrand": "Apple",
+  "lastSector": "technology",
+  "lastScore": 9,
   "lastTwoHadYear": [
-    true,
-    false
+    false,
+    true
   ],
   "recentBrands": [
-    "MTV",
     "Wendy's",
     "Charmin",
     "The Economist",
-    "Bounty"
+    "Bounty",
+    "Apple"
   ]
 }
