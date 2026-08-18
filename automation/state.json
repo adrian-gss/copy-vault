@@ -1,5 +1,5 @@
 {
-  "counter": 74,
+  "counter": 75,
   "posted": [
     0,
     1,
@@ -74,21 +74,22 @@
     154,
     28,
     153,
-    32
+    32,
+    155
   ],
-  "postIndex": 74,
-  "lastBrand": "Apple",
-  "lastSector": "technology",
-  "lastScore": 9,
+  "postIndex": 75,
+  "lastBrand": "Secret",
+  "lastSector": "health & beauty",
+  "lastScore": 4,
   "lastTwoHadYear": [
-    false,
-    true
+    true,
+    false
   ],
   "recentBrands": [
-    "Wendy's",
     "Charmin",
     "The Economist",
     "Bounty",
-    "Apple"
+    "Apple",
+    "Secret"
   ]
 }
