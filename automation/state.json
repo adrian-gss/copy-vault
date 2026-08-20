@@ -1,5 +1,5 @@
 {
-  "counter": 75,
+  "counter": 76,
   "posted": [
     0,
     1,
@@ -75,21 +75,22 @@
     28,
     153,
     32,
-    155
+    155,
+    41
   ],
-  "postIndex": 75,
-  "lastBrand": "Secret",
-  "lastSector": "health & beauty",
-  "lastScore": 4,
+  "postIndex": 76,
+  "lastBrand": "Patek Philippe",
+  "lastSector": "fashion & style",
+  "lastScore": 9,
   "lastTwoHadYear": [
-    true,
-    false
+    false,
+    true
   ],
   "recentBrands": [
-    "Charmin",
     "The Economist",
     "Bounty",
     "Apple",
-    "Secret"
+    "Secret",
+    "Patek Philippe"
   ]
 }
