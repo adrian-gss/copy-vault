@@ -1,5 +1,5 @@
 {
-  "counter": 76,
+  "counter": 77,
   "posted": [
     0,
     1,
@@ -76,21 +76,22 @@
     153,
     32,
     155,
-    41
+    41,
+    156
   ],
-  "postIndex": 76,
-  "lastBrand": "Patek Philippe",
-  "lastSector": "fashion & style",
-  "lastScore": 9,
+  "postIndex": 77,
+  "lastBrand": "Energizer",
+  "lastSector": "services",
+  "lastScore": 4,
   "lastTwoHadYear": [
-    false,
-    true
+    true,
+    false
   ],
   "recentBrands": [
-    "The Economist",
     "Bounty",
     "Apple",
     "Secret",
-    "Patek Philippe"
+    "Patek Philippe",
+    "Energizer"
   ]
 }
