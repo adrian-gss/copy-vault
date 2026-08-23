@@ -1,5 +1,5 @@
 {
-  "counter": 78,
+  "counter": 79,
   "posted": [
     0,
     1,
@@ -78,21 +78,22 @@
     155,
     41,
     156,
-    43
+    43,
+    157
   ],
-  "postIndex": 78,
-  "lastBrand": "BMW",
-  "lastSector": "automotive",
-  "lastScore": 9,
+  "postIndex": 79,
+  "lastBrand": "Lay's",
+  "lastSector": "food & drink",
+  "lastScore": 4,
   "lastTwoHadYear": [
-    false,
-    true
+    true,
+    false
   ],
   "recentBrands": [
-    "Apple",
     "Secret",
     "Patek Philippe",
     "Energizer",
-    "BMW"
+    "BMW",
+    "Lay's"
   ]
 }
