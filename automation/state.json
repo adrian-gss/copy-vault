@@ -1,5 +1,5 @@
 {
-  "counter": 79,
+  "counter": 80,
   "posted": [
     0,
     1,
@@ -79,21 +79,22 @@
     41,
     156,
     43,
-    157
+    157,
+    94
   ],
-  "postIndex": 79,
-  "lastBrand": "Lay's",
-  "lastSector": "food & drink",
-  "lastScore": 4,
+  "postIndex": 80,
+  "lastBrand": "Estrella Damm",
+  "lastSector": "alcohol",
+  "lastScore": 9,
   "lastTwoHadYear": [
-    true,
-    false
+    false,
+    true
   ],
   "recentBrands": [
-    "Secret",
     "Patek Philippe",
     "Energizer",
     "BMW",
-    "Lay's"
+    "Lay's",
+    "Estrella Damm"
   ]
 }
