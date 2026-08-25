@@ -1,5 +1,5 @@
 {
-  "counter": 80,
+  "counter": 81,
   "posted": [
     0,
     1,
@@ -80,21 +80,22 @@
     156,
     43,
     157,
-    94
+    94,
+    158
   ],
-  "postIndex": 80,
-  "lastBrand": "Estrella Damm",
-  "lastSector": "alcohol",
-  "lastScore": 9,
+  "postIndex": 81,
+  "lastBrand": "M&M's",
+  "lastSector": "food & drink",
+  "lastScore": 4,
   "lastTwoHadYear": [
-    false,
-    true
+    true,
+    false
   ],
   "recentBrands": [
-    "Patek Philippe",
     "Energizer",
     "BMW",
     "Lay's",
-    "Estrella Damm"
+    "Estrella Damm",
+    "M&M's"
   ]
 }
