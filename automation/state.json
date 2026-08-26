@@ -1,5 +1,5 @@
 {
-  "counter": 81,
+  "counter": 82,
   "posted": [
     0,
     1,
@@ -81,21 +81,22 @@
     43,
     157,
     94,
-    158
+    158,
+    33
   ],
-  "postIndex": 81,
-  "lastBrand": "M&M's",
-  "lastSector": "food & drink",
-  "lastScore": 4,
+  "postIndex": 82,
+  "lastBrand": "Apple",
+  "lastSector": "technology",
+  "lastScore": 9,
   "lastTwoHadYear": [
-    true,
-    false
+    false,
+    true
   ],
   "recentBrands": [
-    "Energizer",
     "BMW",
     "Lay's",
     "Estrella Damm",
-    "M&M's"
+    "M&M's",
+    "Apple"
   ]
 }
