@@ -1,5 +1,5 @@
 {
-  "counter": 82,
+  "counter": 83,
   "posted": [
     0,
     1,
@@ -82,21 +82,22 @@
     157,
     94,
     158,
-    33
+    33,
+    159
   ],
-  "postIndex": 82,
-  "lastBrand": "Apple",
-  "lastSector": "technology",
-  "lastScore": 9,
+  "postIndex": 83,
+  "lastBrand": "KFC",
+  "lastSector": "food & drink",
+  "lastScore": 4,
   "lastTwoHadYear": [
-    false,
-    true
+    true,
+    false
   ],
   "recentBrands": [
-    "BMW",
     "Lay's",
     "Estrella Damm",
     "M&M's",
-    "Apple"
+    "Apple",
+    "KFC"
   ]
 }
