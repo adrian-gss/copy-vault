@@ -1,5 +1,5 @@
 {
-  "counter": 83,
+  "counter": 84,
   "posted": [
     0,
     1,
@@ -83,21 +83,22 @@
     94,
     158,
     33,
-    159
+    159,
+    42
   ],
-  "postIndex": 83,
-  "lastBrand": "KFC",
-  "lastSector": "food & drink",
-  "lastScore": 4,
+  "postIndex": 84,
+  "lastBrand": "Patek Philippe",
+  "lastSector": "fashion & style",
+  "lastScore": 9,
   "lastTwoHadYear": [
-    true,
-    false
+    false,
+    true
   ],
   "recentBrands": [
-    "Lay's",
     "Estrella Damm",
     "M&M's",
     "Apple",
-    "KFC"
+    "KFC",
+    "Patek Philippe"
   ]
 }
