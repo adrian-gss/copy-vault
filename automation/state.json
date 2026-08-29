@@ -1,5 +1,5 @@
 {
-  "counter": 84,
+  "counter": 85,
   "posted": [
     0,
     1,
@@ -84,21 +84,22 @@
     158,
     33,
     159,
-    42
+    42,
+    160
   ],
-  "postIndex": 84,
-  "lastBrand": "Patek Philippe",
-  "lastSector": "fashion & style",
-  "lastScore": 9,
+  "postIndex": 85,
+  "lastBrand": "Aston Martin",
+  "lastSector": "automotive",
+  "lastScore": 4,
   "lastTwoHadYear": [
-    false,
-    true
+    true,
+    false
   ],
   "recentBrands": [
-    "Estrella Damm",
     "M&M's",
     "Apple",
     "KFC",
-    "Patek Philippe"
+    "Patek Philippe",
+    "Aston Martin"
   ]
 }
