@@ -1,5 +1,5 @@
 {
-  "counter": 85,
+  "counter": 86,
   "posted": [
     0,
     1,
@@ -85,21 +85,22 @@
     33,
     159,
     42,
-    160
+    160,
+    46
   ],
-  "postIndex": 85,
-  "lastBrand": "Aston Martin",
-  "lastSector": "automotive",
-  "lastScore": 4,
+  "postIndex": 86,
+  "lastBrand": "Carlsberg",
+  "lastSector": "alcohol",
+  "lastScore": 9,
   "lastTwoHadYear": [
-    true,
-    false
+    false,
+    true
   ],
   "recentBrands": [
-    "M&M's",
     "Apple",
     "KFC",
     "Patek Philippe",
-    "Aston Martin"
+    "Aston Martin",
+    "Carlsberg"
   ]
 }
