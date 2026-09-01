@@ -1,5 +1,5 @@
 {
-  "counter": 87,
+  "counter": 88,
   "posted": [
     0,
     1,
@@ -87,21 +87,22 @@
     42,
     160,
     46,
-    161
+    161,
+    34
   ],
-  "postIndex": 87,
-  "lastBrand": "Greyhound",
-  "lastSector": "travel & transport",
-  "lastScore": 4,
+  "postIndex": 88,
+  "lastBrand": "Apple",
+  "lastSector": "technology",
+  "lastScore": 9,
   "lastTwoHadYear": [
-    true,
-    false
+    false,
+    true
   ],
   "recentBrands": [
-    "KFC",
     "Patek Philippe",
     "Aston Martin",
     "Carlsberg",
-    "Greyhound"
+    "Greyhound",
+    "Apple"
   ]
 }
