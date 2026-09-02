@@ -1,5 +1,5 @@
 {
-  "counter": 88,
+  "counter": 89,
   "posted": [
     0,
     1,
@@ -88,21 +88,22 @@
     160,
     46,
     161,
-    34
+    34,
+    162
   ],
-  "postIndex": 88,
-  "lastBrand": "Apple",
-  "lastSector": "technology",
-  "lastScore": 9,
+  "postIndex": 89,
+  "lastBrand": "Papa John's",
+  "lastSector": "food & drink",
+  "lastScore": 4,
   "lastTwoHadYear": [
-    false,
-    true
+    true,
+    false
   ],
   "recentBrands": [
-    "Patek Philippe",
     "Aston Martin",
     "Carlsberg",
     "Greyhound",
-    "Apple"
+    "Apple",
+    "Papa John's"
   ]
 }
