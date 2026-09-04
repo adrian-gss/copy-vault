@@ -1,5 +1,5 @@
 {
-  "counter": 90,
+  "counter": 91,
   "posted": [
     0,
     1,
@@ -90,21 +90,22 @@
     161,
     34,
     162,
-    44
+    44,
+    163
   ],
-  "postIndex": 90,
-  "lastBrand": "Porsche",
-  "lastSector": "automotive",
-  "lastScore": 9,
+  "postIndex": 91,
+  "lastBrand": "E.F. Hutton",
+  "lastSector": "services",
+  "lastScore": 4,
   "lastTwoHadYear": [
-    false,
-    true
+    true,
+    false
   ],
   "recentBrands": [
-    "Carlsberg",
     "Greyhound",
     "Apple",
     "Papa John's",
-    "Porsche"
+    "Porsche",
+    "E.F. Hutton"
   ]
 }
