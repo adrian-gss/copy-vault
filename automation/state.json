@@ -1,5 +1,5 @@
 {
-  "counter": 91,
+  "counter": 92,
   "posted": [
     0,
     1,
@@ -91,21 +91,22 @@
     34,
     162,
     44,
-    163
+    163,
+    45
   ],
-  "postIndex": 91,
-  "lastBrand": "E.F. Hutton",
-  "lastSector": "services",
-  "lastScore": 4,
+  "postIndex": 92,
+  "lastBrand": "Volkswagen GTI",
+  "lastSector": "automotive",
+  "lastScore": 9,
   "lastTwoHadYear": [
-    true,
-    false
+    false,
+    true
   ],
   "recentBrands": [
-    "Greyhound",
     "Apple",
     "Papa John's",
     "Porsche",
-    "E.F. Hutton"
+    "E.F. Hutton",
+    "Volkswagen GTI"
   ]
 }
