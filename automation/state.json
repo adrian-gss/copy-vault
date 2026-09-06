@@ -1,5 +1,5 @@
 {
-  "counter": 92,
+  "counter": 93,
   "posted": [
     0,
     1,
@@ -92,21 +92,22 @@
     162,
     44,
     163,
-    45
+    45,
+    164
   ],
-  "postIndex": 92,
-  "lastBrand": "Volkswagen GTI",
-  "lastSector": "automotive",
-  "lastScore": 9,
+  "postIndex": 93,
+  "lastBrand": "Southwest Airlines",
+  "lastSector": "travel & transport",
+  "lastScore": 4,
   "lastTwoHadYear": [
-    false,
-    true
+    true,
+    false
   ],
   "recentBrands": [
-    "Apple",
     "Papa John's",
     "Porsche",
     "E.F. Hutton",
-    "Volkswagen GTI"
+    "Volkswagen GTI",
+    "Southwest Airlines"
   ]
 }
