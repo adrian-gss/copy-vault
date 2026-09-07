@@ -1,5 +1,5 @@
 {
-  "counter": 93,
+  "counter": 94,
   "posted": [
     0,
     1,
@@ -93,21 +93,22 @@
     44,
     163,
     45,
-    164
+    164,
+    35
   ],
-  "postIndex": 93,
-  "lastBrand": "Southwest Airlines",
-  "lastSector": "travel & transport",
-  "lastScore": 4,
+  "postIndex": 94,
+  "lastBrand": "Apple",
+  "lastSector": "technology",
+  "lastScore": 9,
   "lastTwoHadYear": [
-    true,
-    false
+    false,
+    true
   ],
   "recentBrands": [
-    "Papa John's",
     "Porsche",
     "E.F. Hutton",
     "Volkswagen GTI",
-    "Southwest Airlines"
+    "Southwest Airlines",
+    "Apple"
   ]
 }
