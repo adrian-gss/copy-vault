@@ -1,5 +1,5 @@
 {
-  "counter": 94,
+  "counter": 95,
   "posted": [
     0,
     1,
@@ -94,21 +94,22 @@
     163,
     45,
     164,
-    35
+    35,
+    165
   ],
-  "postIndex": 94,
-  "lastBrand": "Apple",
-  "lastSector": "technology",
-  "lastScore": 9,
+  "postIndex": 95,
+  "lastBrand": "Sprite",
+  "lastSector": "food & drink",
+  "lastScore": 4,
   "lastTwoHadYear": [
-    false,
-    true
+    true,
+    false
   ],
   "recentBrands": [
-    "Porsche",
     "E.F. Hutton",
     "Volkswagen GTI",
     "Southwest Airlines",
-    "Apple"
+    "Apple",
+    "Sprite"
   ]
 }
