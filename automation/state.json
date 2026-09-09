@@ -1,5 +1,5 @@
 {
-  "counter": 95,
+  "counter": 96,
   "posted": [
     0,
     1,
@@ -95,21 +95,22 @@
     45,
     164,
     35,
-    165
+    165,
+    47
   ],
-  "postIndex": 95,
-  "lastBrand": "Sprite",
-  "lastSector": "food & drink",
-  "lastScore": 4,
+  "postIndex": 96,
+  "lastBrand": "Carlsberg",
+  "lastSector": "alcohol",
+  "lastScore": 9,
   "lastTwoHadYear": [
-    true,
-    false
+    false,
+    true
   ],
   "recentBrands": [
-    "E.F. Hutton",
     "Volkswagen GTI",
     "Southwest Airlines",
     "Apple",
-    "Sprite"
+    "Sprite",
+    "Carlsberg"
   ]
 }
