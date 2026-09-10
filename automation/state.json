@@ -1,5 +1,5 @@
 {
-  "counter": 96,
+  "counter": 97,
   "posted": [
     0,
     1,
@@ -96,21 +96,22 @@
     164,
     35,
     165,
-    47
+    47,
+    166
   ],
-  "postIndex": 96,
-  "lastBrand": "Carlsberg",
-  "lastSector": "alcohol",
-  "lastScore": 9,
+  "postIndex": 97,
+  "lastBrand": "Old Spice",
+  "lastSector": "health & beauty",
+  "lastScore": 4,
   "lastTwoHadYear": [
-    false,
-    true
+    true,
+    false
   ],
   "recentBrands": [
-    "Volkswagen GTI",
     "Southwest Airlines",
     "Apple",
     "Sprite",
-    "Carlsberg"
+    "Carlsberg",
+    "Old Spice"
   ]
 }
