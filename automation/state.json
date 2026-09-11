@@ -1,5 +1,5 @@
 {
-  "counter": 97,
+  "counter": 98,
   "posted": [
     0,
     1,
@@ -97,21 +97,22 @@
     35,
     165,
     47,
-    166
+    166,
+    48
   ],
-  "postIndex": 97,
-  "lastBrand": "Old Spice",
-  "lastSector": "health & beauty",
-  "lastScore": 4,
+  "postIndex": 98,
+  "lastBrand": "Heineken",
+  "lastSector": "alcohol",
+  "lastScore": 9,
   "lastTwoHadYear": [
-    true,
-    false
+    false,
+    true
   ],
   "recentBrands": [
-    "Southwest Airlines",
     "Apple",
     "Sprite",
     "Carlsberg",
-    "Old Spice"
+    "Old Spice",
+    "Heineken"
   ]
 }
