@@ -1,5 +1,5 @@
 {
-  "counter": 98,
+  "counter": 99,
   "posted": [
     0,
     1,
@@ -98,21 +98,22 @@
     165,
     47,
     166,
-    48
+    48,
+    167
   ],
-  "postIndex": 98,
-  "lastBrand": "Heineken",
-  "lastSector": "alcohol",
-  "lastScore": 9,
+  "postIndex": 99,
+  "lastBrand": "Capital One",
+  "lastSector": "services",
+  "lastScore": 4,
   "lastTwoHadYear": [
-    false,
-    true
+    true,
+    false
   ],
   "recentBrands": [
-    "Apple",
     "Sprite",
     "Carlsberg",
     "Old Spice",
-    "Heineken"
+    "Heineken",
+    "Capital One"
   ]
 }
