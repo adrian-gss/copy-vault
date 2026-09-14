@@ -1,5 +1,5 @@
 {
-  "counter": 100,
+  "counter": 101,
   "posted": [
     0,
     1,
@@ -100,21 +100,22 @@
     166,
     48,
     167,
-    91
+    91,
+    168
   ],
-  "postIndex": 100,
-  "lastBrand": "El Almendro",
-  "lastSector": "food & drink",
-  "lastScore": 9,
+  "postIndex": 101,
+  "lastBrand": "General Electric",
+  "lastSector": "technology",
+  "lastScore": 4,
   "lastTwoHadYear": [
-    false,
-    true
+    true,
+    false
   ],
   "recentBrands": [
-    "Carlsberg",
     "Old Spice",
     "Heineken",
     "Capital One",
-    "El Almendro"
+    "El Almendro",
+    "General Electric"
   ]
 }
