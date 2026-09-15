@@ -1,5 +1,5 @@
 {
-  "counter": 101,
+  "counter": 102,
   "posted": [
     0,
     1,
@@ -101,21 +101,22 @@
     48,
     167,
     91,
-    168
+    168,
+    49
   ],
-  "postIndex": 101,
-  "lastBrand": "General Electric",
-  "lastSector": "technology",
-  "lastScore": 4,
+  "postIndex": 102,
+  "lastBrand": "Heinz",
+  "lastSector": "food & drink",
+  "lastScore": 9,
   "lastTwoHadYear": [
-    true,
-    false
+    false,
+    true
   ],
   "recentBrands": [
-    "Old Spice",
     "Heineken",
     "Capital One",
     "El Almendro",
-    "General Electric"
+    "General Electric",
+    "Heinz"
   ]
 }
