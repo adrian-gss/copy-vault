@@ -1,5 +1,5 @@
 {
-  "counter": 103,
+  "counter": 104,
   "posted": [
     0,
     1,
@@ -103,21 +103,22 @@
     91,
     168,
     49,
-    169
+    169,
+    50
   ],
-  "postIndex": 103,
-  "lastBrand": "Verizon",
-  "lastSector": "technology",
-  "lastScore": 4,
+  "postIndex": 104,
+  "lastBrand": "Heinz Ketchup",
+  "lastSector": "food & drink",
+  "lastScore": 9,
   "lastTwoHadYear": [
-    true,
-    false
+    false,
+    true
   ],
   "recentBrands": [
-    "Capital One",
     "El Almendro",
     "General Electric",
     "Heinz",
-    "Verizon"
+    "Verizon",
+    "Heinz Ketchup"
   ]
 }
