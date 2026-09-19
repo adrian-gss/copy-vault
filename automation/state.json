@@ -1,5 +1,5 @@
 {
-  "counter": 105,
+  "counter": 106,
   "posted": [
     0,
     1,
@@ -105,21 +105,22 @@
     49,
     169,
     50,
-    171
+    171,
+    51
   ],
-  "postIndex": 105,
-  "lastBrand": "AT&T",
-  "lastSector": "technology",
-  "lastScore": 4,
+  "postIndex": 106,
+  "lastBrand": "Ronseal",
+  "lastSector": "services",
+  "lastScore": 9,
   "lastTwoHadYear": [
-    true,
-    false
+    false,
+    true
   ],
   "recentBrands": [
-    "General Electric",
     "Heinz",
     "Verizon",
     "Heinz Ketchup",
-    "AT&T"
+    "AT&T",
+    "Ronseal"
   ]
 }
