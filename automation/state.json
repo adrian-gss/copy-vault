@@ -1,5 +1,5 @@
 {
-  "counter": 106,
+  "counter": 107,
   "posted": [
     0,
     1,
@@ -106,21 +106,22 @@
     169,
     50,
     171,
-    51
+    51,
+    170
   ],
-  "postIndex": 106,
-  "lastBrand": "Ronseal",
-  "lastSector": "services",
-  "lastScore": 9,
+  "postIndex": 107,
+  "lastBrand": "Meow Mix",
+  "lastSector": "food & drink",
+  "lastScore": 4,
   "lastTwoHadYear": [
-    false,
-    true
+    true,
+    false
   ],
   "recentBrands": [
-    "Heinz",
     "Verizon",
     "Heinz Ketchup",
     "AT&T",
-    "Ronseal"
+    "Ronseal",
+    "Meow Mix"
   ]
 }
