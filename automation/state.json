@@ -1,5 +1,5 @@
 {
-  "counter": 107,
+  "counter": 108,
   "posted": [
     0,
     1,
@@ -107,21 +107,22 @@
     50,
     171,
     51,
-    170
+    170,
+    36
   ],
-  "postIndex": 107,
-  "lastBrand": "Meow Mix",
-  "lastSector": "food & drink",
-  "lastScore": 4,
+  "postIndex": 108,
+  "lastBrand": "Apple",
+  "lastSector": "technology",
+  "lastScore": 9,
   "lastTwoHadYear": [
-    true,
-    false
+    false,
+    true
   ],
   "recentBrands": [
-    "Verizon",
     "Heinz Ketchup",
     "AT&T",
     "Ronseal",
-    "Meow Mix"
+    "Meow Mix",
+    "Apple"
   ]
 }
