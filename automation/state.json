@@ -1,5 +1,5 @@
 {
-  "counter": 108,
+  "counter": 109,
   "posted": [
     0,
     1,
@@ -108,21 +108,22 @@
     171,
     51,
     170,
-    36
+    36,
+    172
   ],
-  "postIndex": 108,
-  "lastBrand": "Apple",
-  "lastSector": "technology",
-  "lastScore": 9,
+  "postIndex": 109,
+  "lastBrand": "Walmart",
+  "lastSector": "services",
+  "lastScore": 4,
   "lastTwoHadYear": [
-    false,
-    true
+    true,
+    false
   ],
   "recentBrands": [
-    "Heinz Ketchup",
     "AT&T",
     "Ronseal",
     "Meow Mix",
-    "Apple"
+    "Apple",
+    "Walmart"
   ]
 }
