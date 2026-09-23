@@ -1,5 +1,5 @@
 {
-  "counter": 109,
+  "counter": 110,
   "posted": [
     0,
     1,
@@ -109,21 +109,22 @@
     51,
     170,
     36,
-    172
+    172,
+    52
   ],
-  "postIndex": 109,
-  "lastBrand": "Walmart",
-  "lastSector": "services",
-  "lastScore": 4,
+  "postIndex": 110,
+  "lastBrand": "Specsavers",
+  "lastSector": "health & beauty",
+  "lastScore": 9,
   "lastTwoHadYear": [
-    true,
-    false
+    false,
+    true
   ],
   "recentBrands": [
-    "AT&T",
     "Ronseal",
     "Meow Mix",
     "Apple",
-    "Walmart"
+    "Walmart",
+    "Specsavers"
   ]
 }
