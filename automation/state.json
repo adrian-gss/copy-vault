@@ -1,5 +1,5 @@
 {
-  "counter": 110,
+  "counter": 111,
   "posted": [
     0,
     1,
@@ -110,21 +110,22 @@
     170,
     36,
     172,
-    52
+    52,
+    173
   ],
-  "postIndex": 110,
-  "lastBrand": "Specsavers",
-  "lastSector": "health & beauty",
-  "lastScore": 9,
+  "postIndex": 111,
+  "lastBrand": "EA Games",
+  "lastSector": "technology",
+  "lastScore": 4,
   "lastTwoHadYear": [
-    false,
-    true
+    true,
+    false
   ],
   "recentBrands": [
-    "Ronseal",
     "Meow Mix",
     "Apple",
     "Walmart",
-    "Specsavers"
+    "Specsavers",
+    "EA Games"
   ]
 }
