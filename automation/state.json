@@ -1,5 +1,5 @@
 {
-  "counter": 111,
+  "counter": 112,
   "posted": [
     0,
     1,
@@ -111,21 +111,22 @@
     36,
     172,
     52,
-    173
+    173,
+    54
   ],
-  "postIndex": 111,
-  "lastBrand": "EA Games",
-  "lastSector": "technology",
-  "lastScore": 4,
+  "postIndex": 112,
+  "lastBrand": "HBO",
+  "lastSector": "media & entertainment",
+  "lastScore": 9,
   "lastTwoHadYear": [
-    true,
-    false
+    false,
+    true
   ],
   "recentBrands": [
-    "Meow Mix",
     "Apple",
     "Walmart",
     "Specsavers",
-    "EA Games"
+    "EA Games",
+    "HBO"
   ]
 }
