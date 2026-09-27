@@ -1,5 +1,5 @@
 {
-  "counter": 113,
+  "counter": 114,
   "posted": [
     0,
     1,
@@ -113,21 +113,22 @@
     52,
     173,
     54,
-    174
+    174,
+    55
   ],
-  "postIndex": 113,
-  "lastBrand": "General Electric",
-  "lastSector": "technology",
-  "lastScore": 4,
+  "postIndex": 114,
+  "lastBrand": "Mastercard",
+  "lastSector": "services",
+  "lastScore": 9,
   "lastTwoHadYear": [
-    true,
-    false
+    false,
+    true
   ],
   "recentBrands": [
-    "Walmart",
     "Specsavers",
     "EA Games",
     "HBO",
-    "General Electric"
+    "General Electric",
+    "Mastercard"
   ]
 }
