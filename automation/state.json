@@ -1,5 +1,5 @@
 {
-  "counter": 115,
+  "counter": 116,
   "posted": [
     0,
     1,
@@ -115,21 +115,22 @@
     54,
     174,
     55,
-    175
+    175,
+    53
   ],
-  "postIndex": 115,
-  "lastBrand": "Philips",
-  "lastSector": "technology",
-  "lastScore": 4,
+  "postIndex": 116,
+  "lastBrand": "Specsavers",
+  "lastSector": "health & beauty",
+  "lastScore": 9,
   "lastTwoHadYear": [
-    true,
-    false
+    false,
+    true
   ],
   "recentBrands": [
-    "EA Games",
     "HBO",
     "General Electric",
     "Mastercard",
-    "Philips"
+    "Philips",
+    "Specsavers"
   ]
 }
