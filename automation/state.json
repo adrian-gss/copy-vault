@@ -1,5 +1,5 @@
 {
-  "counter": 116,
+  "counter": 117,
   "posted": [
     0,
     1,
@@ -116,21 +116,22 @@
     174,
     55,
     175,
-    53
+    53,
+    177
   ],
-  "postIndex": 116,
-  "lastBrand": "Specsavers",
-  "lastSector": "health & beauty",
-  "lastScore": 9,
+  "postIndex": 117,
+  "lastBrand": "McDonald's",
+  "lastSector": "food & drink",
+  "lastScore": 4,
   "lastTwoHadYear": [
-    false,
-    true
+    true,
+    false
   ],
   "recentBrands": [
-    "HBO",
     "General Electric",
     "Mastercard",
     "Philips",
-    "Specsavers"
+    "Specsavers",
+    "McDonald's"
   ]
 }
