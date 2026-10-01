@@ -1,5 +1,5 @@
 {
-  "counter": 117,
+  "counter": 118,
   "posted": [
     0,
     1,
@@ -117,21 +117,22 @@
     55,
     175,
     53,
-    177
+    177,
+    37
   ],
-  "postIndex": 117,
-  "lastBrand": "McDonald's",
-  "lastSector": "food & drink",
-  "lastScore": 4,
+  "postIndex": 118,
+  "lastBrand": "Apple",
+  "lastSector": "technology",
+  "lastScore": 9,
   "lastTwoHadYear": [
-    true,
-    false
+    false,
+    true
   ],
   "recentBrands": [
-    "General Electric",
     "Mastercard",
     "Philips",
     "Specsavers",
-    "McDonald's"
+    "McDonald's",
+    "Apple"
   ]
 }
