@@ -1,5 +1,5 @@
 {
-  "counter": 118,
+  "counter": 119,
   "posted": [
     0,
     1,
@@ -118,21 +118,22 @@
     175,
     53,
     177,
-    37
+    37,
+    176
   ],
-  "postIndex": 118,
-  "lastBrand": "Apple",
-  "lastSector": "technology",
-  "lastScore": 9,
+  "postIndex": 119,
+  "lastBrand": "Gillette",
+  "lastSector": "health & beauty",
+  "lastScore": 4,
   "lastTwoHadYear": [
-    false,
-    true
+    true,
+    false
   ],
   "recentBrands": [
-    "Mastercard",
     "Philips",
     "Specsavers",
     "McDonald's",
-    "Apple"
+    "Apple",
+    "Gillette"
   ]
 }
