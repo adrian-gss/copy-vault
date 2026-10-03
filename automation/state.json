@@ -1,5 +1,5 @@
 {
-  "counter": 119,
+  "counter": 120,
   "posted": [
     0,
     1,
@@ -119,21 +119,22 @@
     53,
     177,
     37,
-    176
+    176,
+    92
   ],
-  "postIndex": 119,
-  "lastBrand": "Gillette",
-  "lastSector": "health & beauty",
-  "lastScore": 4,
+  "postIndex": 120,
+  "lastBrand": "Campofrío",
+  "lastSector": "food & drink",
+  "lastScore": 9,
   "lastTwoHadYear": [
-    true,
-    false
+    false,
+    true
   ],
   "recentBrands": [
-    "Philips",
     "Specsavers",
     "McDonald's",
     "Apple",
-    "Gillette"
+    "Gillette",
+    "Campofrío"
   ]
 }
