@@ -1,5 +1,5 @@
 {
-  "counter": 120,
+  "counter": 121,
   "posted": [
     0,
     1,
@@ -120,21 +120,22 @@
     177,
     37,
     176,
-    92
+    92,
+    180
   ],
-  "postIndex": 120,
-  "lastBrand": "Campofrío",
-  "lastSector": "food & drink",
-  "lastScore": 9,
+  "postIndex": 121,
+  "lastBrand": "Timex",
+  "lastSector": "fashion & style",
+  "lastScore": 4,
   "lastTwoHadYear": [
-    false,
-    true
+    true,
+    false
   ],
   "recentBrands": [
-    "Specsavers",
     "McDonald's",
     "Apple",
     "Gillette",
-    "Campofrío"
+    "Campofrío",
+    "Timex"
   ]
 }
