@@ -1,5 +1,5 @@
 {
-  "counter": 121,
+  "counter": 122,
   "posted": [
     0,
     1,
@@ -121,21 +121,22 @@
     37,
     176,
     92,
-    180
+    180,
+    56
   ],
-  "postIndex": 121,
-  "lastBrand": "Timex",
-  "lastSector": "fashion & style",
-  "lastScore": 4,
+  "postIndex": 122,
+  "lastBrand": "Listerine",
+  "lastSector": "health & beauty",
+  "lastScore": 9,
   "lastTwoHadYear": [
-    true,
-    false
+    false,
+    true
   ],
   "recentBrands": [
-    "McDonald's",
     "Apple",
     "Gillette",
     "Campofrío",
-    "Timex"
+    "Timex",
+    "Listerine"
   ]
 }
