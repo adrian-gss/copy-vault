@@ -1,5 +1,5 @@
 {
-  "counter": 122,
+  "counter": 123,
   "posted": [
     0,
     1,
@@ -122,21 +122,22 @@
     176,
     92,
     180,
-    56
+    56,
+    178
   ],
-  "postIndex": 122,
-  "lastBrand": "Listerine",
-  "lastSector": "health & beauty",
-  "lastScore": 9,
+  "postIndex": 123,
+  "lastBrand": "KitKat",
+  "lastSector": "food & drink",
+  "lastScore": 4,
   "lastTwoHadYear": [
-    false,
-    true
+    true,
+    false
   ],
   "recentBrands": [
-    "Apple",
     "Gillette",
     "Campofrío",
     "Timex",
-    "Listerine"
+    "Listerine",
+    "KitKat"
   ]
 }
