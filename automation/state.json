@@ -1,5 +1,5 @@
 {
-  "counter": 123,
+  "counter": 124,
   "posted": [
     0,
     1,
@@ -123,21 +123,22 @@
     92,
     180,
     56,
-    178
+    178,
+    57
   ],
-  "postIndex": 123,
-  "lastBrand": "KitKat",
-  "lastSector": "food & drink",
-  "lastScore": 4,
+  "postIndex": 124,
+  "lastBrand": "The Body Shop",
+  "lastSector": "health & beauty",
+  "lastScore": 9,
   "lastTwoHadYear": [
-    true,
-    false
+    false,
+    true
   ],
   "recentBrands": [
-    "Gillette",
     "Campofrío",
     "Timex",
     "Listerine",
-    "KitKat"
+    "KitKat",
+    "The Body Shop"
   ]
 }
