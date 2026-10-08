@@ -1,5 +1,5 @@
 {
-  "counter": 124,
+  "counter": 125,
   "posted": [
     0,
     1,
@@ -124,21 +124,22 @@
     180,
     56,
     178,
-    57
+    57,
+    179
   ],
-  "postIndex": 124,
-  "lastBrand": "The Body Shop",
-  "lastSector": "health & beauty",
-  "lastScore": 9,
+  "postIndex": 125,
+  "lastBrand": "Doublemint",
+  "lastSector": "food & drink",
+  "lastScore": 4,
   "lastTwoHadYear": [
-    false,
-    true
+    true,
+    false
   ],
   "recentBrands": [
-    "Campofrío",
     "Timex",
     "Listerine",
     "KitKat",
-    "The Body Shop"
+    "The Body Shop",
+    "Doublemint"
   ]
 }
