@@ -1,5 +1,5 @@
 {
-  "counter": 125,
+  "counter": 126,
   "posted": [
     0,
     1,
@@ -125,21 +125,22 @@
     56,
     178,
     57,
-    179
+    179,
+    58
   ],
-  "postIndex": 125,
-  "lastBrand": "Doublemint",
-  "lastSector": "food & drink",
-  "lastScore": 4,
+  "postIndex": 126,
+  "lastBrand": "Partnership for a Drug-Free America",
+  "lastSector": "public interest & culture",
+  "lastScore": 9,
   "lastTwoHadYear": [
-    true,
-    false
+    false,
+    true
   ],
   "recentBrands": [
-    "Timex",
     "Listerine",
     "KitKat",
     "The Body Shop",
-    "Doublemint"
+    "Doublemint",
+    "Partnership for a Drug-Free America"
   ]
 }
