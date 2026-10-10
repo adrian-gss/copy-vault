@@ -1,5 +1,5 @@
 {
-  "counter": 126,
+  "counter": 127,
   "posted": [
     0,
     1,
@@ -126,21 +126,22 @@
     178,
     57,
     179,
-    58
+    58,
+    181
   ],
-  "postIndex": 126,
-  "lastBrand": "Partnership for a Drug-Free America",
-  "lastSector": "public interest & culture",
-  "lastScore": 9,
+  "postIndex": 127,
+  "lastBrand": "Nintendo",
+  "lastSector": "technology",
+  "lastScore": 4,
   "lastTwoHadYear": [
-    false,
-    true
+    true,
+    false
   ],
   "recentBrands": [
-    "Listerine",
     "KitKat",
     "The Body Shop",
     "Doublemint",
-    "Partnership for a Drug-Free America"
+    "Partnership for a Drug-Free America",
+    "Nintendo"
   ]
 }
