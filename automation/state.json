@@ -1,5 +1,5 @@
 {
-  "counter": 127,
+  "counter": 128,
   "posted": [
     0,
     1,
@@ -127,21 +127,22 @@
     57,
     179,
     58,
-    181
+    181,
+    59
   ],
-  "postIndex": 127,
-  "lastBrand": "Nintendo",
-  "lastSector": "technology",
-  "lastScore": 4,
+  "postIndex": 128,
+  "lastBrand": "U.S. Department of Transportation",
+  "lastSector": "public interest & culture",
+  "lastScore": 9,
   "lastTwoHadYear": [
-    true,
-    false
+    false,
+    true
   ],
   "recentBrands": [
-    "KitKat",
     "The Body Shop",
     "Doublemint",
     "Partnership for a Drug-Free America",
-    "Nintendo"
+    "Nintendo",
+    "U.S. Department of Transportation"
   ]
 }
