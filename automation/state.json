@@ -1,5 +1,5 @@
 {
-  "counter": 128,
+  "counter": 129,
   "posted": [
     0,
     1,
@@ -128,21 +128,22 @@
     179,
     58,
     181,
-    59
+    59,
+    182
   ],
-  "postIndex": 128,
-  "lastBrand": "U.S. Department of Transportation",
-  "lastSector": "public interest & culture",
-  "lastScore": 9,
+  "postIndex": 129,
+  "lastBrand": "PlayStation",
+  "lastSector": "technology",
+  "lastScore": 4,
   "lastTwoHadYear": [
-    false,
-    true
+    true,
+    false
   ],
   "recentBrands": [
-    "The Body Shop",
     "Doublemint",
     "Partnership for a Drug-Free America",
     "Nintendo",
-    "U.S. Department of Transportation"
+    "U.S. Department of Transportation",
+    "PlayStation"
   ]
 }
