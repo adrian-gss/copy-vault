@@ -1,5 +1,5 @@
 {
-  "counter": 129,
+  "counter": 130,
   "posted": [
     0,
     1,
@@ -129,21 +129,22 @@
     58,
     181,
     59,
-    182
+    182,
+    60
   ],
-  "postIndex": 129,
-  "lastBrand": "PlayStation",
-  "lastSector": "technology",
-  "lastScore": 4,
+  "postIndex": 130,
+  "lastBrand": "Snickers",
+  "lastSector": "food & drink",
+  "lastScore": 9,
   "lastTwoHadYear": [
-    true,
-    false
+    false,
+    true
   ],
   "recentBrands": [
-    "Doublemint",
     "Partnership for a Drug-Free America",
     "Nintendo",
     "U.S. Department of Transportation",
-    "PlayStation"
+    "PlayStation",
+    "Snickers"
   ]
 }
