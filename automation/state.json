@@ -1,5 +1,5 @@
 {
-  "counter": 130,
+  "counter": 131,
   "posted": [
     0,
     1,
@@ -130,21 +130,22 @@
     181,
     59,
     182,
-    60
+    60,
+    183
   ],
-  "postIndex": 130,
-  "lastBrand": "Snickers",
-  "lastSector": "food & drink",
-  "lastScore": 9,
+  "postIndex": 131,
+  "lastBrand": "American Express",
+  "lastSector": "services",
+  "lastScore": 4,
   "lastTwoHadYear": [
-    false,
-    true
+    true,
+    false
   ],
   "recentBrands": [
-    "Partnership for a Drug-Free America",
     "Nintendo",
     "U.S. Department of Transportation",
     "PlayStation",
-    "Snickers"
+    "Snickers",
+    "American Express"
   ]
 }
