@@ -1,5 +1,5 @@
 {
-  "counter": 131,
+  "counter": 132,
   "posted": [
     0,
     1,
@@ -131,21 +131,22 @@
     59,
     182,
     60,
-    183
+    183,
+    61
   ],
-  "postIndex": 131,
-  "lastBrand": "American Express",
-  "lastSector": "services",
-  "lastScore": 4,
+  "postIndex": 132,
+  "lastBrand": "Burger King",
+  "lastSector": "food & drink",
+  "lastScore": 9,
   "lastTwoHadYear": [
-    true,
-    false
+    false,
+    true
   ],
   "recentBrands": [
-    "Nintendo",
     "U.S. Department of Transportation",
     "PlayStation",
     "Snickers",
-    "American Express"
+    "American Express",
+    "Burger King"
   ]
 }
