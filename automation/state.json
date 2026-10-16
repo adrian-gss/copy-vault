@@ -1,5 +1,5 @@
 {
-  "counter": 132,
+  "counter": 133,
   "posted": [
     0,
     1,
@@ -132,21 +132,22 @@
     182,
     60,
     183,
-    61
+    61,
+    184
   ],
-  "postIndex": 132,
-  "lastBrand": "Burger King",
-  "lastSector": "food & drink",
-  "lastScore": 9,
+  "postIndex": 133,
+  "lastBrand": "Esso",
+  "lastSector": "automotive",
+  "lastScore": 4,
   "lastTwoHadYear": [
-    false,
-    true
+    true,
+    false
   ],
   "recentBrands": [
-    "U.S. Department of Transportation",
     "PlayStation",
     "Snickers",
     "American Express",
-    "Burger King"
+    "Burger King",
+    "Esso"
   ]
 }
