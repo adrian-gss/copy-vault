@@ -1,5 +1,5 @@
 {
-  "counter": 133,
+  "counter": 134,
   "posted": [
     0,
     1,
@@ -133,21 +133,22 @@
     60,
     183,
     61,
-    184
+    184,
+    65
   ],
-  "postIndex": 133,
-  "lastBrand": "Esso",
-  "lastSector": "automotive",
-  "lastScore": 4,
+  "postIndex": 134,
+  "lastBrand": "Bodyform",
+  "lastSector": "health & beauty",
+  "lastScore": 9,
   "lastTwoHadYear": [
-    true,
-    false
+    false,
+    true
   ],
   "recentBrands": [
-    "PlayStation",
     "Snickers",
     "American Express",
     "Burger King",
-    "Esso"
+    "Esso",
+    "Bodyform"
   ]
 }
