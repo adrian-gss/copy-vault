@@ -1,5 +1,5 @@
 {
-  "counter": 134,
+  "counter": 135,
   "posted": [
     0,
     1,
@@ -134,21 +134,22 @@
     183,
     61,
     184,
-    65
+    65,
+    185
   ],
-  "postIndex": 134,
-  "lastBrand": "Bodyform",
-  "lastSector": "health & beauty",
-  "lastScore": 9,
+  "postIndex": 135,
+  "lastBrand": "Taco Bell",
+  "lastSector": "food & drink",
+  "lastScore": 4,
   "lastTwoHadYear": [
-    false,
-    true
+    true,
+    false
   ],
   "recentBrands": [
-    "Snickers",
     "American Express",
     "Burger King",
     "Esso",
-    "Bodyform"
+    "Bodyform",
+    "Taco Bell"
   ]
 }
