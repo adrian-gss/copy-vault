@@ -1,5 +1,5 @@
 {
-  "counter": 135,
+  "counter": 136,
   "posted": [
     0,
     1,
@@ -135,21 +135,22 @@
     61,
     184,
     65,
-    185
+    185,
+    67
   ],
-  "postIndex": 135,
-  "lastBrand": "Taco Bell",
-  "lastSector": "food & drink",
-  "lastScore": 4,
+  "postIndex": 136,
+  "lastBrand": "Always (P&G)",
+  "lastSector": "health & beauty",
+  "lastScore": 9,
   "lastTwoHadYear": [
-    true,
-    false
+    false,
+    true
   ],
   "recentBrands": [
-    "American Express",
     "Burger King",
     "Esso",
     "Bodyform",
-    "Taco Bell"
+    "Taco Bell",
+    "Always (P&G)"
   ]
 }
