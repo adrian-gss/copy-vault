@@ -1,5 +1,5 @@
 {
-  "counter": 136,
+  "counter": 137,
   "posted": [
     0,
     1,
@@ -136,21 +136,22 @@
     184,
     65,
     185,
-    67
+    67,
+    186
   ],
-  "postIndex": 136,
-  "lastBrand": "Always (P&G)",
-  "lastSector": "health & beauty",
-  "lastScore": 9,
+  "postIndex": 137,
+  "lastBrand": "Wheaties",
+  "lastSector": "food & drink",
+  "lastScore": 4,
   "lastTwoHadYear": [
-    false,
-    true
+    true,
+    false
   ],
   "recentBrands": [
-    "Burger King",
     "Esso",
     "Bodyform",
     "Taco Bell",
-    "Always (P&G)"
+    "Always (P&G)",
+    "Wheaties"
   ]
 }
