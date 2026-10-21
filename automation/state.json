@@ -1,5 +1,5 @@
 {
-  "counter": 137,
+  "counter": 138,
   "posted": [
     0,
     1,
@@ -137,21 +137,22 @@
     65,
     185,
     67,
-    186
+    186,
+    68
   ],
-  "postIndex": 137,
-  "lastBrand": "Wheaties",
-  "lastSector": "food & drink",
-  "lastScore": 4,
+  "postIndex": 138,
+  "lastBrand": "Dove",
+  "lastSector": "health & beauty",
+  "lastScore": 9,
   "lastTwoHadYear": [
-    true,
-    false
+    false,
+    true
   ],
   "recentBrands": [
-    "Esso",
     "Bodyform",
     "Taco Bell",
     "Always (P&G)",
-    "Wheaties"
+    "Wheaties",
+    "Dove"
   ]
 }
