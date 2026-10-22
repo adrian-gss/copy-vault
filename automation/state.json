@@ -1,5 +1,5 @@
 {
-  "counter": 138,
+  "counter": 139,
   "posted": [
     0,
     1,
@@ -138,21 +138,22 @@
     185,
     67,
     186,
-    68
+    68,
+    187
   ],
-  "postIndex": 138,
-  "lastBrand": "Dove",
-  "lastSector": "health & beauty",
-  "lastScore": 9,
+  "postIndex": 139,
+  "lastBrand": "Allstate",
+  "lastSector": "services",
+  "lastScore": 4,
   "lastTwoHadYear": [
-    false,
-    true
+    true,
+    false
   ],
   "recentBrands": [
-    "Bodyform",
     "Taco Bell",
     "Always (P&G)",
     "Wheaties",
-    "Dove"
+    "Dove",
+    "Allstate"
   ]
 }
