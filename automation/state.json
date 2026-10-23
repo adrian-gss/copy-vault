@@ -1,5 +1,5 @@
 {
-  "counter": 139,
+  "counter": 140,
   "posted": [
     0,
     1,
@@ -139,21 +139,22 @@
     67,
     186,
     68,
-    187
+    187,
+    95
   ],
-  "postIndex": 139,
-  "lastBrand": "Allstate",
-  "lastSector": "services",
-  "lastScore": 4,
+  "postIndex": 140,
+  "lastBrand": "Cruzcampo",
+  "lastSector": "alcohol",
+  "lastScore": 9,
   "lastTwoHadYear": [
-    true,
-    false
+    false,
+    true
   ],
   "recentBrands": [
-    "Taco Bell",
     "Always (P&G)",
     "Wheaties",
     "Dove",
-    "Allstate"
+    "Allstate",
+    "Cruzcampo"
   ]
 }
