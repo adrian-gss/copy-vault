@@ -1,5 +1,5 @@
 {
-  "counter": 140,
+  "counter": 141,
   "posted": [
     0,
     1,
@@ -140,21 +140,22 @@
     186,
     68,
     187,
-    95
+    95,
+    188
   ],
-  "postIndex": 140,
-  "lastBrand": "Cruzcampo",
-  "lastSector": "alcohol",
-  "lastScore": 9,
+  "postIndex": 141,
+  "lastBrand": "BMW",
+  "lastSector": "automotive",
+  "lastScore": 4,
   "lastTwoHadYear": [
-    false,
-    true
+    true,
+    false
   ],
   "recentBrands": [
-    "Always (P&G)",
     "Wheaties",
     "Dove",
     "Allstate",
-    "Cruzcampo"
+    "Cruzcampo",
+    "BMW"
   ]
 }
