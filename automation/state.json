@@ -1,5 +1,5 @@
 {
-  "counter": 142,
+  "counter": 143,
   "posted": [
     0,
     1,
@@ -142,21 +142,22 @@
     187,
     95,
     188,
-    62
+    62,
+    190
   ],
-  "postIndex": 142,
-  "lastBrand": "Burger King",
-  "lastSector": "food & drink",
-  "lastScore": 9,
+  "postIndex": 143,
+  "lastBrand": "Samsung",
+  "lastSector": "technology",
+  "lastScore": 4,
   "lastTwoHadYear": [
-    false,
-    true
+    true,
+    false
   ],
   "recentBrands": [
-    "Dove",
     "Allstate",
     "Cruzcampo",
     "BMW",
-    "Burger King"
+    "Burger King",
+    "Samsung"
   ]
 }
