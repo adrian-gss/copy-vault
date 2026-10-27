@@ -1,5 +1,5 @@
 {
-  "counter": 143,
+  "counter": 144,
   "posted": [
     0,
     1,
@@ -143,21 +143,22 @@
     95,
     188,
     62,
-    190
+    190,
+    66
   ],
-  "postIndex": 143,
-  "lastBrand": "Samsung",
-  "lastSector": "technology",
-  "lastScore": 4,
+  "postIndex": 144,
+  "lastBrand": "Bodyform",
+  "lastSector": "health & beauty",
+  "lastScore": 9,
   "lastTwoHadYear": [
-    true,
-    false
+    false,
+    true
   ],
   "recentBrands": [
-    "Allstate",
     "Cruzcampo",
     "BMW",
     "Burger King",
-    "Samsung"
+    "Samsung",
+    "Bodyform"
   ]
 }
