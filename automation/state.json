@@ -1,5 +1,5 @@
 {
-  "counter": 144,
+  "counter": 145,
   "posted": [
     0,
     1,
@@ -144,21 +144,22 @@
     188,
     62,
     190,
-    66
+    66,
+    189
   ],
-  "postIndex": 144,
-  "lastBrand": "Bodyform",
-  "lastSector": "health & beauty",
-  "lastScore": 9,
+  "postIndex": 145,
+  "lastBrand": "Domino's Pizza",
+  "lastSector": "food & drink",
+  "lastScore": 4,
   "lastTwoHadYear": [
-    false,
-    true
+    true,
+    false
   ],
   "recentBrands": [
-    "Cruzcampo",
     "BMW",
     "Burger King",
     "Samsung",
-    "Bodyform"
+    "Bodyform",
+    "Domino's Pizza"
   ]
 }
