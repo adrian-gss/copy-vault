@@ -1,5 +1,5 @@
 {
-  "counter": 146,
+  "counter": 147,
   "posted": [
     0,
     1,
@@ -146,21 +146,22 @@
     190,
     66,
     189,
-    69
+    69,
+    191
   ],
-  "postIndex": 146,
-  "lastBrand": "Dove",
-  "lastSector": "health & beauty",
-  "lastScore": 9,
+  "postIndex": 147,
+  "lastBrand": "Toyota",
+  "lastSector": "automotive",
+  "lastScore": 4,
   "lastTwoHadYear": [
-    false,
-    true
+    true,
+    false
   ],
   "recentBrands": [
-    "Burger King",
     "Samsung",
     "Bodyform",
     "Domino's Pizza",
-    "Dove"
+    "Dove",
+    "Toyota"
   ]
 }
