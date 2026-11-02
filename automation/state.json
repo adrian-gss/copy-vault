@@ -1,5 +1,5 @@
 {
-  "counter": 149,
+  "counter": 150,
   "posted": [
     0,
     1,
@@ -149,21 +149,22 @@
     69,
     191,
     63,
-    194
+    194,
+    70
   ],
-  "postIndex": 149,
-  "lastBrand": "Jaguar",
-  "lastSector": "automotive",
-  "lastScore": 4,
+  "postIndex": 150,
+  "lastBrand": "The New York Times",
+  "lastSector": "media & entertainment",
+  "lastScore": 9,
   "lastTwoHadYear": [
-    true,
-    false
+    false,
+    true
   ],
   "recentBrands": [
-    "Domino's Pizza",
     "Dove",
     "Toyota",
     "Burger King",
-    "Jaguar"
+    "Jaguar",
+    "The New York Times"
   ]
 }
