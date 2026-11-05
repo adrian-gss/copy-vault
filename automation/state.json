@@ -1,5 +1,5 @@
 {
-  "counter": 152,
+  "counter": 153,
   "posted": [
     0,
     1,
@@ -152,21 +152,22 @@
     194,
     70,
     192,
-    72
+    72,
+    193
   ],
-  "postIndex": 152,
-  "lastBrand": "The Washington Post",
-  "lastSector": "media & entertainment",
-  "lastScore": 9,
+  "postIndex": 153,
+  "lastBrand": "Taco Bell",
+  "lastSector": "food & drink",
+  "lastScore": 4,
   "lastTwoHadYear": [
-    false,
-    true
+    true,
+    false
   ],
   "recentBrands": [
-    "Burger King",
     "Jaguar",
     "The New York Times",
     "Maxwell House",
-    "The Washington Post"
+    "The Washington Post",
+    "Taco Bell"
   ]
 }
