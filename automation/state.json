@@ -1,5 +1,5 @@
 {
-  "counter": 153,
+  "counter": 154,
   "posted": [
     0,
     1,
@@ -153,21 +153,22 @@
     70,
     192,
     72,
-    193
+    193,
+    73
   ],
-  "postIndex": 153,
-  "lastBrand": "Taco Bell",
-  "lastSector": "food & drink",
-  "lastScore": 4,
+  "postIndex": 154,
+  "lastBrand": "Honda Diesel",
+  "lastSector": "automotive",
+  "lastScore": 9,
   "lastTwoHadYear": [
-    true,
-    false
+    false,
+    true
   ],
   "recentBrands": [
-    "Jaguar",
     "The New York Times",
     "Maxwell House",
     "The Washington Post",
-    "Taco Bell"
+    "Taco Bell",
+    "Honda Diesel"
   ]
 }
