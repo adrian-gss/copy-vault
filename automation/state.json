@@ -1,5 +1,5 @@
 {
-  "counter": 155,
+  "counter": 156,
   "posted": [
     0,
     1,
@@ -155,21 +155,22 @@
     72,
     193,
     73,
-    195
+    195,
+    64
   ],
-  "postIndex": 155,
-  "lastBrand": "Target",
-  "lastSector": "services",
-  "lastScore": 4,
+  "postIndex": 156,
+  "lastBrand": "Burger King",
+  "lastSector": "food & drink",
+  "lastScore": 9,
   "lastTwoHadYear": [
-    true,
-    false
+    false,
+    true
   ],
   "recentBrands": [
-    "Maxwell House",
     "The Washington Post",
     "Taco Bell",
     "Honda Diesel",
-    "Target"
+    "Target",
+    "Burger King"
   ]
 }
