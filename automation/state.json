@@ -1,5 +1,5 @@
 {
-  "counter": 157,
+  "counter": 158,
   "posted": [
     0,
     1,
@@ -157,21 +157,22 @@
     73,
     195,
     64,
-    196
+    196,
+    71
   ],
-  "postIndex": 157,
-  "lastBrand": "U.S. Army",
-  "lastSector": "public interest & culture",
-  "lastScore": 4,
+  "postIndex": 158,
+  "lastBrand": "The New York Times",
+  "lastSector": "media & entertainment",
+  "lastScore": 9,
   "lastTwoHadYear": [
-    true,
-    false
+    false,
+    true
   ],
   "recentBrands": [
-    "Taco Bell",
     "Honda Diesel",
     "Target",
     "Burger King",
-    "U.S. Army"
+    "U.S. Army",
+    "The New York Times"
   ]
 }
