@@ -1,5 +1,5 @@
 {
-  "counter": 159,
+  "counter": 160,
   "posted": [
     0,
     1,
@@ -159,21 +159,22 @@
     64,
     196,
     71,
-    197
+    197,
+    96
   ],
-  "postIndex": 159,
-  "lastBrand": "Campbell's",
-  "lastSector": "food & drink",
-  "lastScore": 4,
+  "postIndex": 160,
+  "lastBrand": "Cruzcampo",
+  "lastSector": "alcohol",
+  "lastScore": 9,
   "lastTwoHadYear": [
-    true,
-    false
+    false,
+    true
   ],
   "recentBrands": [
-    "Target",
     "Burger King",
     "U.S. Army",
     "The New York Times",
-    "Campbell's"
+    "Campbell's",
+    "Cruzcampo"
   ]
 }
