@@ -1,5 +1,5 @@
 {
-  "counter": 161,
+  "counter": 162,
   "posted": [
     0,
     1,
@@ -161,21 +161,22 @@
     71,
     197,
     96,
-    198
+    198,
+    74
   ],
-  "postIndex": 161,
-  "lastBrand": "Coca-Cola",
-  "lastSector": "food & drink",
-  "lastScore": 4,
+  "postIndex": 162,
+  "lastBrand": "Guinness",
+  "lastSector": "alcohol",
+  "lastScore": 9,
   "lastTwoHadYear": [
-    true,
-    false
+    false,
+    true
   ],
   "recentBrands": [
-    "U.S. Army",
     "The New York Times",
     "Campbell's",
     "Cruzcampo",
-    "Coca-Cola"
+    "Coca-Cola",
+    "Guinness"
   ]
 }
