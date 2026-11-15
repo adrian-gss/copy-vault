@@ -1,5 +1,5 @@
 {
-  "counter": 162,
+  "counter": 163,
   "posted": [
     0,
     1,
@@ -162,21 +162,22 @@
     197,
     96,
     198,
-    74
+    74,
+    199
   ],
-  "postIndex": 162,
-  "lastBrand": "Guinness",
-  "lastSector": "alcohol",
-  "lastScore": 9,
+  "postIndex": 163,
+  "lastBrand": "Rice Krispies",
+  "lastSector": "food & drink",
+  "lastScore": 4,
   "lastTwoHadYear": [
-    false,
-    true
+    true,
+    false
   ],
   "recentBrands": [
-    "The New York Times",
     "Campbell's",
     "Cruzcampo",
     "Coca-Cola",
-    "Guinness"
+    "Guinness",
+    "Rice Krispies"
   ]
 }
