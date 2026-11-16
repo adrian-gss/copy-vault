@@ -1,5 +1,5 @@
 {
-  "counter": 163,
+  "counter": 164,
   "posted": [
     0,
     1,
@@ -163,21 +163,22 @@
     96,
     198,
     74,
-    199
+    199,
+    77
   ],
-  "postIndex": 163,
-  "lastBrand": "Rice Krispies",
-  "lastSector": "food & drink",
-  "lastScore": 4,
+  "postIndex": 164,
+  "lastBrand": "Mailchimp",
+  "lastSector": "technology",
+  "lastScore": 9,
   "lastTwoHadYear": [
-    true,
-    false
+    false,
+    true
   ],
   "recentBrands": [
-    "Campbell's",
     "Cruzcampo",
     "Coca-Cola",
     "Guinness",
-    "Rice Krispies"
+    "Rice Krispies",
+    "Mailchimp"
   ]
 }
