@@ -1,5 +1,5 @@
 {
-  "counter": 164,
+  "counter": 165,
   "posted": [
     0,
     1,
@@ -164,21 +164,22 @@
     198,
     74,
     199,
-    77
+    77,
+    200
   ],
-  "postIndex": 164,
-  "lastBrand": "Mailchimp",
-  "lastSector": "technology",
-  "lastScore": 9,
+  "postIndex": 165,
+  "lastBrand": "UNCF",
+  "lastSector": "public interest & culture",
+  "lastScore": 4,
   "lastTwoHadYear": [
-    false,
-    true
+    true,
+    false
   ],
   "recentBrands": [
-    "Cruzcampo",
     "Coca-Cola",
     "Guinness",
     "Rice Krispies",
-    "Mailchimp"
+    "Mailchimp",
+    "UNCF"
   ]
 }
