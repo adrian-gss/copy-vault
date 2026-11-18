@@ -1,5 +1,5 @@
 {
-  "counter": 165,
+  "counter": 166,
   "posted": [
     0,
     1,
@@ -165,21 +165,22 @@
     74,
     199,
     77,
-    200
+    200,
+    79
   ],
-  "postIndex": 165,
-  "lastBrand": "UNCF",
-  "lastSector": "public interest & culture",
-  "lastScore": 4,
+  "postIndex": 166,
+  "lastBrand": "Liquid Death",
+  "lastSector": "food & drink",
+  "lastScore": 9,
   "lastTwoHadYear": [
-    true,
-    false
+    false,
+    true
   ],
   "recentBrands": [
-    "Coca-Cola",
     "Guinness",
     "Rice Krispies",
     "Mailchimp",
-    "UNCF"
+    "UNCF",
+    "Liquid Death"
   ]
 }
