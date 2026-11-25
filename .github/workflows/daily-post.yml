@@ -12,7 +12,9 @@ permissions:
 
 jobs:
   post:
-    runs-on: ubuntu-latest
+    # Pinned: ubuntu-latest moved to 26.04 (Nov 2026) and Playwright 1.60 can't
+    # install Chromium there. Bump Playwright before moving off 24.04.
+    runs-on: ubuntu-24.04
 
     steps:
       - name: Checkout
@@ -30,6 +32,7 @@ jobs:
         run: cd automation && npx playwright install --with-deps chromium
 
       - name: Generate image and caption
+        id: generate
         run: cd automation && node generate.js
 
       - name: Commit output
@@ -48,8 +51,8 @@ jobs:
 
       - name: Publish to LinkedIn (via LinkedIn API)
         # Runs even if the Instagram step failed, so one channel breaking
-        # doesn't take down the other.
-        if: always()
+        # doesn't take down the other — but only if there's an image to post.
+        if: ${{ !cancelled() && steps.generate.outcome == 'success' }}
         env:
           LINKEDIN_ACCESS_TOKEN: ${{ secrets.LINKEDIN_ACCESS_TOKEN }}
           LINKEDIN_ORG_URN: ${{ secrets.LINKEDIN_ORG_URN }}
