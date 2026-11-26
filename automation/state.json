@@ -1,5 +1,5 @@
 {
-  "counter": 167,
+  "counter": 168,
   "posted": [
     0,
     1,
@@ -167,21 +167,22 @@
     77,
     200,
     79,
-    201
+    201,
+    75
   ],
-  "postIndex": 167,
-  "lastBrand": "The Home Depot",
-  "lastSector": "services",
-  "lastScore": 4,
+  "postIndex": 168,
+  "lastBrand": "Guinness",
+  "lastSector": "alcohol",
+  "lastScore": 9,
   "lastTwoHadYear": [
-    true,
-    false
+    false,
+    true
   ],
   "recentBrands": [
-    "Rice Krispies",
     "Mailchimp",
     "UNCF",
     "Liquid Death",
-    "The Home Depot"
+    "The Home Depot",
+    "Guinness"
   ]
 }
