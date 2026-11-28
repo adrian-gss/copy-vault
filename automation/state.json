@@ -1,5 +1,5 @@
 {
-  "counter": 169,
+  "counter": 170,
   "posted": [
     0,
     1,
@@ -169,21 +169,22 @@
     79,
     201,
     75,
-    202
+    202,
+    78
   ],
-  "postIndex": 169,
-  "lastBrand": "John Deere",
-  "lastSector": "services",
-  "lastScore": 4,
+  "postIndex": 170,
+  "lastBrand": "Mailchimp",
+  "lastSector": "technology",
+  "lastScore": 9,
   "lastTwoHadYear": [
-    true,
-    false
+    false,
+    true
   ],
   "recentBrands": [
-    "UNCF",
     "Liquid Death",
     "The Home Depot",
     "Guinness",
-    "John Deere"
+    "John Deere",
+    "Mailchimp"
   ]
 }
